@@ -45,7 +45,7 @@ complete -o nospace -C /usr/bin/vault vault
 MAKEFLAGS="-j$(nproc)"
 
 export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/ssh-agent.socket"
-export DOTFILES_REPO="ssh://git@codeberg.org/Gunsrude/dotfiles.git"
+export DOTFILES_REPO="https://codeberg.org/Gunsrude/dotfiles.git"
 
 # Dotfiles stuffs
 alias c=chezmoi
