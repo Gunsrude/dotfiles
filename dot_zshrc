@@ -77,6 +77,10 @@ alias nano='nvim'
 export EDITOR=nvim
 alias :q='exit'
 alias e='nvim .'
+function vsclear {
+    rm -f ~/.local/share/nvim/sessions/*
+    rm -f ~/.local/state/nvim/sessions/*
+}
 
 # Python
 alias venv='python -m venv'

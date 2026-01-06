@@ -5,7 +5,7 @@ opt.relativenumber = true
 opt.tabstop = 4
 opt.shiftwidth = 4
 opt.expandtab = true
-opt.autoindent = true
+opt.autoindent = false
 opt.wrap = false
 opt.ignorecase = true
 opt.smartcase = true
@@ -55,3 +55,14 @@ vim.api.nvim_create_autocmd("BufReadPost", {
     end
   end,
 })
+
+-- Fix yaml indent issues
+-- vim.api.nvim_create_autocmd("FileType", {
+--     pattern = { "yaml", "yaml.ansible" },
+--     callback = function()
+--       vim.opt_local.indentkeys:remove("0#")
+--       vim.opt_local.indentkeys:remove("<:>")
+--       vim.opt_local.indentkeys:remove("0-")
+--     end,
+-- })
+
