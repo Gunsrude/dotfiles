@@ -1,0 +1,93 @@
+
+* {
+    font-family: "JetBrainsMono Nerd Font", "Font Awesome 6 Free";
+    font-size: 13px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: rgba(30, 30, 46, 0.9);
+    color: #cdd6f4;
+    border-radius: 10px;
+}
+
+#workspaces button {
+    padding: 0 10px;
+    color: #cdd6f4;
+    border-radius: 8px;
+    margin: 4px;
+    transition: all 0.3s ease;
+}
+
+#workspaces button.active {
+    background: linear-gradient(45deg, #ff9d00, #dd00ff);
+    color: #1e1e2e;
+}
+
+#workspaces button:hover {
+    background: rgba(255, 157, 0, 0.3);
+}
+
+#window {
+    color: #cdd6f4;
+    padding: 0 15px;
+}
+
+#clock {
+    padding: 0 15px;
+    background: rgba(255, 157, 0, 0.2);
+    border-radius: 8px;
+    margin: 4px;
+    font-weight: bold;
+}
+
+#cpu,
+#memory,
+#battery,
+#network,
+#pulseaudio {
+    padding: 0 12px;
+    background: rgba(180, 190, 254, 0.1);
+    border-radius: 8px;
+    margin: 4px 2px;
+}
+
+#battery.charging {
+    background: rgba(166, 227, 161, 0.2);
+}
+
+#battery.warning:not(.charging) {
+    background: rgba(249, 226, 175, 0.2);
+    color: #f9e2af;
+}
+
+#battery.critical:not(.charging) {
+    background: rgba(243, 139, 168, 0.2);
+    color: #f38ba8;
+}
+
+#pulseaudio.muted {
+    color: #f38ba8;
+}
+
+#tray {
+    padding: 0 10px;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+}
+
+tooltip {
+    background: rgba(30, 30, 46, 0.95);
+    border: 2px solid rgba(255, 157, 0, 0.5);
+    border-radius: 8px;
+}
+
+tooltip label {
+    color: #cdd6f4;
+}
