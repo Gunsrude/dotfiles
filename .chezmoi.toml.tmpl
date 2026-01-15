@@ -16,7 +16,7 @@
 
 [data]
     machine_type = {{ $machineType | quote }}
-    is_container = {{ $isContainer }}
+    is_container = {{ not (not $isContainer) }}
 {{- if not $isContainer }}
     email = {{ $email | quote }}
     name = {{ $name | quote }}

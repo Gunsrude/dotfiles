@@ -1,6 +1,7 @@
 vim.filetype.add({
   filename = {
     ["dot_zshrc"] = "zsh",
+    ["dot_zshrc.tmpl"] = "zsh",
     ["dot_bashrc"] = "bash",
     ["dot_bash_profile"] = "bash",
     ["dot_profile"] = "sh",
