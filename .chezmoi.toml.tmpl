@@ -1,0 +1,24 @@
+{{- $isContainer := or (env "REMOTE_CONTAINERS") (env "REMOTE_CONTAINERS_IPC") (env "CODESPACES") -}}
+
+{{- $machineType := "" -}}
+{{- if $isContainer -}}
+{{-   $machineType = "container" -}}
+{{- else -}}
+{{-   $machineType = promptChoiceOnce . "machine_type" "Machine type" (list "work" "personal" "server") -}}
+{{- end -}}
+
+{{- $email := "" -}}
+{{- $name := "" -}}
+{{- if not $isContainer -}}
+{{-   $email = promptStringOnce . "email" "Email address" -}}
+{{-   $name = promptStringOnce . "name" "Full name" -}}
+{{- end -}}
+
+[data]
+    machine_type = {{ $machineType | quote }}
+    is_container = {{ $isContainer }}
+{{- if not $isContainer }}
+    email = {{ $email | quote }}
+    name = {{ $name | quote }}
+{{- end }}
+

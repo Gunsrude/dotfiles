@@ -1,11 +1,27 @@
+{{- if eq .machine_type "container" }}
+
+.*
+*
+
+!.zshrc
+!.config/nvim
+!.config/nvim/**
+!.config/zsh
+!.config/zsh/**
+
+.gitconfig
+
+{{- else }}
+
 {{- if eq .machine_type "work" }}
 .ssh
 .ssh/**
-{{- end }}
-
+{{- else }}
 .ssh/id_rsa
 .ssh/id_ed25519
 .ssh/*.pem
-
 .ssh/authorized_keys
+{{- end }}
+
+{{- end }}
 
