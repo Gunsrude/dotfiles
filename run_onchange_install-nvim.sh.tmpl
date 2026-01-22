@@ -1,0 +1,31 @@
+{{- if and (eq .chezmoi.os "linux") (ne .chezmoi.osRelease.id "arch") -}}
+#!/bin/bash
+set -e
+
+INSTALL_DIR="$HOME/.local/bin"
+mkdir -p "$INSTALL_DIR"
+cd "$INSTALL_DIR"
+
+# Detect architecture
+case "$(uname -m)" in
+    x86_64)  APPIMAGE="nvim-linux-x86_64.appimage" ;;
+    aarch64) APPIMAGE="nvim-linux-arm64.appimage" ;;
+    *)       echo "Unsupported architecture"; exit 1 ;;
+esac
+
+echo "Downloading latest Neovim AppImage..."
+curl -Lo "$APPIMAGE" "https://github.com/neovim/neovim/releases/latest/download/${APPIMAGE}"
+chmod u+x "$APPIMAGE"
+
+# Try running directly, fall back to extraction if no FUSE
+if ./"$APPIMAGE" --version &>/dev/null; then
+    ln -sf "$APPIMAGE" nvim
+else
+    echo "FUSE not available, extracting..."
+    ./"$APPIMAGE" --appimage-extract >/dev/null
+    rm "$APPIMAGE"
+    ln -sf squashfs-root/usr/bin/nvim nvim
+fi
+
+echo "Neovim installed: $(./nvim --version | head -1)"
+{{ end -}}
