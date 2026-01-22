@@ -1,0 +1,25 @@
+{{- if and (eq .chezmoi.os "linux") (ne .chezmoi.osRelease.id "arch") -}}
+#!/bin/bash
+# Non-Arch (Debian, Ubuntu, etc.) - install latest from AppImage
+set -e
+
+NVIM_VERSION="stable"
+INSTALL_DIR="$HOME/.local/bin"
+
+mkdir -p "$INSTALL_DIR"
+
+echo "Installing latest Neovim AppImage..."
+curl -Lo "$INSTALL_DIR/nvim" "https://github.com/neovim/neovim/releases/download/${NVIM_VERSION}/nvim.appimage"
+chmod u+x "$INSTALL_DIR/nvim"
+
+if ! "$INSTALL_DIR/nvim" --version &>/dev/null; then
+    echo "FUSE not available, extracting AppImage..."
+    cd "$INSTALL_DIR"
+    ./nvim --appimage-extract &>/dev/null
+    rm nvim
+    ln -sf squashfs-root/AppRun nvim
+fi
+
+echo "Neovim installed: $(nvim --version | head -1)"
+{{ end -}}
+
