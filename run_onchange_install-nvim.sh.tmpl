@@ -1,4 +1,8 @@
-{{- if and (eq .chezmoi.os "linux") (ne .chezmoi.osRelease.id "arch") -}}
+{{- $isArch := false -}}
+{{- if hasKey .chezmoi.osRelease "id" -}}
+{{-   $isArch = eq .chezmoi.osRelease.id "arch" -}}
+{{- end -}}
+{{- if and (eq .chezmoi.os "linux") (not $isArch) -}}
 #!/bin/bash
 set -e
 
