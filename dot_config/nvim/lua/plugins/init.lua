@@ -70,25 +70,25 @@ return {
 
   {
     "nvim-treesitter/nvim-treesitter",
+    lazy = false,
+    branch = "main",
     build = ":TSUpdate",
     config = function()
-      require("nvim-treesitter.configs").setup({
-        ensure_installed = {
-          "python", "yaml", "lua", "bash", "json",
-          "toml", "markdown", "vim", "vimdoc"
-        },
-        auto_install = true,
-        sync_install = false,
-        ignore_install = {},
-        modules = {},
-        highlight = {
-          enable = true,
-          additional_vim_regex_highlighting = false,
-        },
-        indent = {
-          enable = false,
-          disable = { "yaml" },
-        },
+      local ts = require("nvim-treesitter")
+      ts.install({
+        "python", "yaml", "lua", "bash", "json",
+        "toml", "markdown", "vim", "vimdoc"
+      })
+      vim.api.nvim_create_autocmd("FileType", {
+        callback = function(args)
+          pcall(vim.treesitter.start, args.buf)
+        end,
+      })
+      vim.api.nvim_create_autocmd("FileType", {
+        callback = function(args)
+          local lang = vim.treesitter.language.get_lang(args.match) or args.match
+          ts.install({ lang })
+        end,
       })
     end,
   },
