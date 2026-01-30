@@ -71,23 +71,30 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     lazy = false,
-    branch = "main",
     build = ":TSUpdate",
     config = function()
       local ts = require("nvim-treesitter")
-      ts.install({
+
+      local parsers = {
         "python", "yaml", "lua", "bash", "json",
         "toml", "markdown", "vim", "vimdoc"
-      })
-      vim.api.nvim_create_autocmd("FileType", {
-        callback = function(args)
-          pcall(vim.treesitter.start, args.buf)
+      }
+
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "LazyDone",
+        once = true,
+        callback = function()
+          ts.install(parsers)
         end,
       })
+
       vim.api.nvim_create_autocmd("FileType", {
-        callback = function(args)
-          local lang = vim.treesitter.language.get_lang(args.match) or args.match
+        callback = function(ev)
+          -- Auto-install parser for this filetype
+          local lang = vim.treesitter.language.get_lang(ev.match) or ev.match
           ts.install({ lang })
+
+          pcall(vim.treesitter.start, ev.buf)
         end,
       })
     end,
