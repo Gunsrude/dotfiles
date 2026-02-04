@@ -1,0 +1,3 @@
+openai-api-base: http://charon.zt.stellar.build:5001/v1
+openai-api-key: not-needed
+model: openai/koboldcpp

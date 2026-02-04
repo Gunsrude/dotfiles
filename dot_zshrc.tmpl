@@ -52,6 +52,9 @@ dockerrm() {
 alias sdl="env -u SDL_VIDEODRIVER"
 alias xforce="SDL_VIDEODRIVER=x11"
 
+# Bad devs
+alias aider='aider --config ~/.config/aider/config.yml'
+
 # yay fixes
 alias yay='MAKEFLAGS="-j$(nproc)" yay --sudoloop'
 alias mirrorup='sudo reflector --latest 20 --protocol https --sort rate --save /etc/pacman.d/mirrorlist -n 8 -c US --threads 8'
