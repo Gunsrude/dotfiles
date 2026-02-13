@@ -1,5 +1,44 @@
 return {
   {
+    "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
+    opts = function()
+      local highlight = {
+        "RainbowRed",
+        "RainbowYellow",
+        "RainbowBlue",
+        "RainbowOrange",
+        "RainbowGreen",
+        "RainbowViolet",
+        "RainbowCyan",
+      }
+
+      local hooks = require("ibl.hooks")
+      hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+        vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
+        vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
+        vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF" })
+        vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66" })
+        vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
+        vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
+        vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
+      end)
+
+      return {
+        indent = {
+          highlight = highlight,
+          char = "▏",
+        },
+        whitespace = {
+          remove_blankline_trail = false,
+        },
+        scope = {
+          enabled = false,
+        },
+      }
+    end,
+  },
+  {
     "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
@@ -124,138 +163,7 @@ return {
       })
     end,
   },
---[[
-  {
-    "akinsho/bufferline.nvim",
-    version = "*",
-    dependencies = "nvim-tree/nvim-web-devicons",
-    config = function()
-      require("bufferline").setup({
-        options = {
-          mode = "buffers",
-          themable = true,
-          numbers = "none",
-          close_command = "Bdelete! %d",
-          right_mouse_command = "Bdelete! %d",
-          left_mouse_command = "buffer %d",
-          middle_mouse_command = nil,
-          indicator = {
-            icon = "▎",
-            style = "icon",
-          },
-          buffer_close_icon = "󰅖",
-          modified_icon = "●",
-          close_icon = "",
-          left_trunc_marker = "",
-          right_trunc_marker = "",
-          max_name_length = 30,
-          max_prefix_length = 30,
-          tab_size = 21,
-          diagnostics = "nvim_lsp",
-          diagnostics_update_in_insert = false,
-          offsets = {
-            {
-              filetype = "NvimTree",
-              text = "File Explorer",
-              text_align = "left",
-              separator = true
-            }
-          },
-          color_icons = true,
-          show_buffer_icons = true,
-          show_buffer_close_icons = true,
-          show_close_icon = true,
-          show_tab_indicators = true,
-          persist_buffer_sort = true,
-          separator_style = "thin",
-          enforce_regular_tabs = true,
-          always_show_bufferline = true,
-        }
-      })
-    end,
-  },
-  {
-    "romgrk/barbar.nvim",
-    dependencies = {
-      "lewis6991/gitsigns.nvim",
-      "nvim-tree/nvim-web-devicons",
-    },
-    init = function() 
-      vim.g.barbar_auto_setup = false 
-    end,
-    config = function()
-      require("barbar").setup({
-        animation = true,
-        auto_hide = false,
-        tabpages = true,
-        clickable = true,
-        exclude_ft = {'javascript'},
-        exclude_name = {'package.json'},
-        focus_on_close = 'left',
-        hide = {extensions = true, inactive = false},
-        highlight_alternate = false,
-        highlight_inactive_file_icons = false,
-        highlight_visible = true,
-        icons = {
-          buffer_index = false,
-          buffer_number = false,
-          button = '',
-          diagnostics = {
-            [vim.diagnostic.severity.ERROR] = {enabled = true, icon = 'ﬀ'},
-            [vim.diagnostic.severity.WARN] = {enabled = false},
-            [vim.diagnostic.severity.INFO] = {enabled = false},
-            [vim.diagnostic.severity.HINT] = {enabled = true},
-          },
-          gitsigns = {
-            added = {enabled = true, icon = '+'},
-            changed = {enabled = true, icon = '~'},
-            deleted = {enabled = true, icon = '-'},
-          },
-          filetype = {
-            custom_colors = false,
-            enabled = true,
-          },
-          separator = {left = '▎', right = ''},
-          separator_at_end = true,
-          modified = {button = '●'},
-          pinned = {button = '', filename = true},
-          preset = 'default',
-          alternate = {filetype = {enabled = false}},
-          current = {buffer_index = false},
-          inactive = {button = '×'},
-          visible = {modified = {buffer_number = false}},
-        },
-        insert_at_end = false,
-        insert_at_start = false,
-        maximum_padding = 1,
-        minimum_padding = 1,
-        maximum_length = 30,
-        minimum_length = 0,
-        semantic_letters = true,
-        sidebar_filetypes = {
-          NvimTree = true,
-        },
-        letters = 'asdfjkl;ghnmxcvbziowerutyqpASDFJKLGHNMXCVBZIOWERUTYQP',
-        no_name_title = nil,
-      })
 
-      -- Keymaps for barbar
-      local map = vim.api.nvim_set_keymap
-      local opts = { noremap = true, silent = true }
-
-      -- Navigate buffers
-      map('n', '<A-,>', '<Cmd>BufferPrevious<CR>', opts)
-      map('n', '<A-.>', '<Cmd>BufferNext<CR>', opts)
-      -- Re-order buffers
-      map('n', '<A-<>', '<Cmd>BufferMovePrevious<CR>', opts)
-      map('n', '<A->>', '<Cmd>BufferMoveNext<CR>', opts)
-      -- Close buffers
-      map('n', '<A-c>', '<Cmd>BufferClose<CR>', opts)
-      -- Buffer picking
-      map('n', '<C-p>', '<Cmd>BufferPick<CR>', opts)
-    end,
-  },
-    ]]--
   {
     "nvim-tree/nvim-web-devicons",
     config = function()
