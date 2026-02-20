@@ -93,6 +93,11 @@ function mc {
 }
 alias fucking='sudo'
 
+function dotsetup() {
+  local remote="${1:?Usage: dotsetup <remote-host>}"
+  ssh "$remote" "sh -c \"\$(curl -fsLS get.chezmoi.io)\" -- init --apply $DOTFILES_REPO"
+}
+
 function fuck() {
   local app_name=$1
 
