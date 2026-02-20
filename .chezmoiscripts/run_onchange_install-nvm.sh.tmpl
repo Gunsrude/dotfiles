@@ -1,0 +1,31 @@
+#!/bin/bash
+# run_onchange_install-nvm-node.sh
+# chezmoi:template: hash={{ include "dot_config/nvim/lua/plugins/lsp.lua" | sha256sum }}
+
+set -euo pipefail
+
+NVM_VERSION="v0.40.1"
+export NVM_DIR="${NVM_DIR:-$HOME/.nvm}"
+export PROFILE=/dev/null
+
+# Install nvm if not present
+if [[ ! -d "$NVM_DIR" ]]; then
+    echo "Installing nvm $NVM_VERSION..."
+    curl -fsSL "https://raw.githubusercontent.com/nvm-sh/nvm/${NVM_VERSION}/install.sh" | bash
+else
+    echo "nvm already installed at $NVM_DIR"
+fi
+
+# Source nvm for this script
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+# Install LTS node if no default version set
+if ! nvm which default &>/dev/null; then
+    echo "Installing Node.js LTS..."
+    nvm install --lts
+    nvm alias default 'lts/*'
+else
+    echo "Node.js default already set: $(nvm which default)"
+fi
+
+echo "Done. node: $(node --version), npm: $(npm --version)"
