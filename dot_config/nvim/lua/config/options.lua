@@ -23,6 +23,8 @@ opt.undodir = os.getenv("HOME") .. "/.config/.vim/undodir"
 opt.undofile = true
 opt.scrolloff = 8
 opt.sidescrolloff = 8
+opt.timeoutlen=300
+opt.ttimeoutlen=10
 
 -- Session and persistence options
 opt.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
