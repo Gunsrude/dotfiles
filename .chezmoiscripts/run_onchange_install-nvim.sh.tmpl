@@ -1,29 +1,28 @@
 #!/bin/bash
 set -e
 
-INSTALL_DIR="$HOME/.local/bin"
-mkdir -p "$INSTALL_DIR"
-cd "$INSTALL_DIR"
+INSTALL_DIR="$HOME/.local"
+BIN_DIR="$INSTALL_DIR/bin"
+NVIM_DIR="$INSTALL_DIR/nvim"
+
+mkdir -p "$BIN_DIR"
 
 # Detect architecture
 case "$(uname -m)" in
-    x86_64)  APPIMAGE="nvim-linux-x86_64.appimage" ;;
-    aarch64) APPIMAGE="nvim-linux-arm64.appimage" ;;
-    *)       echo "Unsupported architecture"; exit 1 ;;
+    x86_64)  ARCH="x86_64" ;;
+    aarch64) ARCH="arm64" ;;
+    *)       echo "Unsupported architecture: $(uname -m)"; exit 1 ;;
 esac
 
-echo "Downloading latest Neovim AppImage..."
-curl -Lo "$APPIMAGE" "https://github.com/neovim/neovim/releases/latest/download/${APPIMAGE}"
-chmod u+x "$APPIMAGE"
+TARBALL="nvim-linux-${ARCH}.tar.gz"
+URL="https://github.com/neovim/neovim/releases/latest/download/${TARBALL}"
 
-# Try running directly, fall back to extraction if no FUSE
-if ./"$APPIMAGE" --version &>/dev/null; then
-    ln -sf "$APPIMAGE" nvim
-else
-    echo "FUSE not available, extracting..."
-    ./"$APPIMAGE" --appimage-extract >/dev/null
-    rm "$APPIMAGE"
-    ln -sf squashfs-root/usr/bin/nvim nvim
-fi
+echo "Downloading latest Neovim tarball ($ARCH)..."
+curl -L "$URL" | tar xz -C /tmp
 
-echo "Neovim installed: $(./nvim --version | head -1)"
+rm -rf "$NVIM_DIR"
+mv "/tmp/nvim-linux-${ARCH}" "$NVIM_DIR"
+
+ln -sf "$NVIM_DIR/bin/nvim" "$BIN_DIR/nvim"
+
+echo "Neovim installed: $("$BIN_DIR/nvim" --version | head -1)"
