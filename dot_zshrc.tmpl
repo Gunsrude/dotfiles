@@ -53,9 +53,6 @@ dockerrm() {
 alias sdl="env -u SDL_VIDEODRIVER"
 alias xforce="SDL_VIDEODRIVER=x11"
 
-# Bad devs
-alias aider='aider --config ~/.config/aider/config.yml'
-
 # yay fixes
 alias yay='MAKEFLAGS="-j$(nproc)" yay --sudoloop'
 alias mirrorup='sudo reflector --latest 20 --protocol https --sort rate --save /etc/pacman.d/mirrorlist -n 8 -c US --threads 8'
@@ -77,10 +74,22 @@ alias e='nvim .'
 function vsclear {
     rm -f ~/.local/share/nvim/sessions/*
     rm -f ~/.local/state/nvim/sessions/*
+    rm -rf ~/.cache/nvim
 }
 
 # Python
 alias venv='python -m venv'
+
+# Dev stuff
+alias devvim='devcontainer exec --workspace-folder . vim .'
+alias devdown='docker rm -f $(docker ps -aq --filter "label=devcontainer.local_folder=$(pwd)")'
+alias devup='devcontainer up \
+  --workspace-folder . \
+  --dotfiles-repository https://codeberg.org/Gunsrude/dotfiles \
+  --dotfiles-install-command install.sh \
+  --mount "type=bind,source=${SSH_AUTH_SOCK},target=/tmp/ssh-agent.sock" \
+  --remote-env SSH_AUTH_SOCK=/tmp/ssh-agent.sock'
+alias devrebuild='devdown && devup --remove-existing-container --build-no-cache'
 
 # Other Stuff
 alias s='source ${HOME}/.zshrc'
@@ -94,6 +103,7 @@ function mc {
 }
 alias fucking='sudo'
 
+# Def some chicken and egg stuff going on here
 function dotsetup() {
   local remote="${1:?Usage: dotsetup <remote-host>}"
   ssh "$remote" "sh -c \"\$(curl -fsLS get.chezmoi.io)\" -- init --apply $DOTFILES_REPO"
@@ -105,12 +115,6 @@ function fuck() {
   for i in $(ps aux | grep -i "$app_name" | grep -v grep | awk '{print $2}');do
     sudo kill -9 $i
   done
-}
-
-# I have never once used this after creation
-function record() { 
-  if [ ! -d "${HOME}/recording" ]; then mkdir "${HOME}/recording"; fi
-  script -q "$HOME/recording/$(date +'%Y-%m-%d.%H-%M-%S')-session.log"
 }
 
 # PATH
