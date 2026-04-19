@@ -20,6 +20,10 @@
   },
   "permission": {
     "bash": {
+      "git diff": "allow",
+      "git fetch": "allow",
+      "git status": "allow",
+      "git log": "allow",
       "git *": "ask"
     }
   },
