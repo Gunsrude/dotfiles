@@ -1,0 +1,26 @@
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trash
+.iconcache
+
+# IDE / Editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Package manager / runtime
+node_modules/
+vendor/
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Temp / build artifacts
+*.tmp
+*.bak
+*.orig
