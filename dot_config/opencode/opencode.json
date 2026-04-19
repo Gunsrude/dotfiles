@@ -2,10 +2,19 @@
   "$schema": "https://opencode.ai/config.json",
   "provider": {
     "ollama": {
+      "npm": "@ai-sdk/openai-compatible",
       "options": {
-        "baseURL": "http://llm.stellar.build:11434/api"
+        "baseURL": "http://llm.stellar.build:11434/v1"
+      },
+      "models": {
+        "qwen3.6": {
+          "name": "qwen3.6"
+        }
       }
     }
   },
-  "model": "ollama/qwen3-coder-next:q4_K_M"
+  "model": "ollama/qwen3.6",
+  "tools": {
+    "websearch": true
+  }
 }

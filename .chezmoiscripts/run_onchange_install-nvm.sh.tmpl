@@ -7,6 +7,7 @@ set -euo pipefail
 NVM_VERSION="v0.40.1"
 export NVM_DIR="${NVM_DIR:-$HOME/.nvm}"
 export PROFILE=/dev/null
+MIN_NODE_VERSION=18
 
 # Install nvm if not present
 if [[ ! -d "$NVM_DIR" ]]; then
@@ -19,13 +20,26 @@ fi
 # Source nvm for this script
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
-# Install LTS node if no default version set
+# Check if we need to install/upgrade node
+NEED_INSTALL=false
+
 if ! nvm which default &>/dev/null; then
-    echo "Installing Node.js LTS..."
-    nvm install --lts
-    nvm alias default 'lts/*'
+    NEED_INSTALL=true
+    echo "No default node set"
 else
-    echo "Node.js default already set: $(nvm which default)"
+    CURRENT=$(nvm version default 2>/dev/null | sed 's/v//')
+    MAJOR=$(echo "$CURRENT" | cut -d. -f1)
+    if [[ "$MAJOR" -lt "$MIN_NODE_VERSION" ]]; then
+        NEED_INSTALL=true
+        echo "Node v$CURRENT is below v${MIN_NODE_VERSION}, upgrading"
+    else
+        echo "Node v$CURRENT meets minimum v${MIN_NODE_VERSION}"
+    fi
+fi
+
+if [[ "$NEED_INSTALL" == "true" ]]; then
+    nvm install --lts
+    nvm alias default lts/*
 fi
 
 echo "Done. node: $(node --version), npm: $(npm --version)"
