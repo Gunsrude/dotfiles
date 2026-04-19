@@ -18,5 +18,10 @@
   "tools": {
     "websearch": true
   },
+  "permission": {
+    "bash": {
+      "git *": "ask"
+    }
+  },
   "instructions": ["~/.config/opencode/PROFILE.md"]
 }
