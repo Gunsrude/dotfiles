@@ -16,5 +16,6 @@
   "model": "ollama/qwen3.6",
   "tools": {
     "websearch": true
-  }
+  },
+  "instructions": ["~/.config/opencode/PROFILE.md"]
 }

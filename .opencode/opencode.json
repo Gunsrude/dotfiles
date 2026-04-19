@@ -1,0 +1,16 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "instructions": [".opencode/INSTRUCTIONS.md"],
+  "permission": {
+    "external_directory": {
+      "~/.config/**": "allow",
+      "~/.local/**": "allow"
+    }
+  },
+  "watcher": {
+    "ignore": [
+      "~/.config/**",
+      "~/.local/**"
+    ]
+  }
+}
