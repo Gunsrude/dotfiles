@@ -1,0 +1,13 @@
+#!/bin/bash
+# run_onchange_install-opencode.sh
+# chezmoi:template: hash={{ include "dot_config/opencode/opencode.json" | sha256sum }}
+
+set -euo pipefail
+
+# Install opencode if not present
+if command -v opencode &>/dev/null; then
+    echo "opencode already installed: $(opencode --version 2>/dev/null || echo 'installed')"
+else
+    echo "Installing opencode..."
+    curl -fsSL https://opencode.ai/install | bash
+fi
