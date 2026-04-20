@@ -5,9 +5,15 @@
 set -euo pipefail
 
 # Install opencode if not present
-if command -v opencode &>/dev/null; then
-    echo "opencode already installed: $(opencode --version 2>/dev/null || echo 'installed')"
+OPENCODE_BIN="$HOME/.opencode/bin/opencode"
+if command -v opencode &>/dev/null || [[ -f "$OPENCODE_BIN" ]]; then
+    echo "opencode already installed: $(opencode --version 2>/dev/null || $OPENCODE_BIN --version 2>/dev/null || echo 'installed')"
 else
     echo "Installing opencode..."
     curl -fsSL https://opencode.ai/install | bash
+    OPENCODE_BIN="$HOME/.opencode/bin/opencode"
+    if [[ -f "$OPENCODE_BIN" ]]; then
+        ln -sf "$OPENCODE_BIN" "$HOME/.local/bin/opencode"
+        echo "Symlinked opencode to ~/.local/bin/"
+    fi
 fi
