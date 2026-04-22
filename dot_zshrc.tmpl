@@ -129,10 +129,8 @@ function set_terminal_title() {
 }
 
 # Add workstation specific things like WSL settings
-if [ -d .config/zsh-includes ]; then
-    for f in .config/zsh-includes/*; do 
-        [ -f "$f" ] && source "$f"
-    done
+if [[ -d ~/.zshrc.local ]]; then
+    source ~/.zshrc.local
 fi
 
 if [[ -d "$HOME/.nvm" ]]; then

@@ -1,0 +1,32 @@
+
+# oh-my-opencode-slim - clones into ~/.config/opencode/plugins/oh-my-opencode-slim
+[".config/opencode/plugins/oh-my-opencode-slim"]
+    type = "git-repo"
+    url = "https://github.com/alvinunreal/oh-my-opencode-slim.git"
+    pull.args = ["--ff-only"]
+    refreshPeriod = "168h"
+
+# opencode-voice for local voice chat
+#[".config/opencode/plugins/opencode-voice"]
+#    type = "git-repo"
+#    url = "https://github.com/renjfk/opencode-voice.git"
+#    pull.args = ["--ff-only"]
+#    refreshPeriod = "168h"
+
+{{ $snipVersion := "0.15.0" }}
+
+{{ if eq .chezmoi.os "linux" }}
+{{ if eq .chezmoi.arch "amd64" }}
+[".local/bin/snip"]
+    type = "archive-file"
+    url = "https://github.com/edouard-claude/snip/releases/download/v{{ $snipVersion }}/snip_{{ $snipVersion }}_linux_amd64.tar.gz"
+    path = "snip"
+    executable = true
+{{ else if eq .chezmoi.arch "arm64" }}
+[".local/bin/snip"]
+    type = "archive-file"
+    url = "https://github.com/edouard-claude/snip/releases/download/v{{ $snipVersion }}/snip_{{ $snipVersion }}_linux_arm64.tar.gz"
+    path = "snip"
+    executable = true
+{{ end }}
+{{ end }}
