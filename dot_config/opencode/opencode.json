@@ -25,10 +25,15 @@
   "permission": {
     "bash": {
       "git *": "ask",
+      "snip git *": "ask",
       "git diff*": "allow",
       "git fetch*": "allow",
       "git status*": "allow",
-      "git log*": "allow"
+      "git log*": "allow",
+      "snip git diff*": "allow",
+      "snip git fetch*": "allow",
+      "snip git status*": "allow",
+      "snip git log*": "allow"
     }
   },
   "instructions": ["~/.config/opencode/PROFILE.md"],
