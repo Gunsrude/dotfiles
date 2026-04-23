@@ -6,8 +6,8 @@ ARCH=$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/')
 OS=$(uname -s | tr '[:upper:]' '[:lower:]')
 
 curl -fsSL "https://codeberg.org/goern/forgejo-mcp/releases/download/v${VERSION}/forgejo-mcp_${VERSION}_${OS}_${ARCH}.tar.gz" \
-  | tar -xz -C ~/.local/bin "forgejo-mcp_${VERSION}_${OS}_${ARCH}/forgejo-mcp"
+  | tar -xz -C /tmp "forgejo-mcp_${VERSION}_${OS}_${ARCH}/forgejo-mcp"
 
-ln -sf ~/.local/bin/"forgejo-mcp_${VERSION}_${OS}_${ARCH}/forgejo-mcp" ~/.local/bin/forgejo-mcp
+install /tmp/forgejo-mcp_${VERSION}_${OS}_${ARCH}/forgejo-mcp ~/.local/bin/forgejo-mcp
 
 echo "forgejo-mcp installed: v${VERSION}"
