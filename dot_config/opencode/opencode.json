@@ -10,7 +10,7 @@
       "models": {
         "qwen3.6": {
           "name": "qwen3.6",
-          "contextLength": 131072
+          "contextLength": 65536
         }
       }
     }

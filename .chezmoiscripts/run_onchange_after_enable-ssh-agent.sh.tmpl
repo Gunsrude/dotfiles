@@ -1,0 +1,4 @@
+#!/bin/bash
+{{- if not .is_container }}
+systemctl --user enable --now ssh-agent.service
+{{- end }}

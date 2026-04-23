@@ -1,0 +1,10 @@
+[Unit]
+Description=SSH agent
+
+[Service]
+ExecStartPre=/bin/mkdir -p %h/.local/share/ssh
+ExecStart=/usr/bin/ssh-agent -D -a %h/.local/share/ssh/ssh-agent.socket
+ExecStop=/usr/bin/ssh-agent -k
+
+[Install]
+WantedBy=default.target

@@ -36,7 +36,7 @@ complete -o nospace -C /usr/bin/vault vault
 MAKEFLAGS="-j$(nproc)"
 
 {{- if not .is_container }}
-export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/ssh-agent.socket"
+export SSH_AUTH_SOCK="$HOME/.local/share/ssh/ssh-agent.socket"
 export DOTFILES_REPO="https://codeberg.org/Gunsrude/dotfiles.git"
 {{- end }}
 
