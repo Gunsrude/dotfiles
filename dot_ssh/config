@@ -1,0 +1,12 @@
+AddKeystoAgent yes
+CanonicalizeHostname yes
+ForwardAgent yes
+SetEnv TERM=xterm-256color
+ServerAliveInterval 60
+ServerAliveCountMax 10
+TCPKeepAlive yes
+
+Host localhost
+	StrictHostKeyChecking no
+	UserKnownHostsFile=/dev/null
+
