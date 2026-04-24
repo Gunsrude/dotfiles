@@ -6,6 +6,9 @@
 .Trash
 .iconcache
 
+# LSP / Language servers
+.lcm
+
 # IDE / Editors
 .idea/
 .vscode/
