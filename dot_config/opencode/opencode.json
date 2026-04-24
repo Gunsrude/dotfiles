@@ -38,7 +38,6 @@
   },
   "instructions": ["~/.config/opencode/PROFILE.md"],
   "plugin": [
-    "opencode-mem",
-    "opencode-working-memory"
+    "opencode-mem"
   ]
 }
