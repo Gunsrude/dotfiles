@@ -4,6 +4,12 @@
 
 set -eu
 
+# The opencode installer script requires bash
+if ! command -v bash >/dev/null 2>&1; then
+    echo "Skipping opencode install: bash not found. Please install bash and re-run chezmoi apply." >&2
+    exit 0
+fi
+
 # Install opencode if not present
 OPENCODE_BIN="$HOME/.opencode/bin/opencode"
 if command -v opencode >/dev/null 2>&1 || [ -f "$OPENCODE_BIN" ]; then
