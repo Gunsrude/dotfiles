@@ -1,4 +1,8 @@
-#!/bin/bash
+#!/bin/sh
 {{- if not .is_container }}
-systemctl --user enable --now ssh-agent.service
+if command -v systemctl >/dev/null 2>&1; then
+    systemctl --user enable --now ssh-agent.service
+else
+    echo "Skipping ssh-agent: no systemctl (non-systemd init detected)"
+fi
 {{- end }}

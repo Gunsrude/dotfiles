@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 set -e
 
 INSTALL_DIR="$HOME/.local"
@@ -11,8 +11,9 @@ mkdir -p "$BIN_DIR"
 case "$(uname -m)" in
     x86_64)  ARCH="x86_64" ;;
     aarch64) ARCH="arm64" ;;
-    *)       echo "Unsupported architecture: $(uname -m)"; exit 1 ;;
+    *)       echo "WARNING: unsupported architecture $(uname -m), attempting with raw arch" ;;
 esac
+ARCH="${ARCH:-$(uname -m)}"
 
 TARBALL="nvim-linux-${ARCH}.tar.gz"
 URL="https://github.com/neovim/neovim/releases/latest/download/${TARBALL}"
