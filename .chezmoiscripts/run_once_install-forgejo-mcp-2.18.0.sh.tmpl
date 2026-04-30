@@ -8,6 +8,10 @@ OS=$(uname -s | tr '[:upper:]' '[:lower:]')
 curl -fsSL "https://codeberg.org/goern/forgejo-mcp/releases/download/v${VERSION}/forgejo-mcp_${VERSION}_${OS}_${ARCH}.tar.gz" \
   | tar -xz -C /tmp "forgejo-mcp_${VERSION}_${OS}_${ARCH}/forgejo-mcp"
 
+if [[ ! -d ~/.local/bin ]]; then
+    mkdir ~/.local/bin
+fi
+
 install /tmp/forgejo-mcp_${VERSION}_${OS}_${ARCH}/forgejo-mcp ~/.local/bin/forgejo-mcp
 
 echo "forgejo-mcp installed: v${VERSION}"
