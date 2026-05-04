@@ -13,6 +13,9 @@
           "contextLength": 65536
         }
       }
+    },
+    "opencode": {
+      "apiKey": "{env:OPENCODE_ZEN_API_KEY}"
     }
   },
   "watcher": {
@@ -36,8 +39,11 @@
       "snip git log*": "allow"
     }
   },
-  "instructions": ["~/.config/opencode/PROFILE.md"],
+  "instructions": [
+      "~/.config/opencode/PROFILE.md"
+  ],
   "plugin": [
-    "opencode-mem"
+    "opencode-mem",
+    "envsitter-guard@latest"
   ]
 }
