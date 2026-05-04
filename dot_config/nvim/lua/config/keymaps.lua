@@ -21,5 +21,9 @@ keymap.set("n", "<leader>bb", "<cmd>Telescope buffers<CR>", { desc = "List buffe
 keymap.set("n", "<leader>bd", "<cmd>Bdelete<CR>", { desc = "Delete buffer" })
 
 --fuckit button
+<<<<<<< HEAD
 keymap.set("n", "qqq", "<cmd>qa<CR>", { nowait = true, desc = "Quit Entirely" })
+=======
+keymap.set("n", "qqq", "<cmd>qa<CR>", { desc = "Quit Entirely" })
+>>>>>>> refs/remotes/origin/main
 

@@ -1,8 +1,20 @@
-#!/bin/bash
+#!/bin/sh
 # run_onchange_install-nvm-node.sh
 # chezmoi:template: hash={{ include "dot_config/nvim/lua/plugins/lsp.lua" | sha256sum }}
 
-set -euo pipefail
+set -eu
+
+# Both nvm and its installer require bash
+if ! command -v bash >/dev/null 2>&1; then
+    echo "Skipping nvm install: bash not found. Please install bash and re-run chezmoi apply." >&2
+    exit 0
+fi
+
+# Skip nvm on Alpine/musl (node.js doesn't publish musl binaries, nvm installer fails)
+if [ -f /etc/alpine-release ] || [ -x /bin/apk ]; then
+    echo "Skipping nvm install: Alpine/musl detected. Node/nvm not installed by default." >&2
+    exit 0
+fi
 
 NVM_VERSION="v0.40.1"
 export NVM_DIR="${NVM_DIR:-$HOME/.nvm}"
@@ -10,7 +22,7 @@ export PROFILE=/dev/null
 MIN_NODE_VERSION=18
 
 # Install nvm if not present
-if [[ ! -d "$NVM_DIR" ]]; then
+if [ ! -d "$NVM_DIR" ]; then
     echo "Installing nvm $NVM_VERSION..."
     curl -fsSL "https://raw.githubusercontent.com/nvm-sh/nvm/${NVM_VERSION}/install.sh" | bash
 else
@@ -23,13 +35,13 @@ fi
 # Check if we need to install/upgrade node
 NEED_INSTALL=false
 
-if ! nvm which default &>/dev/null; then
+if ! nvm which default >/dev/null 2>&1; then
     NEED_INSTALL=true
     echo "No default node set"
 else
     CURRENT=$(nvm version default 2>/dev/null | sed 's/v//')
     MAJOR=$(echo "$CURRENT" | cut -d. -f1)
-    if [[ "$MAJOR" -lt "$MIN_NODE_VERSION" ]]; then
+    if [ "$MAJOR" -lt "$MIN_NODE_VERSION" ]; then
         NEED_INSTALL=true
         echo "Node v$CURRENT is below v${MIN_NODE_VERSION}, upgrading"
     else
@@ -37,9 +49,9 @@ else
     fi
 fi
 
-if [[ "$NEED_INSTALL" == "true" ]]; then
+if [ "$NEED_INSTALL" = "true" ]; then
     nvm install --lts
-    nvm alias default lts/*
+    nvm alias default 'lts/*'
 fi
 
 echo "Done. node: $(node --version), npm: $(npm --version)"
