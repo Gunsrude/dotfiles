@@ -1,0 +1,13 @@
+{
+  "dbPath": ".opencode/memory.db",
+  "contextMaxTokens": 2000,
+  "semanticContextMaxResults": 3,
+  "semanticMinScore": 0.55,
+  "indexSize": 50,
+  "sampleSize": 5,
+  "retentionDays": 90,
+  "privacyStrip": true,
+  "logLevel": "info",
+  "compressionModel": "llamacpp/qwen3-small",
+  "maxRawContentSize": 8000
+}

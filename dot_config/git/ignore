@@ -15,6 +15,7 @@
 *.swp
 *.swo
 *~
+.opencode/memory*
 
 # Package manager / runtime
 node_modules/

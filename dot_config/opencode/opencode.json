@@ -9,8 +9,10 @@
       },
       "models": {
         "qwen3.6": {
-          "name": "qwen3.6",
-          "contextLength": 65536
+          "name": "Qwen3 35B MoE"
+        },
+        "qwen3-small": {
+          "name": "Qwen3 1.7B (small)"
         }
       }
     },
@@ -22,28 +24,30 @@
     "ignore": ["node_modules/**", "dist/**", ".git/**"]
   },
   "model": "llamacpp/qwen3.6",
+  "small_model": "llamacpp/qwen3-small",
   "tools": {
     "websearch": true
+  },
+  "compaction": {
+      "prune": false
   },
   "permission": {
     "bash": {
       "git *": "ask",
-      "snip git *": "ask",
       "git diff*": "allow",
       "git fetch*": "allow",
       "git status*": "allow",
-      "git log*": "allow",
-      "snip git diff*": "allow",
-      "snip git fetch*": "allow",
-      "snip git status*": "allow",
-      "snip git log*": "allow"
+      "git log*": "allow"
     }
   },
   "instructions": [
       "~/.config/opencode/PROFILE.md"
   ],
   "plugin": [
-    "opencode-mem",
-    "envsitter-guard@latest"
+    ["opencode-model-stats", { "prefillPollMs": 250 }],
+    "@tarquinen/opencode-dcp@latest",
+    "opencode-memory-plugin@latest",
+    "envsitter-guard@latest",
+    "opencode-shell-strategy@latest"
   ]
 }
