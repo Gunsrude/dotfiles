@@ -19,15 +19,10 @@
 
 {{- else }}
 
-{{- if eq .machine_type "work" }}
-.ssh
-.ssh/**
-{{- else }}
 .ssh/id_rsa
 .ssh/id_ed25519
 .ssh/*.pem
 .ssh/authorized_keys
-{{- end }}
 
 {{- end }}
 

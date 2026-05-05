@@ -6,6 +6,8 @@ ServerAliveInterval 60
 ServerAliveCountMax 10
 TCPKeepAlive yes
 
+Include config.d/*
+
 Host localhost
 	StrictHostKeyChecking no
 	UserKnownHostsFile=/dev/null
