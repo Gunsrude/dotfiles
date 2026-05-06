@@ -1,0 +1,73 @@
+
+GOOSE_TELEMETRY_ENABLED: false
+
+GOOSE_PROVIDER: openai
+GOOSE_MODEL: qwen3.6
+
+OPENAI_HOST: http://llm.stellar.build:8080
+OPENAI_BASE_PATH: v1/chat/completions
+OPENAI_API_KEY: not-needed
+
+GOOSE_LEAD_PROVIDER: openai
+GOOSE_LEAD_MODEL: qwen-small
+
+GOOSE_PLANNER_PROVIDER: openai
+GOOSE_PLANNER_MODEL: qwen-small
+
+GOOSE_AUTO_COMPACT_THRESHOLD: 0.7
+GOOSE_MODE: approve
+
+GOOSE_CONTEXT_LIMIT: 131072
+GOOSE_PLANNER_CONTEXT_LIMIT: 32768
+
+extensions:
+  developer:
+    type: builtin
+    name: developer
+    enabled: true
+
+  memory:
+    type: builtin
+    name: memory
+    enabled: true
+
+  skills:
+    type: platform
+    name: skills
+    enabled: true
+
+  todo:
+    type: platform
+    name: todo
+    enabled: true
+
+  analyze:
+    type: platform
+    name: analyze
+    enabled: true
+
+  extensionmanager:
+    type: platform
+    name: extensionmanager
+    enabled: true
+
+  summon:
+    type: platform
+    name: summon
+    enabled: true
+
+  tom:
+    type: platform
+    name: tom
+    enabled: false   # enable if you want per-machine context injection via env var
+
+  chatrecall:
+    type: platform
+    name: chatrecall
+    enabled: false   # enable if you want cross-session search
+
+  computercontroller:
+    type: builtin
+    name: computercontroller
+    enabled: false
+

@@ -44,7 +44,7 @@
       "~/.config/opencode/PROFILE.md"
   ],
   "plugin": [
-    ["opencode-model-stats", { "prefillPollMs": 250 }],
+    ["opencode-model-stats", { "prefillPollMs": 0 }],
     "@tarquinen/opencode-dcp@latest",
     "opencode-memory-plugin@latest",
     "envsitter-guard@latest",

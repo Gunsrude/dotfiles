@@ -1,0 +1,68 @@
+
+{
+  "preset": "local",
+
+  "presets": {
+    "local": {
+      "orchestrator": {
+        "model": "llamacpp/qwen3.6",
+        "temperature": 0.6,
+        "skills": ["*"]
+      },
+
+      "oracle": {
+        "model": "llamacpp/qwen3.6",
+        "temperature": 0.5,
+        "skills": ["!websearch", "!grep_app"]
+      },
+
+      "designer": {
+        "model": "llamacpp/qwen3.6",
+        "temperature": 0.7,
+        "skills": ["*"]
+      },
+
+      "explorer": {
+        "model": "llamacpp/qwen3-small",
+        "temperature": 0.3,
+        "skills": ["!websearch", "!grep_app", "!context7"],
+        "mcps": []
+      },
+
+      "librarian": {
+        "model": "llamacpp/qwen3-small",
+        "temperature": 0.3,
+        "skills": ["websearch", "context7", "grep_app"],
+        "mcps": []
+      },
+
+      "fixer": {
+        "model": "llamacpp/qwen3.6",
+        "temperature": 0.2,
+        "skills": ["!websearch", "!grep_app", "!context7"],
+        "mcps": []
+      }
+    }
+  },
+
+  "disabled_agents": ["observer", "council"],
+
+  "sessionManager": {
+    "readContextMinLines": 15,
+    "readContextMaxFiles": 5
+  },
+
+  "fallback": {
+    "enabled": true,
+    "timeoutMs": 30000,
+    "retryDelayMs": 1000,
+    "retry_on_empty": true,
+    "chains": {
+      "explorer":  ["llamacpp/qwen3-small", "llamacpp/qwen3.6"],
+      "librarian": ["llamacpp/qwen3-small", "llamacpp/qwen3.6"]
+    }
+  },
+
+  "autoUpdate": false
+}
+
