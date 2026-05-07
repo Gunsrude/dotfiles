@@ -1,0 +1,61 @@
+#!/bin/sh
+set -e
+
+VERSION="2.18.0"
+
+# Common arch detection
+case "$(uname -m)" in
+    x86_64)  ARCH="amd64" ;;
+    aarch64) ARCH="arm64" ;;
+    *)       echo "WARNING: unsupported architecture $(uname -m), attempting with raw arch" ;;
+esac
+ARCH="${ARCH:-$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/')}"
+OS=$(uname -s | tr '[:upper:]' '[:lower:]')
+
+# Create bin directory if needed
+if [ ! -d ~/.local/bin ]; then
+    mkdir -p ~/.local/bin
+fi
+
+# ====================
+# Forgejo MCP (Linux only)
+# ====================
+if [ "$OS" = "linux" ]; then
+    echo "Installing forgejo-mcp..."
+    curl -fsSL "https://codeberg.org/goern/forgejo-mcp/releases/download/v${VERSION}/forgejo-mcp_${VERSION}_${OS}_${ARCH}.tar.gz" \
+      | tar -xz -C /tmp "forgejo-mcp_${VERSION}_${OS}_${ARCH}/forgejo-mcp"
+
+    install /tmp/forgejo-mcp_${VERSION}_${OS}_${ARCH}/forgejo-mcp ~/.local/bin/forgejo-mcp
+    rm -rf "/tmp/forgejo-mcp_${VERSION}_${OS}_${ARCH}"
+    echo "forgejo-mcp installed: v${VERSION}"
+else
+    echo "Skipping forgejo-mcp (Linux only)"
+fi
+
+# ====================
+# GitHub MCP Server (Linux + Darwin)
+# ====================
+GITHUB_MCP_OS=$(echo "$OS" | tr '[:lower:]' '[:upper:]')
+
+if [ "$OS" = "linux" ] || [ "$OS" = "darwin" ]; then
+    # Map internal arch to GitHub asset naming
+    case "$ARCH" in
+        amd64) GITHUB_ARCH="x86_64" ;;
+        arm64) GITHUB_ARCH="arm64" ;;
+        *)     GITHUB_ARCH="$ARCH" ;;
+    esac
+
+    GITHUB_TAR="github-mcp-server_${GITHUB_MCP_OS}_${GITHUB_ARCH}.tar.gz"
+    GITHUB_URL="https://github.com/github/github-mcp-server/releases/latest/download/${GITHUB_TAR}"
+
+    echo "Installing github-mcp-server..."
+    echo "  Downloading: ${GITHUB_URL}"
+
+    curl -fsSL "$GITHUB_URL" | tar -xz -C /tmp github-mcp-server
+
+    install /tmp/github-mcp-server ~/.local/bin/github-mcp-server
+    echo "github-mcp-server installed"
+else
+    echo "Skipping github-mcp-server (Linux and Darwin only)"
+    echo "  Unsupported OS: ${OS}"
+fi

@@ -1,0 +1,46 @@
+{
+  "storagePath": "~/.config/opencode",
+
+  "embeddingModel": "Xenova/nomic-embed-text-v1",
+
+  "memory": {
+    "defaultScope": "project"
+  },
+
+  "memoryProvider": "openai-chat",
+  "memoryModel": "qwen-small",
+  "memoryApiUrl": "http://llm.stellar.build:8080/v1",
+  "memoryApiKey": "sk-dummy",
+
+  "autoCaptureEnabled": true,
+  "autoCaptureLanguage": "auto",
+
+  "webServerEnabled": true,
+  "webServerPort": 4747,
+
+  "showAutoCaptureToasts": true,
+  "showUserProfileToasts": true,
+  "showErrorToasts": true,
+
+  "userProfileAnalysisInterval": 20,
+
+  "maxMemories": 50,
+
+  "compaction": {
+    "enabled": true,
+    "memoryLimit": 40
+  },
+
+  "memoryExtraParams": { 
+      "enable_thinking": false
+  },
+
+  "chatMessage": {
+    "enabled": true,
+    "maxMemories": 5,
+    "excludeCurrentSession": true,
+    "maxAgeDays": undefined,
+    "injectOn": "first"
+  }
+}
+

@@ -16,6 +16,8 @@
 *.swo
 *~
 .opencode/memory*
+memories.db
+index.usearch
 
 # Package manager / runtime
 node_modules/

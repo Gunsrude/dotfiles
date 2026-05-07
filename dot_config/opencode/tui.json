@@ -2,6 +2,6 @@
   "$schema": "https://opencode.ai/tui.json",
   "theme": "catppuccin",
   "plugin": [
-    ["opencode-model-stats", { "prefillPollMs": 250 }]
+    ["opencode-model-stats", { "prefillPollMs": 0 }]
   ]
 }
