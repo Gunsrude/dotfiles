@@ -19,8 +19,9 @@ opt.splitright = true
 opt.splitbelow = true
 opt.swapfile = false
 opt.backup = false
-opt.undodir = os.getenv("HOME") .. "/.config/.vim/undodir"
+opt.writebackup = false
 opt.undofile = true
+opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 opt.scrolloff = 8
 opt.sidescrolloff = 8
 opt.timeoutlen=300
@@ -28,15 +29,6 @@ opt.ttimeoutlen=10
 
 -- Session and persistence options
 opt.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
-
--- Better backup, swap, and undo handling
-opt.backup = false
-opt.writebackup = false
-opt.swapfile = false
-
--- Persistent undo
-opt.undofile = true
-opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 
 -- Create undodir if it doesn't exist
 vim.fn.mkdir(vim.fn.expand("~/.vim/undodir"), "p")

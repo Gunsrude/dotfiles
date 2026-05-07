@@ -18,7 +18,6 @@ keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle file ex
 keymap.set("n", "<S-l>", "<cmd>bnext<CR>", { desc = "Next buffer" })
 keymap.set("n", "<S-h>", "<cmd>bprevious<CR>", { desc = "Previous buffer" })
 keymap.set("n", "<leader>bb", "<cmd>Telescope buffers<CR>", { desc = "List buffers" })
-keymap.set("n", "<leader>bd", "<cmd>Bdelete<CR>", { desc = "Delete buffer" })
 
 --fuckit button
 keymap.set("n", "111", "<cmd>qa<CR>", { nowait = true, desc = "Quit Entirely" })
