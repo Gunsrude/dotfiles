@@ -30,3 +30,18 @@
     executable = true
 {{ end }}
 {{ end }}
+{{ if eq .chezmoi.os "darwin" }}
+{{ if eq .chezmoi.arch "amd64" }}
+[".local/bin/snip"]
+    type = "archive-file"
+    url = "https://github.com/edouard-claude/snip/releases/download/v{{ $snipVersion }}/snip_{{ $snipVersion }}_darwin_amd64.tar.gz"
+    path = "snip"
+    executable = true
+{{ else if eq .chezmoi.arch "arm64" }}
+[".local/bin/snip"]
+    type = "archive-file"
+    url = "https://github.com/edouard-claude/snip/releases/download/v{{ $snipVersion }}/snip_{{ $snipVersion }}_darwin_arm64.tar.gz"
+    path = "snip"
+    executable = true
+{{ end }}
+{{ end }}

@@ -17,6 +17,16 @@
 
 .gitconfig
 
+{{- else if eq .chezmoi.os "darwin" }}
+
+.ssh/id_rsa
+.ssh/id_ed25519
+.ssh/*.pem
+.ssh/authorized_keys
+
+!dot_config
+dot_config/hypr/**
+
 {{- else }}
 
 .ssh/id_rsa

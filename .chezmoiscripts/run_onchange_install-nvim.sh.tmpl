@@ -15,15 +15,30 @@ case "$(uname -m)" in
 esac
 ARCH="${ARCH:-$(uname -m)}"
 
-TARBALL="nvim-linux-${ARCH}.tar.gz"
+OS=$(uname -s | tr '[:upper:]' '[:lower:]')
+
+if [ "$OS" = "linux" ]; then
+    TARBALL="nvim-linux-${ARCH}.tar.gz"
+elif [ "$OS" = "darwin" ]; then
+    TARBALL="nvim-macos-${ARCH}.tar.gz"
+else
+    echo "ERROR: unsupported OS $OS for neovim installation"
+    exit 1
+fi
+
 URL="https://github.com/neovim/neovim/releases/latest/download/${TARBALL}"
 
-echo "Downloading latest Neovim tarball ($ARCH)..."
+echo "Downloading latest Neovim tarball ($OS, $ARCH)..."
 curl -L "$URL" | tar xz -C /tmp
 
-rm -rf "$NVIM_DIR"
-mv "/tmp/nvim-linux-${ARCH}" "$NVIM_DIR"
-
-ln -sf "$NVIM_DIR/bin/nvim" "$BIN_DIR/nvim"
+if [ "$OS" = "linux" ]; then
+    rm -rf "$NVIM_DIR"
+    mv "/tmp/nvim-linux-${ARCH}" "$NVIM_DIR"
+    ln -sf "$NVIM_DIR/bin/nvim" "$BIN_DIR/nvim"
+elif [ "$OS" = "darwin" ]; then
+    rm -rf "$NVIM_DIR"
+    mv "/tmp/nvim-macos-${ARCH}" "$NVIM_DIR"
+    ln -sf "$NVIM_DIR/nvim.app/Contents/MacOS/nvim" "$BIN_DIR/nvim"
+fi
 
 echo "Neovim installed: $("$BIN_DIR/nvim" --version | head -1)"

@@ -33,10 +33,16 @@ autoload -Uz promptinit && promptinit
 complete -o nospace -C /usr/bin/vault vault
 
 # MAKE environment
+{{ if eq .chezmoi.os "linux" }}
 MAKEFLAGS="-j$(nproc)"
+{{ else }}
+MAKEFLAGS="-j$(sysctl -n hw.ncpu)"
+{{ end }}
 
 {{- if not .is_container }}
+{{- if eq .chezmoi.os "linux" }}
 export SSH_AUTH_SOCK="$HOME/.local/share/ssh/ssh-agent.socket"
+{{- end }}
 export DOTFILES_REPO="https://codeberg.org/Gunsrude/dotfiles.git"
 {{- end }}
 
@@ -50,14 +56,22 @@ dockerrm() {
 
 # Aliases
 # env
+{{- if eq .chezmoi.os "linux" }}
 alias sdl="env -u SDL_VIDEODRIVER"
 alias xforce="SDL_VIDEODRIVER=x11"
+{{- end }}
 
 # yay fixes
+{{- if eq .chezmoi.os "linux" }}
 alias yay='MAKEFLAGS="-j$(nproc)" yay --sudoloop'
 alias mirrorup='sudo reflector --latest 20 --protocol https --sort rate --save /etc/pacman.d/mirrorlist -n 8 -c US --threads 8'
+{{- end }}
 
+{{ if eq .chezmoi.os "linux" }}
 alias ls='ls --time-style=long-iso'
+{{ else }}
+alias ls='ls -lF'
+{{ end }}
 alias followthewhiterabbit="kitty --class kitty-matrix --config ~/.config/kitty/matrix.conf --start-as fullscreen -- tmatrix -f 0.1,2 -g 10,40"
 
 # Wine32 Default
