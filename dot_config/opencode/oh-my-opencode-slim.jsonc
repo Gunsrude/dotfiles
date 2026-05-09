@@ -23,14 +23,14 @@
       },
 
       "explorer": {
-        "model": "llamacpp/qwen3-small",
+        "model": "llamacpp/qwen-small",
         "temperature": 0.3,
         "skills": ["!websearch", "!grep_app", "!context7"],
         "mcps": []
       },
 
       "librarian": {
-        "model": "llamacpp/qwen3-small",
+        "model": "llamacpp/qwen-small",
         "temperature": 0.3,
         "skills": ["websearch", "context7", "grep_app"],
         "mcps": []
@@ -58,8 +58,8 @@
     "retryDelayMs": 1000,
     "retry_on_empty": true,
     "chains": {
-      "explorer":  ["llamacpp/qwen3-small", "llamacpp/qwen3.6"],
-      "librarian": ["llamacpp/qwen3-small", "llamacpp/qwen3.6"]
+      "explorer":  ["llamacpp/qwen-small", "llamacpp/qwen3.6"],
+      "librarian": ["llamacpp/qwen-small", "llamacpp/qwen3.6"]
     }
   },
 

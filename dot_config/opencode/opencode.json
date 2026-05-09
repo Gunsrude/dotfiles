@@ -11,18 +11,8 @@
         "qwen3.6": {
           "name": "Qwen3 35B MoE"
         },
-        "qwen3-small": {
-          "name": "Qwen3 1.7B (small)"
-        },
-        "moondream": {
-            "name": "moondream2",
-            "modalities": {
-                "input": [
-                    "image",
-                    "text"
-                ],
-                "output": ["text"]
-            }
+        "qwen-small": {
+          "name": "Qwen Small + Vision"
         }
       }
     },
@@ -34,9 +24,10 @@
     "ignore": ["node_modules/**", "dist/**", ".git/**"]
   },
   "model": "llamacpp/qwen3.6",
-  "small_model": "llamacpp/qwen3-small",
+  "small_model": "llamacpp/qwen-small",
   "tools": {
-    "websearch": true
+    "websearch": false,
+    "kagi_kagi_summarizer": false
   },
   "compaction": {
       "prune": false
@@ -54,14 +45,13 @@
       "~/.config/opencode/PROFILE.md"
   ],
   "plugin": [
-    "@tarquinen/opencode-dcp@latest",
+    "@cortexkit/opencode-magic-context",
     "envsitter-guard@latest",
-    ["opencode-model-stats", { "prefillPollMs": 0 }],
     "opencode-shell-strategy@latest",
     ["opencode-image-vision", {
       "vision": {
         "provider": "custom",
-        "model": "moondream",
+        "model": "qwen-small",
         "apiKey": "local",
         "baseUrl": "http://llm.stellar.build:8080/v1",
         "language": "en"

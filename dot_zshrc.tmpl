@@ -132,6 +132,9 @@ function fuck() {
 }
 
 # PATH
+{{- if and (eq .chezmoi.os "darwin") (not .is_container) }}
+if [ -d "/opt/homebrew/bin" ]; then path+=("/opt/homebrew/bin"); fi
+{{- end }}
 if [ -d "${HOME}/.local/bin" ]; then path+=("${HOME}/.local/bin"); fi
 if [ -d "${HOME}/bin" ]; then path+=("${HOME}/bin"); fi
 #export PATH
