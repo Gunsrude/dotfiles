@@ -50,14 +50,14 @@
       "command": ["npx", "-y", "exa-mcp-server"],
       "environment": {
         "EXA_API_KEY": "{env:EXA_API_KEY}"
-      }
+      },
+      "disabled": true
     }
   },
   "model": "llamacpp/qwen-full",
   "small_model": "llamacpp/qwen-small",
   "tools": {
-    "websearch": false,
-    "kagi_kagi_summarizer": false
+    "websearch": false
   },
   "lsp": true,
   "compaction": {

@@ -19,6 +19,7 @@ You have two search MCP tools available: `kagi` and `exa`. Use them as follows:
 - Searching for anything where recency matters (Kagi's index is fresher)
 
 ### Use `exa` (Exa) when:
+- Exa is enabled for the session (it is disabled by default)
 - The query is conceptual or semantic ("find libraries that do X", "how do people solve Y")
 - You need to find similar code, patterns, or approaches
 - You're researching a technical topic that requires understanding, not just a link
@@ -30,4 +31,5 @@ You have two search MCP tools available: `kagi` and `exa`. Use them as follows:
 - Use `exa` as the semantic/research layer when Kagi returns shallow results
 - Do NOT run both tools for the same query simultaneously — pick the right one first
 - If the first tool returns poor results, try the other before giving up
+- `kagi_kagi_summarizer` is available — its primary purpose is to summarize a single page for readability. Only use it when that specific functionality is needed
 - Never fabricate URLs — always use a search tool to find them
