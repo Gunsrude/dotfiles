@@ -51,7 +51,7 @@
       "environment": {
         "EXA_API_KEY": "{env:EXA_API_KEY}"
       },
-      "disabled": true
+      "enabled": false
     }
   },
   "model": "llamacpp/qwen-full",
