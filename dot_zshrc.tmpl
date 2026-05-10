@@ -157,3 +157,8 @@ fi
 
 precmd_functions+=(set_terminal_title)
 
+# Opencode CLI
+if [[ -d "$HOME/.opencode/bin" ]]; then
+    export PATH="$HOME/.opencode/bin:$PATH"
+fi
+

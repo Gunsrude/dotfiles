@@ -7,9 +7,8 @@
   // Wait 5 min after a response before applying queued ops (cache safety)
   "cache_ttl": "5m",
 
-  // Use absolute tokens instead of percentage.
   "execute_threshold_tokens": {
-    "default": 200000
+    "default": 120000
   },
 
   // Last 20 tags (messages/tool calls) are immune from immediate dropping
