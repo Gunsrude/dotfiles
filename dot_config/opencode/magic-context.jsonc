@@ -8,7 +8,7 @@
   "cache_ttl": "5m",
 
   "execute_threshold_tokens": {
-    "default": 100000
+    "default": 90000
   },
 
   // Last 20 tags (messages/tool calls) are immune from immediate dropping
@@ -29,7 +29,7 @@
   "clear_reasoning_age": 50,
 
   // Nudge agent after 15 consecutive turns without user input
-  "iteration_nudge_threshold": 25,
+  "iteration_nudge_threshold": 15,
 
   // Fix for qwen only allowing single system prompt
   "system_message_merge": true,
