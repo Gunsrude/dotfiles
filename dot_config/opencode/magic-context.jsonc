@@ -8,14 +8,14 @@
   "cache_ttl": "5m",
 
   "execute_threshold_tokens": {
-    "default": 90000
+    "default": 80000
   },
 
   // Last 20 tags (messages/tool calls) are immune from immediate dropping
   "protected_tags": 20,
 
   // Minimum token growth between rolling nudges to the agent
-  "nudge_interval_tokens": 10000,
+  "nudge_interval_tokens": 2000,
 
   // Auto-drop tool outputs older than 100 tags
   "auto_drop_tool_age": 100,
@@ -46,7 +46,7 @@
   },
 
   // Timeout per historian call
-  "historian_timeout_ms": 60000,
+  "historian_timeout_ms": 600000,
 
   // Fraction of usable context reserved for the history block.
   // 0.15 = 15% of (128k × execute_threshold). Triggers compression when exceeded.
@@ -59,7 +59,7 @@
   // Historian trigger: fire when ≥3 commit clusters are unsummarized
   "commit_cluster_trigger": {
     "enabled": true,
-    "min_clusters": 3
+    "min_clusters": 2
   },
 
   // ── Compressor ──────────────────────────────────────────────────────────
