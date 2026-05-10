@@ -46,6 +46,21 @@ export SSH_AUTH_SOCK="$HOME/.local/share/ssh/ssh-agent.socket"
 export DOTFILES_REPO="https://codeberg.org/Gunsrude/dotfiles.git"
 {{- end }}
 
+# Goose AI agent
+export GOOSE_PROVIDER=openai
+export GOOSE_MODEL=qwen-full
+export OPENAI_HOST=http://llm.stellar.build:8080
+export OPENAI_BASE_PATH=v1/chat/completions
+export OPENAI_API_KEY=not-needed
+export GOOSE_LEAD_PROVIDER=openai
+export GOOSE_LEAD_MODEL=qwen-small
+export GOOSE_PLANNER_PROVIDER=openai
+export GOOSE_PLANNER_MODEL=qwen-small
+export GOOSE_TELEMETRY_ENABLED=false
+export GOOSE_AUTO_COMPACT_THRESHOLD=0.7
+export GOOSE_CONTEXT_LIMIT=131072
+export GOOSE_PLANNER_CONTEXT_LIMIT=32768
+
 # Dotfiles stuffs
 alias c=chezmoi
 
@@ -134,10 +149,14 @@ function fuck() {
 # PATH
 {{- if and (eq .chezmoi.os "darwin") (not .is_container) }}
 if [ -d "/opt/homebrew/bin" ]; then path+=("/opt/homebrew/bin"); fi
+if [ -d "${HOME}/Library/Python/3.9/bin" ]; then path+=("${HOME}/Library/Python/3.9/bin"); fi
 {{- end }}
 if [ -d "${HOME}/.local/bin" ]; then path+=("${HOME}/.local/bin"); fi
 if [ -d "${HOME}/bin" ]; then path+=("${HOME}/bin"); fi
 #export PATH
+
+# Dummy API key for opencode-voice (ollama doesn't authenticate, but plugin requires a value)
+export OLLAMA_API_KEY="ollama"
 
 function set_terminal_title() {
     local user_host="%n@%m"

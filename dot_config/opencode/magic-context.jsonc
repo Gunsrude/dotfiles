@@ -8,7 +8,7 @@
   "cache_ttl": "5m",
 
   "execute_threshold_tokens": {
-    "default": 120000
+    "default": 100000
   },
 
   // Last 20 tags (messages/tool calls) are immune from immediate dropping
@@ -45,8 +45,8 @@
     // "prompt": "..."
   },
 
-  // Timeout per historian call (5 min default — fine for CPU inference)
-  "historian_timeout_ms": 300000,
+  // Timeout per historian call
+  "historian_timeout_ms": 60000,
 
   // Fraction of usable context reserved for the history block.
   // 0.15 = 15% of (128k × execute_threshold). Triggers compression when exceeded.

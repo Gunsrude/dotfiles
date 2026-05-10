@@ -11,15 +11,15 @@
         "qwen-full": {
           "name": "Qwen3 35B MoE",
           "limit": {
-            "context": 262144,
-            "output": 65356
+            "context": 131072,
+            "output": 32768
           }
         },
         "qwen-small": {
           "name": "Qwen Small + Vision",
           "limit": {
-            "context": 32768,
-            "output": 8192
+            "context": 131072,
+            "output": 32768
           }
         }
       }
