@@ -74,12 +74,12 @@
     }
   },
   "instructions": [
-      "~/.config/opencode/PROFILE.md"
+      "~/.config/opencode/PROFILE.md",
+      "~/.config/opencode/plugin/shell-strategy/shell_strategy.md"
   ],
   "plugin": [
     "@cortexkit/opencode-magic-context@0.17.2",
     "envsitter-guard@latest",
-    "opencode-shell-strategy@latest",
     ["opencode-image-vision", {
       "vision": {
         "provider": "custom",
