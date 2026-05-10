@@ -2,8 +2,7 @@
   "$schema": "https://opencode.ai/tui.json",
   "theme": "catppuccin",
   "keybinds": {
-    "session_rename": "<leader>R",
-    "session_interrupt": "<leader>i"
+    "session_rename": "<leader>R"
   },
   "plugin": [
     "@cortexkit/opencode-magic-context@0.17.2",
