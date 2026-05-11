@@ -8,15 +8,29 @@
         "includeUsage": true
       },
       "models": {
-        "qwen-full": {
-          "name": "Qwen3 35B MoE",
+        "full": {
+          "name": "Stellar Coding",
           "limit": {
             "context": 131072,
             "output": 32768
           }
         },
-        "qwen-small": {
-          "name": "Qwen Small + Vision",
+        "historian": {
+            "name": "Stellar Historian",
+          "limit": {
+            "context": 32768,
+            "output": 16384
+          }
+        },
+        "vision": {
+            "name": "Stellar Vision",
+          "limit": {
+            "context": 8192,
+            "output": 2048
+          }
+        },
+        "small": {
+          "name": "Stellar Small",
           "limit": {
             "context": 131072,
             "output": 32768
@@ -54,8 +68,8 @@
       "enabled": false
     }
   },
-  "model": "llamacpp/qwen-full",
-  "small_model": "llamacpp/qwen-small",
+  "model": "llamacpp/full",
+  "small_model": "llamacpp/small",
   "tools": {
     "websearch": false
   },
@@ -71,6 +85,9 @@
       "git fetch*": "allow",
       "git status*": "allow",
       "git log*": "allow"
+    },
+    "skill": {
+      "restart-service": "ask"
     }
   },
   "instructions": [
@@ -83,7 +100,7 @@
     ["opencode-image-vision", {
       "vision": {
         "provider": "custom",
-        "model": "qwen-small",
+        "model": "vision",
         "apiKey": "local",
         "baseUrl": "http://llm.stellar.build:8080/v1",
         "language": "en"

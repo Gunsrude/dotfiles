@@ -37,8 +37,7 @@
   // ── Historian ───────────────────────────────────────────────────────────
 
   "historian": {
-    "model": "llamacpp/qwen-small",
-    // "fallback_models": ["llamacpp/qwen3-full"],
+    "model": "llamacpp/historian",
     "temperature": 0.3,
     "two_pass": true,
     // Optional: custom system prompt for the historian
@@ -100,8 +99,7 @@
   // Fast context briefing agent, invoked via /ctx-aug at session start.
   "sidekick": {
     "enabled": true,
-    "model": "llamacpp/qwen-small",
-    // "fallback_models": ["llamacpp/qwen3-full"],
+    "model": "llamacpp/small",
     "temperature": 0.2,
     "timeout_ms": 30000
   },
@@ -111,8 +109,7 @@
   // archives stale data. Runs in a scheduled window.
   "dreamer": {
     "enabled": true,              // set false if you don't leave machine on
-    "model": "llamacpp/qwen-small",
-    // "fallback_models": ["llamacpp/qwen3-full"],
+    "model": "llamacpp/small",
     "temperature": 0.3,
     "schedule": "02:00-06:00",   // 24h format, supports overnight e.g. "23:00-05:00"
     "max_runtime_minutes": 120,
