@@ -8,7 +8,7 @@
   },
 
   "memoryProvider": "openai-chat",
-  "memoryModel": "small",
+  "memoryModel": "historian",
   "memoryApiUrl": "http://llm.stellar.build:8080/v1",
   "memoryApiKey": "sk-dummy",
 

@@ -11,7 +11,7 @@
         "full": {
           "name": "Stellar Coding",
           "limit": {
-            "context": 98304,
+            "context": 131072,
             "output": 16384
           }
         },
@@ -20,13 +20,6 @@
           "limit": {
             "context": 32768,
             "output": 8192
-          }
-        },
-        "vision": {
-            "name": "Stellar Vision",
-          "limit": {
-            "context": 8192,
-            "output": 2048
           }
         },
         "small": {
@@ -96,18 +89,7 @@
   ],
   "plugin": [
     "@cortexkit/opencode-magic-context@0.18.0",
-    "envsitter-guard@latest",
-    ["opencode-image-vision", {
-      "vision": {
-        "provider": "custom",
-        "model": "vision",
-        "apiKey": "local",
-        "baseUrl": "http://llm.stellar.build:8080/v1",
-        "language": "en"
-      },
-      "clipboard": {
-        "enabled": true
-      }
+    "envsitter-guard@latest"
     }]
   ]
 }
