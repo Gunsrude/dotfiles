@@ -95,7 +95,7 @@
       "~/.config/opencode/plugin/shell-strategy/shell_strategy.md"
   ],
   "plugin": [
-    "@cortexkit/opencode-magic-context@0.17.2",
+    "@cortexkit/opencode-magic-context@0.18.0",
     "envsitter-guard@latest",
     ["opencode-image-vision", {
       "vision": {
