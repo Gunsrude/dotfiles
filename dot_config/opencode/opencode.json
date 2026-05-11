@@ -90,7 +90,6 @@
   "plugin": [
     "@cortexkit/opencode-magic-context@0.18.0",
     "envsitter-guard@latest"
-    }]
   ]
 }
 
