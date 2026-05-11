@@ -11,15 +11,15 @@
         "full": {
           "name": "Stellar Coding",
           "limit": {
-            "context": 131072,
-            "output": 32768
+            "context": 98304,
+            "output": 16384
           }
         },
         "historian": {
             "name": "Stellar Historian",
           "limit": {
             "context": 32768,
-            "output": 16384
+            "output": 8192
           }
         },
         "vision": {
@@ -32,8 +32,8 @@
         "small": {
           "name": "Stellar Small",
           "limit": {
-            "context": 131072,
-            "output": 32768
+            "context": 32768,
+            "output": 4096
           }
         }
       }
