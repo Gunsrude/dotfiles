@@ -1,11 +1,4 @@
 
-# oh-my-opencode-slim - clones into ~/.config/opencode/plugins/oh-my-opencode-slim
-[".config/opencode/plugins/oh-my-opencode-slim"]
-    type = "git-repo"
-    url = "https://github.com/alvinunreal/oh-my-opencode-slim.git"
-    pull.args = ["--ff-only"]
-    refreshPeriod = "168h"
-
 # opencode-voice for local voice chat
 #[".config/opencode/plugins/opencode-voice"]
 #    type = "git-repo"

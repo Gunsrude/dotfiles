@@ -18,21 +18,37 @@
         "historian": {
             "name": "Stellar Historian",
           "limit": {
-            "context": 32768,
-            "output": 8192
+            "context": 100000,
+            "output": 16384
           }
         },
         "small": {
           "name": "Stellar Small",
+          "limit": {
+            "context": 16384,
+            "output": 8192
+          }
+        }
+      }
+    },
+    "opencode": {
+      "apiKey": "{env:OPENCODE_ZEN_API_KEY}",
+      "models": {
+        "gpt-5-nano": {
+          "name": "Zen Nano",
+          "limit": {
+            "context": 32768,
+            "output": 4096
+          }
+        },
+        "qwen3.5-plus": {
+          "name": "Zen Qwen Small",
           "limit": {
             "context": 32768,
             "output": 4096
           }
         }
       }
-    },
-    "opencode": {
-      "apiKey": "{env:OPENCODE_ZEN_API_KEY}"
     }
   },
   "watcher": {
@@ -72,6 +88,9 @@
       "auto": false
   },
   "permission": {
+    "external_directory": {
+      "/tmp/**": "allow"
+    },
     "bash": {
       "git *": "ask",
       "git diff*": "allow",

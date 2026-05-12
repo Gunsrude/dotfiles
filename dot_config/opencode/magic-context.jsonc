@@ -5,7 +5,7 @@
   "cache_ttl": "5m",
 
   "execute_threshold_tokens": {
-    "llamacpp/full": 75000,
+    "llamacpp/full": 90000,
     "default": 20000
   },
 
@@ -25,7 +25,7 @@
 
   "historian": {
     "model": "llamacpp/historian",
-    "fallback_models": ["llamacpp/small"],
+    "fallback_models": ["opencode/gpt-5-nano"],
     "temperature": 0.3,
     "two_pass": true,
   },
@@ -33,6 +33,8 @@
   "historian_timeout_ms": 600000,
 
   "history_budget_percentage": 0.15,
+
+  "compartment_token_budget": 30000,
 
   "compaction_markers": true,
 
@@ -60,7 +62,7 @@
 
   "sidekick": {
     "enabled": true,
-    "model": "llamacpp/small",
+    "model": "opencode/gpt-5-nano",
     "temperature": 0.2,
     "timeout_ms": 30000
   },
