@@ -24,8 +24,8 @@
   "system_message_merge": true,
 
   "historian": {
-    "model": "llamacpp/historian",
-    "fallback_models": ["llamadumb/small"],
+    "model": "llamadumb/small",
+    "fallback_models": ["llamacpp/full"],
     "temperature": 0.3,
     "two_pass": true,
   },

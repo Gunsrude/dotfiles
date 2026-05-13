@@ -37,12 +37,12 @@
     "maxContextLimit": 100000,
     "minContextLimit": 40000,
     "modelMaxLimits": {
-      "llamaswap/full": 100000,
-      "llamaswap/small": 28000
+      "llamacpp/full": 100000,
+      "llamadumb/small": 28000
     },
     "modelMinLimits": {
-      "llamaswap/full": 40000,
-      "llamaswap/small": 16000
+      "llamacpp/full": 40000,
+      "llamadumb/small": 16000
     },
     "nudgeFrequency": 5,
     "iterationNudgeThreshold": 15,

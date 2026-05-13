@@ -11,8 +11,8 @@
         "small": {
           "name": "Stellar Small",
           "limit": {
-            "context": 16384,
-            "output": 8192
+            "context": 32768,
+            "output": 16384
           }
         }
       }
@@ -31,13 +31,7 @@
             "output": 16384
           }
         },
-        "historian": {
-            "name": "Stellar Historian",
-          "limit": {
-            "context": 100000,
-            "output": 16384
-          }
-        },
+ 
         "small": {
           "name": "Stellar Small",
           "limit": {
@@ -71,8 +65,6 @@
     "ignore": ["node_modules/**", "dist/**", ".git/**"]
   },
   "agent": {
-    "historian": { "mode": "subagent", "hidden": false },
-    "historian-editor": { "mode": "subagent", "hidden": false },
     "dreamer": { "mode": "subagent", "hidden": false },
     "sidekick": { "mode": "subagent", "hidden": false }
   },
