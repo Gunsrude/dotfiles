@@ -41,3 +41,15 @@ The **Searcher** finds files using glob/grep (no reads). The **Explorer** reads 
 - Do NOT use `glob` or `grep` — those are the Searcher's job.
 - Be efficient with context — only read what the orchestrator asks for.
 - If the question requires finding new files (not just reading), route back to the orchestrator to use the Searcher agent.
+
+## Findings
+
+Always end your response with a `## Findings` section containing:
+
+- **Completed**: what was done
+- **Discoveries**: anything unexpected found (bugs, quirks, patterns) — even if unrelated to the task
+- **Code patterns found**: key insights from analyzing the files
+- **File contents**: full file content returned as-is when entire files were requested
+- **Needs follow-up**: anything you couldn't finish or that needs orchestrator attention
+
+For any discovery in the Discoveries section above, call `hindsight_retain` before returning this summary.

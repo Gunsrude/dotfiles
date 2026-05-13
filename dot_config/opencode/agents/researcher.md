@@ -109,3 +109,14 @@ When reporting findings, use this structure:
 
 **Caveats**: [Known issues, version requirements, deprecation warnings]
 ```
+
+## Findings
+
+Always end your response with a `## Findings` section containing:
+
+- **Completed**: what was done
+- **Discoveries**: anything unexpected found (bugs, quirks, patterns) — even if unrelated to the task
+- **Decisions made**: any non-obvious choices and why
+- **Needs follow-up**: anything you couldn't finish or that needs orchestrator attention
+
+For any discovery in the Discoveries or Decisions sections above, call `hindsight_retain` before returning this summary.
