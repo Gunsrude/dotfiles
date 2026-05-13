@@ -1,29 +1,68 @@
 {
   "$schema": "https://raw.githubusercontent.com/Opencode-DCP/opencode-dynamic-context-pruning/master/dcp.schema.json",
 
+  "enabled": true,
+  "autoUpdate": true,
+  "debug": false,
+
+  "pruneNotification": "minimal",
+  "pruneNotificationType": "toast",
+
+  "commands": {
+    "enabled": true,
+    "protectedTools": []
+  },
+
+  "manualMode": {
+    "enabled": false,
+    "automaticStrategies": true
+  },
+
+  "turnProtection": {
+    "enabled": false,
+    "turns": 4
+  },
+
+  "experimental": {
+    "allowSubAgents": false,
+    "customPrompts": false
+  },
+
+  "protectedFilePatterns": [],
+
   "compress": {
     "mode": "range",
-    "minContextLimit": 40000,
+    "permission": "allow",
+    "showCompression": false,
+    "summaryBuffer": true,
     "maxContextLimit": 100000,
-    "protectedTools": [
-      "task", "skill", "todowrite", "todoread",
-      "hindsight_retain"
-    ],
+    "minContextLimit": 40000,
+    "modelMaxLimits": {
+      "llamaswap/full": 100000,
+      "llamaswap/small": 28000
+    },
+    "modelMinLimits": {
+      "llamaswap/full": 40000,
+      "llamaswap/small": 16000
+    },
+    "nudgeFrequency": 5,
+    "iterationNudgeThreshold": 15,
+    "nudgeForce": "soft",
+    "protectedTools": ["task", "todowrite", "todoread"],
+    "protectTags": false,
     "protectUserMessages": false
   },
 
-  "deduplication": {
-    "enabled": true
-  },
-
-  "purgeErrors": {
-    "enabled": true,
-    "turns": 3
-  },
-
-  "pruneNotification": "minimal",
-
-  "allowSubAgents": false
+  "strategies": {
+    "deduplication": {
+      "enabled": true,
+      "protectedTools": []
+    },
+    "purgeErrors": {
+      "enabled": true,
+      "turns": 3,
+      "protectedTools": []
+    }
+  }
 }
-
 
