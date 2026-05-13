@@ -25,7 +25,7 @@
 
   "historian": {
     "model": "llamacpp/historian",
-    "fallback_models": ["opencode/gpt-5-nano"],
+    "fallback_models": ["llamadumb/small"],
     "temperature": 0.3,
     "two_pass": true,
   },
@@ -57,12 +57,12 @@
 
   "embedding": {
     "provider": "local",           // "local" | "openai-compatible" | "off"
-    "model": "Xenova/all-MiniLM-L6-v2"
+    "model": "llamadumb/small"
   },
 
   "sidekick": {
     "enabled": true,
-    "model": "opencode/gpt-5-nano",
+    "model": "llamadumb/small",
     "temperature": 0.2,
     "timeout_ms": 30000
   },

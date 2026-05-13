@@ -1,6 +1,22 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "provider": {
+    "llamadumb": {
+      "npm": "@ai-sdk/openai-compatible",
+      "options": {
+        "baseURL": "http://dumblm.stellar.build:8080/v1",
+        "includeUsage": true
+      },
+      "models": {
+        "small": {
+          "name": "Stellar Small",
+          "limit": {
+            "context": 16384,
+            "output": 8192
+          }
+        }
+      }
+    },
     "llamacpp": {
       "npm": "@ai-sdk/openai-compatible",
       "options": {
@@ -78,7 +94,7 @@
     }
   },
   "model": "llamacpp/full",
-  "small_model": "llamacpp/small",
+  "small_model": "llamadumb/small",
   "tools": {
     "websearch": false
   },
@@ -97,9 +113,6 @@
       "git fetch*": "allow",
       "git status*": "allow",
       "git log*": "allow"
-    },
-    "skill": {
-      "restart-service": "ask"
     }
   },
   "instructions": [
@@ -107,7 +120,6 @@
       "~/.config/opencode/plugin/shell-strategy/shell_strategy.md"
   ],
   "plugin": [
-    "@cortexkit/opencode-magic-context@0.18.0",
     "envsitter-guard@latest"
   ]
 }

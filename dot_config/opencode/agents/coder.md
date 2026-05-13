@@ -62,3 +62,4 @@ You are operating in a non-interactive environment (no TTY/PTY). Always use non-
 ## Git Permissions
 
 You have full bash access, but all git write commands require approval: `git commit*`, `git push*`, `git merge*`, `git rebase*`, `git reset*`, `git cherry-pick*`, `git tag*`. Read-only git commands like `git diff`, `git status`, `git log`, `git fetch` are allowed. Always ask Mike before running write operations.
+
