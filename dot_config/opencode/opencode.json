@@ -119,8 +119,18 @@
       "~/.config/opencode/PROFILE.md",
       "~/.config/opencode/plugin/shell-strategy/shell_strategy.md"
   ],
+
   "plugin": [
-    "envsitter-guard@latest"
+    "envsitter-guard@latest",
+    "@tarquinen/opencode-dcp@latest", 
+    ["@vectorize-io/opencode-hindsight", {
+      "hindsightApiUrl": "http://dumblm.stellar.build:8888",
+      "autoRecall": true,
+      "autoRetain": true,
+      "recallBudget": "mid",
+      "retainEveryNTurns": 3,
+      "bankMission": "Coding assistant for active development projects. Focus on architecture decisions, library quirks, API patterns, naming conventions, bugs found, and decisions made. Ignore conversational filler."
+    }]
   ]
 }
 
