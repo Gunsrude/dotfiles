@@ -157,6 +157,7 @@ if [ -d "${HOME}/bin" ]; then path+=("${HOME}/bin"); fi
 
 # Dummy API key for opencode-voice (ollama doesn't authenticate, but plugin requires a value)
 export OLLAMA_API_KEY="ollama"
+export HINDSIGHT_DYNAMIC_BANK_ID=true
 
 function set_terminal_title() {
     local user_host="%n@%m"
