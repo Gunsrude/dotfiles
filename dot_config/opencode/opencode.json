@@ -31,7 +31,6 @@
             "output": 16384
           }
         },
- 
         "small": {
           "name": "Stellar Small",
           "limit": {
