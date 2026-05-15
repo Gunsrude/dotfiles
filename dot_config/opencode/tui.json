@@ -6,6 +6,12 @@
   },
   "plugin": [
     "@cortexkit/opencode-magic-context@latest",
-    "@renjfk/opencode-voice@latest"
+    ["@renjfk/opencode-voice", {
+      "endpoint": "http://dumblm.stellar.build:8080/v1",
+      "model": "small",
+      "apiKeyEnv": "OLLAMA_API_KEY",
+      "maxTokens": 2048,
+      "sttPrompt": "~/.config/opencode/stt-prompt.md"
+    }]
   ]
 }
