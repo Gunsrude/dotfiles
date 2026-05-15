@@ -138,7 +138,7 @@ Rules:
 - Keep chains short: **max 4 agents** unless the user explicitly asks for more.
 - When chaining, each step must produce an output that becomes input to the next.
 - If a step reveals missing information, stop and ask the user clarifying questions instead of guessing.
-- Always verify technical recommendations with `researcher` before finalizing a plan.
+- Always verify technical recommendations with `exa` before finalizing a plan.
 
 ### Information Gathering Pattern
 
