@@ -9,7 +9,8 @@
       },
       "models": {
         "small": {
-          "name": "Stellar Small",
+          "name": "Stellar The Not So Bright",
+          "supportsToolCalls": true,
           "limit": {
             "context": 32768,
             "output": 16384
@@ -39,9 +40,9 @@
             }
         },
         "small": {
-          "name": "Stellar Small",
+          "name": "Stellar In Bed",
           "limit": {
-            "context": 16384,
+            "context": 32768,
             "output": 8192
           }
         }
@@ -63,6 +64,13 @@
             "context": 32768,
             "output": 4096
           }
+        },
+        "big-pickle": {
+          "name": "Big Pickle",
+          "limit": {
+            "context": 131072,
+            "output": 16384
+          }
         }
       }
     }
@@ -81,7 +89,7 @@
       "environment": {
         "EXA_API_KEY": "{env:EXA_API_KEY}"
       },
-      "enabled": false
+      "enabled": true
     }
   },
   "model": "Styx/full",
