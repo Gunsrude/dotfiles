@@ -121,7 +121,7 @@
 
   "plugin": [
     "envsitter-guard@latest",
-    "@tarquinen/opencode-dcp@latest", 
+    "@cortexkit/opencode-magic-context@latest",
     ["@vectorize-io/opencode-hindsight", {
       "hindsightApiUrl": "http://dumblm.stellar.build:8888",
       "autoRecall": true,
