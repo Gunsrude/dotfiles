@@ -24,8 +24,8 @@
   "system_message_merge": true,
 
   "historian": {
-    "model": "llamadumb/small",
-    "fallback_models": ["llamacpp/full"],
+    "model": "RatOnAStick/small",
+    "fallback_models": ["Styx/full"],
     "temperature": 0.3,
     "two_pass": true,
   },
@@ -57,19 +57,19 @@
 
   "embedding": {
     "provider": "local",           // "local" | "openai-compatible" | "off"
-    "model": "llamadumb/small"
+    "model": "RatOnAStick/small"
   },
 
   "sidekick": {
     "enabled": true,
-    "model": "llamadumb/small",
+    "model": "RatOnAStick/small",
     "temperature": 0.2,
     "timeout_ms": 30000
   },
 
   "dreamer": {
     "enabled": true,
-    "model": "llamacpp/full",
+    "model": "Styx/full",
     "temperature": 0.3,
     "schedule": "02:00-06:00",
     "max_runtime_minutes": 120,

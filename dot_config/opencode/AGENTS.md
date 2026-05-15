@@ -9,27 +9,17 @@
 
 ## Search Tool Usage
 
-You have two search MCP tools available: `kagi` and `exa`. Use them as follows:
-
-### Use `kagi_search_fetch` (Kagi) when:
-- The query is general web search, current events, or news
-- You need a quick factual lookup (documentation, error messages, package versions)
-- The user asks "search for X" without further qualification
-- You need to fetch a specific URL's content
-- Searching for anything where recency matters (Kagi's index is fresher)
+You have one search MCP tool available: `exa`. Use it as follows:
 
 ### Use `exa` (Exa) when:
-- Exa is enabled for the session (it is disabled by default)
+- You need web search results for any query
 - The query is conceptual or semantic ("find libraries that do X", "how do people solve Y")
 - You need to find similar code, patterns, or approaches
 - You're researching a technical topic that requires understanding, not just a link
 - You need structured extraction of page content (author, date, full text) without a separate fetch
-- Keyword search has already failed or returned poor results
+- You need general web search, current events, news, or quick factual lookups
 
 ### General rules:
-- Default to `kagi_search_fetch` for most searches — it's the primary tool
-- Use `exa` as the semantic/research layer when Kagi returns shallow results
-- Do NOT run both tools for the same query simultaneously — pick the right one first
-- If the first tool returns poor results, try the other before giving up
-- `kagi_kagi_summarizer` is available — its primary purpose is to summarize a single page for readability. Only use it when that specific functionality is needed
+- Use `exa` for all searches — it is the primary and only search tool
+- If results are poor, refine your query and try again
 - Never fabricate URLs — always use a search tool to find them

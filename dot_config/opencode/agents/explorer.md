@@ -1,7 +1,7 @@
 ---
 description: Code analysis and file inspection agent — reads specific files and analyzes their contents
 mode: subagent
-model: llamadumb/small
+model: RatOnAStick/small
 temperature: 0.2
 permission:
   read: allow

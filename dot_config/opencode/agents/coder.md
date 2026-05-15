@@ -1,7 +1,7 @@
 ---
 description: Implements code changes, fixes bugs, refactors code, and handles all write operations
 mode: subagent
-model: opencode/big-pickle 
+model: Styx/coder
 temperature: 0.3
 permission:
   read: allow

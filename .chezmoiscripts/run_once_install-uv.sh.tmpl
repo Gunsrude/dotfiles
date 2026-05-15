@@ -1,0 +1,14 @@
+#!/bin/sh
+set -e
+
+echo "Installing uv (Python package manager)..."
+
+# Create bin directory if needed
+if [ ! -d ~/.local/bin ]; then
+    mkdir -p ~/.local/bin
+fi
+
+# Install uv using the official installer
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+echo "uv installed successfully"
