@@ -5,7 +5,7 @@
   "cache_ttl": "5m",
 
   "execute_threshold_tokens": {
-    "llamacpp/full": 90000,
+    "Styx/full": 90000,
     "default": 20000
   },
 
@@ -25,7 +25,7 @@
 
   "historian": {
     "model": "RatOnAStick/small",
-    "fallback_models": ["Styx/full"],
+    "fallback_models": ["opencode/big-pickle"],
     "temperature": 0.3,
     "two_pass": true,
   },
@@ -57,7 +57,7 @@
 
   "embedding": {
     "provider": "local",           // "local" | "openai-compatible" | "off"
-    "model": "RatOnAStick/small"
+    "model": "Styx/small"
   },
 
   "sidekick": {
