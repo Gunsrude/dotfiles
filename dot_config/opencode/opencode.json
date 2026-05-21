@@ -28,7 +28,7 @@
         "full": {
           "name": "Stellar Brain Gooder",
           "limit": {
-            "context": 131072,
+            "context": 98304,
             "output": 16384
           }
         },
@@ -43,7 +43,7 @@
           "name": "Stellar In Bed",
           "limit": {
             "context": 32768,
-            "output": 8192
+            "output": 4096
           }
         }
       }
