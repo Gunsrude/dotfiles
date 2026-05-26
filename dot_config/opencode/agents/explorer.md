@@ -1,7 +1,7 @@
 ---
 description: Code analysis and file inspection agent — reads specific files and analyzes their contents
 mode: subagent
-model: RatOnAStick/small
+model: RatOnAStick/explorer
 temperature: 0.2
 permission:
   read: allow

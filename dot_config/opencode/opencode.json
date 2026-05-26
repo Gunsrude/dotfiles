@@ -10,10 +10,18 @@
       "models": {
         "small": {
           "name": "Stellar The Not So Bright",
-          "supportsToolCalls": true,
+          "supportsToolCalls": false,
           "limit": {
             "context": 32768,
-            "output": 16384
+            "output": 4096
+          }
+        },
+        "explorer": {
+          "name": "No Man's Sky",
+          "supportsToolCalls": true,
+          "limit": {
+              "context": 32768,
+              "output": 8192
           }
         }
       }
