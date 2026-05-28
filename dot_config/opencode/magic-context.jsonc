@@ -1,112 +1,92 @@
 {
   "$schema": "https://raw.githubusercontent.com/cortexkit/magic-context/master/assets/magic-context.schema.json",
   "enabled": true,
-
+  "ctx_reduce_enabled": false,
   "cache_ttl": "5m",
-
   "execute_threshold_tokens": {
-    "Styx/full": 90000,
+    "Styx/full": 80000,
+    "Styx/coder": 50000,
     "default": 20000
   },
-
   "protected_tags": 20,
-
   "nudge_interval_tokens": 2000,
-
   "auto_drop_tool_age": 100,
-
   "drop_tool_structure": false,
-
   "clear_reasoning_age": 50,
-
   "iteration_nudge_threshold": 15,
-
   "system_message_merge": true,
-
   "historian": {
-    "model": "RatOnAStick/small",
-    "fallback_models": ["opencode/big-pickle"],
+    "model": "RatOnAStick/explorer",
+    "fallback_models": [
+      "opencode/big-pickle"
+    ],
     "temperature": 0.3,
-    "two_pass": true,
+    "two_pass": true
   },
-
   "historian_timeout_ms": 600000,
-
   "history_budget_percentage": 0.15,
-
-  "compartment_token_budget": 30000,
-
-  "compaction_markers": true,
-
   "commit_cluster_trigger": {
     "enabled": true,
     "min_clusters": 2
   },
-
   "compressor": {
     "enabled": true,
     "grace_compartments": 10
   },
-
   "memory": {
     "enabled": true,
     "injection_budget_tokens": 4000,
     "auto_promote": true,
     "retrieval_count_promotion_threshold": 3
   },
-
   "embedding": {
-    "provider": "local",           // "local" | "openai-compatible" | "off"
-    "model": "Styx/small"
+    "provider": "openai-compatible",
+    "model": "embed",
+    "endpoint": "http://llm.stellar.build:8080/v1",
+    "api_key": "none"
   },
-
   "sidekick": {
-    "enabled": true,
     "model": "RatOnAStick/small",
     "temperature": 0.2,
     "timeout_ms": 30000
   },
-
   "dreamer": {
-    "enabled": true,
     "model": "Styx/full",
     "temperature": 0.3,
     "schedule": "02:00-06:00",
     "max_runtime_minutes": 120,
     "task_timeout_minutes": 20,
-    "tasks": ["consolidate", "verify", "archive-stale", "improve"],
+    "tasks": [
+      "consolidate",
+      "verify",
+      "archive-stale",
+      "improve"
+    ],
     "inject_docs": true,
-
     "user_memories": {
       "enabled": true,
       "promotion_threshold": 3
     },
-
     "pin_key_files": {
       "enabled": false,
       "token_budget": 10000,
       "min_reads": 4
     }
   },
-
   "experimental": {
     "temporal_awareness": true,
-
     "git_commit_indexing": {
       "enabled": true,
       "since_days": 365,
       "max_commits": 2000
     },
-
     "auto_search": {
       "enabled": true,
       "score_threshold": 0.55,
       "min_prompt_chars": 20
     },
-
     "caveman_text_compression": {
-      "enabled": false
+      "enabled": true
     }
   }
 }
-

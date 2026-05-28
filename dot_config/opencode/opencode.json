@@ -67,6 +67,7 @@
       }
     }
   },
+  "default_agent": "orchestrator",
   "watcher": {
     "ignore": ["node_modules/**", "dist/**", ".git/**"]
   },
@@ -108,22 +109,7 @@
   "plugin": [
     "envsitter-guard@latest",
     "opencode-mem@latest",
-    ["lossless-opencode", {
-      "lcm": {
-        "model": "RatOnAStick/small",
-
-        "summarizeAfterMessages": 60,
-        "summarizeAfterTokens": 50000,
-
-        "maxContextTokens": 60000,
-        "softTokenThreshold": 48000,
-        "hardTokenThreshold": 58000,
-
-        "freshTailSize": 64,
-
-        "leafSummaryBudget": 1200
-      }
-    }]
+    "@cortexkit/opencode-magic-context@latest"
   ]
 }
 
