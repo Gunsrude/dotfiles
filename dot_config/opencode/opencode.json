@@ -20,8 +20,8 @@
           "name": "No Man's Sky",
           "supportsToolCalls": true,
           "limit": {
-              "context": 32768,
-              "output": 8192
+            "context": 32768,
+            "output": 8192
           }
         }
       }
@@ -41,17 +41,10 @@
           }
         },
         "coder": {
-            "name": "Stellar Coding Bitch",
-            "limit": {
-                "context": 65536,
-                "output": 16384
-            }
-        },
-        "small": {
-          "name": "Stellar In Bed",
+          "name": "Stellar Coding Bitch",
           "limit": {
-            "context": 32768,
-            "output": 4096
+            "context": 65536,
+            "output": 16384
           }
         }
       }
@@ -61,34 +54,21 @@
       "models": {
         "gpt-5-nano": {
           "name": "Zen Nano",
-          "limit": {
-            "context": 32768,
-            "output": 4096
-          }
+          "limit": { "context": 32768, "output": 4096 }
         },
         "qwen3.5-plus": {
           "name": "Zen Qwen Small",
-          "limit": {
-            "context": 32768,
-            "output": 4096
-          }
+          "limit": { "context": 32768, "output": 4096 }
         },
         "big-pickle": {
           "name": "Big Pickle",
-          "limit": {
-            "context": 131072,
-            "output": 16384
-          }
+          "limit": { "context": 131072, "output": 16384 }
         }
       }
     }
   },
   "watcher": {
     "ignore": ["node_modules/**", "dist/**", ".git/**"]
-  },
-  "agent": {
-    "dreamer": { "mode": "subagent", "hidden": false },
-    "sidekick": { "mode": "subagent", "hidden": false }
   },
   "mcp": {
     "exa": {
@@ -107,8 +87,8 @@
   },
   "lsp": true,
   "compaction": {
-      "prune": false,
-      "auto": false
+    "prune": false,
+    "auto": false
   },
   "permission": {
     "external_directory": {
@@ -123,20 +103,26 @@
     }
   },
   "instructions": [
-      "~/.config/opencode/PROFILE.md",
-      "~/.config/opencode/plugin/shell-strategy/shell_strategy.md"
+    "~/.config/opencode/PROFILE.md"
   ],
-
   "plugin": [
     "envsitter-guard@latest",
-    "@tarquinen/opencode-dcp@latest",
-    ["@vectorize-io/opencode-hindsight", {
-      "hindsightApiUrl": "http://dumblm.stellar.build:8888",
-      "autoRecall": true,
-      "autoRetain": true,
-      "recallBudget": "mid",
-      "retainEveryNTurns": 3,
-      "bankMission": "Coding assistant for active development projects. Focus on architecture decisions, library quirks, API patterns, naming conventions, bugs found, and decisions made. Ignore conversational filler."
+    "opencode-mem@latest",
+    ["lossless-opencode", {
+      "lcm": {
+        "model": "RatOnAStick/small",
+
+        "summarizeAfterMessages": 60,
+        "summarizeAfterTokens": 50000,
+
+        "maxContextTokens": 60000,
+        "softTokenThreshold": 48000,
+        "hardTokenThreshold": 58000,
+
+        "freshTailSize": 64,
+
+        "leafSummaryBudget": 1200
+      }
     }]
   ]
 }

@@ -1,46 +1,37 @@
 {
-  "storagePath": "~/.config/opencode",
-
-  "embeddingModel": "Xenova/nomic-embed-text-v1",
-
-  "memory": {
-    "defaultScope": "project"
-  },
+  "embeddingApiUrl": "http://llm.stellar.build:8080/v1",
+  "embeddingApiKey": "none",
+  "embeddingModel": "embed",
+  "embeddingDimensions": 768,
 
   "memoryProvider": "openai-chat",
-  "memoryModel": "small",
+  "memoryModel": "qwen35-4b",
   "memoryApiUrl": "http://dumblm.stellar.build:8080/v1",
-  "memoryApiKey": "sk-dummy",
-
-  "autoCaptureEnabled": true,
-  "autoCaptureLanguage": "auto",
-
-  "webServerEnabled": true,
-  "webServerPort": 4747,
-
-  "showAutoCaptureToasts": true,
-  "showUserProfileToasts": true,
-  "showErrorToasts": true,
-
-  "userProfileAnalysisInterval": 20,
-
-  "maxMemories": 50,
-
-  "compaction": {
-    "enabled": true,
-    "memoryLimit": 40
-  },
-
-  "memoryExtraParams": { 
-      "enable_thinking": false
-  },
+  "memoryApiKey": "none",
+  "memoryTemperature": 0.3,
 
   "chatMessage": {
     "enabled": true,
-    "maxMemories": 5,
-    "excludeCurrentSession": true,
-    "maxAgeDays": undefined,
-    "injectOn": "first"
-  }
+    "maxMemories": 3,
+    "injectOn": "first",
+    "excludeCurrentSession": true
+  },
+
+  "compaction": {
+    "enabled": true,
+    "memoryLimit": 5
+  },
+
+  "autoCaptureEnabled": true,
+  "autoCaptureMaxIterations": 3,
+  "autoCaptureIterationTimeout": 45000,
+
+  "autoCleanupEnabled": true,
+  "autoCleanupRetentionDays": 60,
+  "deduplicationEnabled": true,
+
+  "showAutoCaptureToasts": true,
+  "showUserProfileToasts": true,
+  "showErrorToasts": true
 }
 
