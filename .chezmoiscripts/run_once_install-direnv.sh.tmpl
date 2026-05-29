@@ -1,0 +1,14 @@
+#!/bin/sh
+set -e
+
+echo "Installing direnv (environment variable manager)..."
+
+# Create bin directory if needed
+if [ ! -d ~/.local/bin ]; then
+    mkdir -p ~/.local/bin
+fi
+
+# Install direnv using the official installer
+curl -LsSf https://direnv.net/install.sh | sh
+
+echo "direnv installed successfully"
