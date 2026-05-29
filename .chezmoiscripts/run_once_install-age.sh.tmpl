@@ -1,0 +1,34 @@
+#!/bin/sh
+set -e
+
+echo "Installing age (encryption tool)..."
+
+# chezmoi template variables — substituted at template rendering time
+VERSION="1.3.1"
+OS="{{ .chezmoi.os }}"
+ARCH="{{ .chezmoi.arch }}"
+
+# Only macOS and Linux are supported with tar.gz releases
+if [ "$OS" != "darwin" ] && [ "$OS" != "linux" ]; then
+    echo "Unsupported OS: ${OS}, skipping age installation"
+    exit 0
+fi
+
+echo "Detected: ${OS}-${ARCH}"
+
+# Create bin directory if needed
+if [ ! -d ~/.local/bin ]; then
+    mkdir -p ~/.local/bin
+fi
+
+# Download, extract, and install age binaries
+ARCHIVE="age-v${VERSION}-${OS}-${ARCH}.tar.gz"
+echo "Downloading ${ARCHIVE}..."
+curl -fsSL "https://github.com/FiloSottile/age/releases/download/v${VERSION}/${ARCHIVE}" \
+  | tar -xz -C /tmp age/age age/age-keygen
+
+install /tmp/age/age ~/.local/bin/age
+install /tmp/age/age-keygen ~/.local/bin/age-keygen
+rm -rf /tmp/age
+
+echo "age installed successfully"
