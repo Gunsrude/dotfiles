@@ -2,7 +2,7 @@
   "$schema": "https://raw.githubusercontent.com/cortexkit/magic-context/master/assets/magic-context.schema.json",
   "enabled": true,
   "ctx_reduce_enabled": false,
-  "cache_ttl": "5m",
+  "cache_ttl": "0",
   "execute_threshold_tokens": {
     "Styx/full": 100000,
     "Styx/coder": 100000,
