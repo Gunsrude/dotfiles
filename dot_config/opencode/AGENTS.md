@@ -30,6 +30,36 @@ Two search tools are available via the Exa MCP server. Use them as follows:
 - If basic results are poor, try `web_search_advanced_exa` before giving up
 - Never fabricate URLs — always use a search tool to find them
 
+### Parameter Defaults & Best Practices
+
+Always use these conservative defaults unless you have a specific reason to increase them:
+
+**For all searches:**
+- `numResults`: 5 (start small, increase to 10 only if needed)
+- Use highlights instead of full text when possible (10x fewer tokens)
+
+**For highlights:**
+- `highlightsMaxCharacters`: 2000 (sufficient for most factual queries)
+- Include a `highlightsQuery` to guide relevance when the search query is broad
+
+**For full text extraction (use sparingly):**
+- `textMaxCharacters`: 3000 maximum for initial fetches
+- Only use when you need complete context or the highlights are insufficient
+
+**When to escalate:**
+1. Start with `web_search_exa` and `numResults: 5`
+2. If results are poor, try a refined query before switching tools
+3. Only use `web_search_advanced_exa` for genuinely complex research requiring:
+   - Domain restrictions (`includeDomains`/`excludeDomains`)
+   - Date range filtering
+   - Subpage crawling (`subpages` parameter)
+   - Category filters (company/people research)
+
+**Why these limits matter:**
+- Default Exa behavior can return ~10,000 characters per result
+- 3 searches × 10 results × 10k chars = 300k+ characters easily
+- Local models process slowly with massive context — be conservative
+
 ## AI-Assisted Git Workflow
 
 When working on any task, follow this branch-based workflow to keep main clean:
