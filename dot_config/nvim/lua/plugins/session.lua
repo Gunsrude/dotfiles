@@ -1,41 +1,27 @@
 return {
   {
-    "okuuva/auto-save.nvim",
-    cmd = "ASToggle",
-    event = { "InsertLeave", "TextChanged" },
-    opts = {
-      enabled = true,
-      trigger_events = {
-        immediate_save = { "BufLeave", "FocusLost" },
-        defer_save = { "InsertLeave", "TextChanged" },
-        cancel_deferred_save = { "InsertEnter" },
-      },
-      condition = function(buf)
-        local fn = vim.fn
-        local utils = require("auto-save.utils.data")
-
-        if
-          fn.getbufvar(buf, "&modifiable") == 1 and
-          utils.not_in(fn.getbufvar(buf, "&filetype"), {}) and
-          utils.not_in(fn.getbufvar(buf, "&buftype"), { 'nofile' }) then
-          return true
-        end
-        return false
-      end,
-      write_all_buffers = false,
-      debounce_delay = 1000,
-      callbacks = {
-        enabling = nil,
-        disabling = nil,
-        before_asserting_save = nil,
-        before_saving = nil,
-        after_saving = nil
-      },
-    },
-    config = function(_, opts)
-      require("auto-save").setup(opts)
-
-      vim.keymap.set("n", "<leader>as", "<cmd>ASToggle<CR>", { desc = "Toggle auto-save" })
+    "yngwi/agentwatch.nvim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require("agentwatch").setup({
+        enabled = true,
+        watch = {
+          debounce_ms = 150,
+          stability_ms = 50,
+          use_gitignore = true,
+          ignore_patterns = {},
+          watch_hidden = false,
+        },
+        buffer = {
+          notify_on_reload = true,
+          notify_on_conflict = true,
+          restore_view = true,
+        },
+        lsp = {
+          mode = "complement",
+        },
+      })
     end,
   },
 
@@ -43,9 +29,14 @@ return {
     "folke/persistence.nvim",
     event = "BufReadPre",
     opts = {
-      options = vim.opt.sessionoptions:get(),
+      dir = vim.fn.stdpath("state") .. "/sessions/",
+      need = 1,
+      branch = true,
     },
     config = function(_, opts)
+      -- Set sessionoptions before plugin loads
+      vim.o.sessionoptions = "buffers,curdir,folds,globals,help,tabpages,winpos,winsize,terminal"
+
       require("persistence").setup(opts)
 
       vim.keymap.set("n", "<leader>qs", function() require("persistence").load() end, { desc = "Restore session for current dir" })
