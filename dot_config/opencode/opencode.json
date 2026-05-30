@@ -22,7 +22,7 @@
             "output": 16384
           }
         },
-        "rp": {
+        "research": {
           "name": "Stellar Researcher",
           "limit": {
             "context": 131072,

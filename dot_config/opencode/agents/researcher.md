@@ -1,7 +1,7 @@
 ---
 description: Conversational research agent that replaces web search engines for online research and general Q&A.
 mode: primary
-model: Styx/rp 
+model: Styx/research
 temperature: 0.7
 permission:
   read: allow
