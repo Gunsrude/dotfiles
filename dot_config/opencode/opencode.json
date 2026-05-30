@@ -63,26 +63,42 @@
         "big-pickle": {
           "name": "Big Pickle",
           "limit": { "context": 131072, "output": 16384 }
+        },
+        "gpt-5-codex": {
+          "name": "GPT-5 Codex",
+          "limit": { "context": 400000, "output": 131072 }
+        },
+        "gpt-5.1-codex-max": {
+          "name": "Codex Max",
+          "limit": { "context": 400000, "output": 131072 }
+        },
+        "gpt-5.1-codex-mini": {
+          "name": "Codex Mini",
+          "limit": { "context": 400000, "output": 131072 }
+        },
+        "kimi-k2.5": {
+          "name": "Kimi K2.5",
+          "limit": { "context": 262144, "output": 65536 }
         }
       }
     }
   },
-  "default_agent": "orchestrator",
+  "default_agent": "team-lead",
   "watcher": {
     "ignore": ["node_modules/**", "dist/**", ".git/**"]
   },
   "mcp": {
     "exa": {
-      "type": "local",
-      "command": ["npx", "-y", "exa-mcp-server"],
-      "environment": {
-        "EXA_API_KEY": "{env:EXA_API_KEY}"
+      "type": "url",
+      "url": "https://mcp.exa.ai/mcp?tools=web_search_exa,web_fetch_exa,web_search_advanced_exa",
+      "headers": {
+        "x-api-key": "{env:EXA_API_KEY}"
       },
       "enabled": true
     }
   },
-  "model": "Styx/full",
-  "small_model": "RatOnAStick/small",
+  "model": "opencode/gpt-5-codex",
+  "small_model": "opencode/big-pickle",
   "tools": {
     "websearch": false
   },

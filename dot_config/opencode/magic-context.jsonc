@@ -6,19 +6,24 @@
   "execute_threshold_tokens": {
     "Styx/full": 80000,
     "Styx/coder": 50000,
+    "opencode/gpt-5-codex": 320000,
+    "opencode/gpt-5.1-codex-max": 320000,
+    "opencode/gpt-5.1-codex-mini": 300000,
+    "opencode/kimi-k2.5": 200000,
+    "opencode/big-pickle": 100000,
     "default": 20000
   },
   "protected_tags": 20,
-  "nudge_interval_tokens": 2000,
+  "nudge_interval_tokens": 10000,
   "auto_drop_tool_age": 100,
-  "drop_tool_structure": false,
+  "drop_tool_structure": true,
   "clear_reasoning_age": 50,
   "iteration_nudge_threshold": 15,
   "system_message_merge": true,
   "historian": {
-    "model": "RatOnAStick/explorer",
+    "model": "opencode/big-pickle",
     "fallback_models": [
-      "opencode/big-pickle"
+      "RatOnAStick/explorer"
     ],
     "temperature": 0.3,
     "two_pass": true
@@ -27,7 +32,7 @@
   "history_budget_percentage": 0.15,
   "commit_cluster_trigger": {
     "enabled": true,
-    "min_clusters": 2
+    "min_clusters": 3
   },
   "compressor": {
     "enabled": true,
@@ -46,7 +51,7 @@
     "api_key": "none"
   },
   "sidekick": {
-    "model": "RatOnAStick/small",
+    "model": "opencode/big-pickle",
     "temperature": 0.2,
     "timeout_ms": 30000
   },

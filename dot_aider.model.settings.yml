@@ -1,0 +1,13 @@
+- name: openai/qwensmart
+  edit_format: whole
+  use_repo_map: true
+  use_system_prompt: true
+  streaming: true
+  system_prompt_prefix: "/no_think"
+  use_temperature: 0.7
+  extra_params:
+    max_tokens: 16384
+    top_p: 0.8
+    top_k: 20
+    min_p: 0.0
+    temperature: 0.7

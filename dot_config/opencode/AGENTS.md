@@ -9,19 +9,25 @@
 
 ## Search Tool Usage
 
-You have one search MCP tool available: `exa`. Use it as follows:
+Two search tools are available via the Exa MCP server. Use them as follows:
 
-### Use `exa` (Exa) when:
-- You need web search results for any query
-- The query is conceptual or semantic ("find libraries that do X", "how do people solve Y")
-- You need to find similar code, patterns, or approaches
-- You're researching a technical topic that requires understanding, not just a link
-- You need structured extraction of page content (author, date, full text) without a separate fetch
-- You need general web search, current events, news, or quick factual lookups
+### Use `web_search_exa` (basic) for standard searches:
+- General web search for any topic
+- Conceptual or semantic queries ("find libraries that do X", "how do people solve Y")
+- Finding similar code, patterns, or approaches
+- Researching a technical topic that needs understanding, not just a link
+- General web search, current events, news, or quick factual lookups
+
+### Use `web_search_advanced_exa` (advanced) ONLY for deep or complex research:
+- Multi-faceted research topics requiring synthesis across many sources
+- Company/people research (uses category filters)
+- Domain-restricted searches with date range filtering
+- Subpage crawling needs
+- **Only activate this tool if you determine the query is a deep or highly complex research topic** — it uses more expensive API endpoints.
 
 ### General rules:
-- Use `exa` for all searches — it is the primary and only search tool
-- If results are poor, refine your query and try again
+- Use `web_search_exa` for all searches as the default — it covers 90% of needs
+- If basic results are poor, try `web_search_advanced_exa` before giving up
 - Never fabricate URLs — always use a search tool to find them
 
 ## AI-Assisted Git Workflow

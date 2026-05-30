@@ -12,10 +12,12 @@
 # IDE / Editors
 .idea/
 .vscode/
+.aider*
 *.swp
 *.swo
 *~
 .opencode/memory*
+.opencode/magic*
 memories.db
 index.usearch
 
@@ -30,3 +32,6 @@ __pycache__/
 *.tmp
 *.bak
 *.orig
+
+# Always
+.env

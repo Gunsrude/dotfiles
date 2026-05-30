@@ -1,0 +1,37 @@
+# Global aider config — managed by chezmoi
+# Aider looks for .aider.conf.yml in: ~/, <git-root>, <cwd>
+# Later files take priority over earlier ones.
+
+# --- LLM connection ---
+# Using Styx endpoint (primary model) from opencode setup
+openai-api-base: http://llm.stellar.build:8080/v1
+openai-api-key: sk-not-needed
+
+model: openai/qwensmart
+weak-model: openai/qwensmart
+editor-model: openai/qwensmart
+
+# --- Local model optimizations ---
+# edit-format: whole
+show-model-warnings: false
+check-model-accepts-settings: false
+stream: true
+timeout: 86400
+
+# --- Repo map ---
+map-tokens: 4096
+map-multiplier-no-files: 2
+
+# --- Git ---
+# Don't prompt to add .aider* to .gitignore — we handle it via global gitignore
+gitignore: false
+attribute-author: true
+attribute-committer: true
+
+# Per-repo overrides go in <git-root>/.aider.conf.yml:
+#   test-cmd: cargo test
+#   lint-cmd: cargo clippy
+#   auto-test: true
+#   auto-lint: true
+#   read:
+#     - AGENTS.md
