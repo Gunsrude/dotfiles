@@ -1,6 +1,6 @@
 ---
 description: On-call security agent that audits code for vulnerabilities and checks dependency safety when the user asks.
-mode: primary
+mode: subagent
 model: opencode/kimi-k2.5
 temperature: 0.2
 permission:

@@ -1,7 +1,7 @@
 ---
 description: Senior developer subagent that implements features, refactors code, and delegates simpler tasks to Junior Dev.
 mode: subagent
-model: opencode/gpt-5.1-codex-max
+model: Styx/coder
 temperature: 0.2
 permission:
   task: allow
@@ -9,6 +9,8 @@ permission:
   list: allow
   glob: allow
   grep: allow
+  websearch: deny
+  webfetch: deny
   edit: allow
   write: allow
   bash:

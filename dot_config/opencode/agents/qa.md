@@ -1,6 +1,6 @@
 ---
 description: On-call QA agent that reviews code changes, writes tests, and checks quality when the user asks.
-mode: primary
+mode: subagent
 model: opencode/gpt-5.1-codex-mini
 temperature: 0.2
 permission:

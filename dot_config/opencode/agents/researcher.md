@@ -1,7 +1,7 @@
 ---
 description: Conversational research agent that replaces web search engines for online research and general Q&A.
 mode: primary
-model: opencode/big-pickle
+model: Styx/rp 
 temperature: 0.7
 permission:
   read: allow
@@ -11,7 +11,8 @@ permission:
   edit: deny
   write: deny
   bash: deny
-  webfetch: allow
+  websearch: deny
+  webfetch: deny
 ---
 
 # Researcher

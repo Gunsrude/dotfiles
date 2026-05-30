@@ -1,31 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "provider": {
-    "RatOnAStick": {
-      "npm": "@ai-sdk/openai-compatible",
-      "options": {
-        "baseURL": "http://dumblm.stellar.build:8080/v1",
-        "includeUsage": true
-      },
-      "models": {
-        "small": {
-          "name": "Stellar The Not So Bright",
-          "supportsToolCalls": false,
-          "limit": {
-            "context": 32768,
-            "output": 4096
-          }
-        },
-        "explorer": {
-          "name": "No Man's Sky",
-          "supportsToolCalls": true,
-          "limit": {
-            "context": 32768,
-            "output": 8192
-          }
-        }
-      }
-    },
     "Styx": {
       "npm": "@ai-sdk/openai-compatible",
       "options": {
@@ -36,14 +11,21 @@
         "full": {
           "name": "Stellar Brain Gooder",
           "limit": {
-            "context": 98304,
+            "context": 131072,
             "output": 16384
           }
         },
         "coder": {
           "name": "Stellar Coding Bitch",
           "limit": {
-            "context": 65536,
+            "context": 131072,
+            "output": 16384
+          }
+        },
+        "rp": {
+          "name": "Stellar Researcher",
+          "limit": {
+            "context": 131072,
             "output": 16384
           }
         }
@@ -89,7 +71,7 @@
   },
   "mcp": {
     "exa": {
-      "type": "url",
+      "type": "remote",
       "url": "https://mcp.exa.ai/mcp?tools=web_search_exa,web_fetch_exa,web_search_advanced_exa",
       "headers": {
         "x-api-key": "{env:EXA_API_KEY}"
@@ -97,7 +79,7 @@
       "enabled": true
     }
   },
-  "model": "opencode/gpt-5-codex",
+  "model": "Styx/full",
   "small_model": "opencode/big-pickle",
   "tools": {
     "websearch": false
@@ -128,4 +110,3 @@
     "@cortexkit/opencode-magic-context@latest"
   ]
 }
-

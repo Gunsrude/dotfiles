@@ -1,7 +1,7 @@
 ---
 description: Orchestrates coding tasks by delegating to subagents (PM, Senior Dev, QA, Security) and reporting progress.
 mode: primary
-model: opencode/gpt-5-codex
+model: Styx/full
 temperature: 0.1
 permission:
   task: allow
@@ -9,6 +9,8 @@ permission:
   list: allow
   glob: allow
   grep: allow
+  websearch: deny
+  webfetch: deny
   edit: deny
   write: deny
   bash:
