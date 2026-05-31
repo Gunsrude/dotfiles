@@ -26,22 +26,14 @@ return {
   },
 
   {
-    "folke/persistence.nvim",
-    event = "BufReadPre",
+    "olimorris/persisted.nvim",
+    lazy = false,
     opts = {
-      dir = vim.fn.stdpath("state") .. "/sessions/",
-      need = 1,
-      branch = true,
+      autostart = true,
+      autoload = true,
+      save_dir = vim.fn.stdpath("data") .. "/sessions/",
+      use_git_branch = true,
+      follow_cwd = true,
     },
-    config = function(_, opts)
-      -- Set sessionoptions before plugin loads
-      vim.o.sessionoptions = "buffers,curdir,folds,globals,help,tabpages,winpos,winsize,terminal"
-
-      require("persistence").setup(opts)
-
-      vim.keymap.set("n", "<leader>qs", function() require("persistence").load() end, { desc = "Restore session for current dir" })
-      vim.keymap.set("n", "<leader>ql", function() require("persistence").load({ last = true }) end, { desc = "Restore last session" })
-      vim.keymap.set("n", "<leader>qd", function() require("persistence").stop() end, { desc = "Don't save current session" })
-    end,
   },
 }

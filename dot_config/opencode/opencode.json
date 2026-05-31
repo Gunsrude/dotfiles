@@ -106,7 +106,6 @@
   ],
   "plugin": [
     "envsitter-guard@latest",
-    "opencode-mem@latest",
     "@cortexkit/opencode-magic-context@latest"
   ]
 }
