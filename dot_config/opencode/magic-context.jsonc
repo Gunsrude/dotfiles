@@ -4,8 +4,8 @@
   "ctx_reduce_enabled": false,
   "cache_ttl": "0",
   "execute_threshold_tokens": {
-    "Styx/full": 100000,
-    "Styx/coder": 100000,
+    "Stellar/full": 100000,
+    "Stellar/coder": 100000,
     "opencode/gpt-5-codex": 320000,
     "opencode/gpt-5.1-codex-max": 320000,
     "opencode/gpt-5.1-codex-mini": 300000,
@@ -14,8 +14,8 @@
     "default": 20000
   },
   "modelMaxLimits": {
-    "Styx/full": 131072,
-    "Styx/coder": 131072,
+    "Stellar/full": 131072,
+    "Stellar/coder": 131072,
     "opencode/gpt-5-codex": 320000,
     "opencode/gpt-5.1-codex-max": 320000,
     "opencode/gpt-5.1-codex-mini": 300000,
@@ -65,7 +65,7 @@
     "timeout_ms": 30000
   },
   "dreamer": {
-    "model": "Styx/full",
+    "model": "Stellar/full",
     "temperature": 0.3,
     "schedule": "02:00-06:00",
     "max_runtime_minutes": 120,

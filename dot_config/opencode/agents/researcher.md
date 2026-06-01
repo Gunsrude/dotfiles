@@ -1,7 +1,7 @@
 ---
 description: Subagent specialized in deep internet research and root cause analysis. Provides decisive, single-best answers.
 mode: subagent
-model: Styx/research
+model: Stellar/research
 temperature: 0.7
 permission:
   read: allow

@@ -1,7 +1,7 @@
 ---
 description: Orchestrates coding tasks by delegating to subagents (PM, Senior Dev, QA, Security) and reporting progress.
 mode: primary
-model: Styx/full
+model: Stellar/full
 temperature: 0.1
 permission:
   task: allow

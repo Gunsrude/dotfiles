@@ -1,7 +1,7 @@
 ---
 description: Senior developer subagent that implements features, refactors code, and delegates simpler tasks to Junior Dev.
 mode: subagent
-model: Styx/coder
+model: Stellar/coder
 temperature: 0.2
 permission:
   task: allow
