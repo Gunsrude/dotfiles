@@ -14,9 +14,25 @@
 {{-   $name = promptStringOnce . "name" "Full name" -}}
 {{- end -}}
 
+{{- $hasBattery := false -}}
+{{- if not $isContainer -}}
+{{-   if eq .chezmoi.os "darwin" -}}
+{{-     $pmsetOutput := output "pmset" "-g" "batt" -}}
+{{-     if contains "present: true" $pmsetOutput -}}
+{{-       $hasBattery = true -}}
+{{-     end -}}
+{{-   else if eq .chezmoi.os "linux" -}}
+{{-     $batteryPresent := output "sh" "-c" "test -f /sys/class/power_supply/BAT0/uevent && grep -q 'POWER_SUPPLY_PRESENT=1' /sys/class/power_supply/BAT0/uevent && echo true || echo false" | trim -}}
+{{-     if eq $batteryPresent "true" -}}
+{{-       $hasBattery = true -}}
+{{-     end -}}
+{{-   end -}}
+{{- end -}}
+
 [data]
     machine_type = {{ $machineType | quote }}
     is_container = {{ not (not $isContainer) }}
+    has_battery = {{ $hasBattery }}
 {{- if not $isContainer }}
     email = {{ $email | quote }}
     name = {{ $name | quote }}
