@@ -12,16 +12,12 @@
 set -g @plugin 'catppuccin/tmux#v2.3.0'
 set -g @plugin 'tmux-plugins/tmux-cpu'
 set -g @plugin 'tmux-plugins/tmux-battery'
-set -g @plugin 'tmux-plugins/tpm'
 
 # -----------------------------------------------------------------------------
-# Catppuccin Configuration (BEFORE loading)
+# Catppuccin Configuration
 # -----------------------------------------------------------------------------
 set -g @catppuccin_flavor 'mocha'
 set -g @catppuccin_window_status_style 'rounded'
-
-# Load Catppuccin theme FIRST (before status line config)
-run '~/.tmux/plugins/tmux/catppuccin.tmux'
 
 # -----------------------------------------------------------------------------
 # Existing User Preferences (preserved)
