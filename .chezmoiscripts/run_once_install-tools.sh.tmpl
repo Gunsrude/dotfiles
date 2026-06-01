@@ -75,3 +75,12 @@ if { [ "$OS" = "linux" ] || [ "$OS" = "darwin" ]; } && ! already github-mcp-serv
       | tar -xz -C /tmp github-mcp-server
     install /tmp/github-mcp-server ~/.local/bin/github-mcp-server
 fi
+
+# ── tmux plugins ───────────────────────────────────────────────
+TPM_DIR="$HOME/.tmux/plugins/tpm"
+if [ ! -d "$TPM_DIR" ]; then
+    mkdir -p "$HOME/.tmux/plugins"
+    git clone --quiet https://github.com/tmux-plugins/tpm "$TPM_DIR"
+    # Install all plugins via TPM (runs in background, no tmux session needed)
+    "$TPM_DIR/bin/install_plugins" >/dev/null 2>&1
+fi

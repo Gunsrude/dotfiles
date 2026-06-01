@@ -1,0 +1,103 @@
+#!/usr/bin/env tmux
+# =============================================================================
+# Mike's tmux configuration (chezmoi template)
+# =============================================================================
+# This file is a template - machine-specific settings are applied via
+# chezmoi using {{ .machine_type }} (work/personal/server/container)
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Plugin Manager (TPM)
+# -----------------------------------------------------------------------------
+set -g @plugin 'catppuccin/tmux#v2.3.0'
+set -g @plugin 'tmux-plugins/tmux-cpu'
+set -g @plugin 'tmux-plugins/tmux-battery'
+set -g @plugin 'tmux-plugins/tpm'
+
+# -----------------------------------------------------------------------------
+# Catppuccin Configuration (BEFORE loading)
+# -----------------------------------------------------------------------------
+set -g @catppuccin_flavor 'mocha'
+set -g @catppuccin_window_status_style 'rounded'
+
+# Load Catppuccin theme FIRST (before status line config)
+run '~/.tmux/plugins/tmux/catppuccin.tmux'
+
+# -----------------------------------------------------------------------------
+# Existing User Preferences (preserved)
+# -----------------------------------------------------------------------------
+
+# Terminal titles
+set -g set-titles on
+set -g set-titles-string '#S:#W'
+
+# Mouse support
+set -g mouse on
+
+# Base index (1-based windows and panes)
+set -g base-index 1
+setw -g pane-base-index 1
+
+# Scrollback buffer
+set -g history-limit 50000
+
+# Default terminal
+set -g default-terminal "screen-256color"
+
+# Prefix key (Ctrl-a instead of Ctrl-b)
+unbind C-b
+set -g prefix C-a
+bind C-a send-prefix
+
+# Vi mode keys in copy/escape mode
+set-window-option -g mode-keys vi
+
+# Escape time (instant escape detection)
+set -s escape-time 0
+
+# -----------------------------------------------------------------------------
+# Status Bar Configuration (AFTER loading catppuccin)
+# -----------------------------------------------------------------------------
+# Status bar refresh interval
+set -g status-interval 1
+
+# Catppuccin built-in status modules (using E: syntax for environment variables)
+set -g status-right-length 100
+set -g status-left-length 100
+set -g status-left ""
+set -g status-right "#{E:@catppuccin_status_application}"
+set -agF status-right "#{E:@catppuccin_status_cpu}"
+set -ag status-right "#{E:@catppuccin_status_session}"
+set -ag status-right "#{E:@catppuccin_status_uptime}"
+set -agF status-right "#{E:@catppuccin_status_battery}"
+
+# -----------------------------------------------------------------------------
+# Custom Keybindings
+# -----------------------------------------------------------------------------
+# Split panes with vi-style keys (h/j/k/l)
+bind h select-pane -L
+bind j select-pane -D
+bind k select-pane -U
+bind l select-pane -R
+
+# Resize panes with Ctrl+arrow keys
+bind C-h resize-pane -L 5
+bind C-j resize-pane -D 5
+bind C-k resize-pane -U 5
+bind C-l resize-pane -R 5
+
+# Switch windows with Ctrl+number
+bind C-1 switch-client -c 1
+bind C-2 switch-client -c 2
+bind C-3 switch-client -c 3
+bind C-4 switch-client -c 4
+bind C-5 switch-client -c 5
+bind C-6 switch-client -c 6
+bind C-7 switch-client -c 7
+bind C-8 switch-client -c 8
+bind C-9 switch-client -c 9
+
+# -----------------------------------------------------------------------------
+# TPM Initialization (must be at the end)
+# -----------------------------------------------------------------------------
+run '~/.tmux/plugins/tpm/tpm'
