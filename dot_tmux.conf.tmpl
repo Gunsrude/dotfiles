@@ -1,7 +1,5 @@
 #!/usr/bin/env tmux
 # =============================================================================
-# Mike's tmux configuration (chezmoi template)
-# =============================================================================
 # This file is a template - machine-specific settings are applied via
 # chezmoi using {{ .machine_type }} (work/personal/server/container)
 # =============================================================================
@@ -9,7 +7,8 @@
 # -----------------------------------------------------------------------------
 # Plugin Manager (TPM)
 # -----------------------------------------------------------------------------
-set -g @plugin 'catppuccin/tmux#v2.3.0'
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'catppuccin/tmux'
 set -g @plugin 'tmux-plugins/tmux-cpu'
 set -g @plugin 'tmux-plugins/tmux-battery'
 
@@ -22,11 +21,8 @@ set -g @catppuccin_window_status_style 'rounded'
 # Load Catppuccin theme (must be done before using its status modules)
 run '~/.tmux/plugins/catppuccin/tmux/catppuccin.tmux'
 
-# Load tmux-cpu plugin (required for CPU/RAM status variables)
-run '~/.tmux/plugins/tmux-plugins/tmux-cpu/cpu.tmux'
-
 # -----------------------------------------------------------------------------
-# Existing User Preferences (preserved)
+# Existing User Preferences
 # -----------------------------------------------------------------------------
 
 # Terminal titles
@@ -58,10 +54,11 @@ set-window-option -g mode-keys vi
 set -s escape-time 0
 
 # -----------------------------------------------------------------------------
-# Status Bar Configuration (AFTER loading catppuccin)
+# Status Bar Configuration
 # -----------------------------------------------------------------------------
 # Status bar refresh interval
 set -g status-interval 1
+set -g status-justify left
 
 # Status bar configuration
 set -g status-left-length 100
@@ -79,6 +76,7 @@ set -ag status-right "#{E:@catppuccin_status_uptime}"
 {{- if and (not .is_container) (index . "has_battery") }}
 set -agF status-right "#{E:@catppuccin_status_battery}"
 {{- end }}
+set -ga status-right "#[bg=#{@thm_bg},fg=#{@thm_blue}] 󰭦 %Y-%m-%d 󰅐 %H:%M "
 
 # -----------------------------------------------------------------------------
 # Custom Keybindings
@@ -107,6 +105,6 @@ bind C-8 switch-client -c 8
 bind C-9 switch-client -c 9
 
 # -----------------------------------------------------------------------------
-# TPM Initialization (must be at the end)
+# TPM Initialization
 # -----------------------------------------------------------------------------
 run '~/.tmux/plugins/tpm/tpm'
