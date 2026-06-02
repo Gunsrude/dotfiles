@@ -23,6 +23,9 @@ set -g @catppuccin_window_status_current_style 'default'
 # Load Catppuccin theme (must be done before using its status modules)
 run '~/.tmux/plugins/catppuccin/tmux/catppuccin.tmux'
 
+# Load tmux-cpu plugin (required for CPU/RAM status variables)
+run '~/.tmux/plugins/tmux-plugins/tmux-cpu/cpu.tmux'
+
 # -----------------------------------------------------------------------------
 # Existing User Preferences (preserved)
 # -----------------------------------------------------------------------------
@@ -61,17 +64,12 @@ set -s escape-time 0
 # Status bar refresh interval
 set -g status-interval 1
 
-# Enable both top and bottom status bars
+# Status bar configuration
 set -g status-justify centre
 set -g status-left-length 100
 set -g status-right-length 100
-set -g status-left-length 100
-set -g status-right-length 100
 
-# TOP status bar - shows application name
-set -g status-top "#[align=centre]#{E:@catppuccin_status_application}"
-
-# BOTTOM status bar
+# Status bar content
 set -g status-left ""
 set -g status-right "#{E:@catppuccin_status_application}"
 {{- if not .is_container }}
