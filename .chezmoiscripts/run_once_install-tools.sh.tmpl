@@ -9,6 +9,27 @@ OS=$(uname -s | tr '[:upper:]' '[:lower:]')
 
 already() { command -v "$1" >/dev/null 2>&1; }
 
+# ── bat (syntax-highlighting cat) ──────────────────────────────
+if ! already bat; then
+    echo "Installing bat..."
+    VERSION="v0.26.1"
+    case "$OS" in
+        darwin)
+            BAT_ARCH=$(echo "$ARCH" | sed 's/amd64/x86_64/;s/arm64/aarch64/')
+            ASSET="bat-${VERSION}-${BAT_ARCH}-apple-darwin.tar.gz"
+            ;;
+        linux)
+            BAT_ARCH=$(echo "$ARCH" | sed 's/amd64/x86_64/;s/arm64/aarch64/')
+            ASSET="bat-${VERSION}-${BAT_ARCH}-unknown-linux-gnu.tar.gz"
+            ;;
+        *)      echo "ERROR: unsupported OS ${OS} for bat"; exit 1 ;;
+    esac
+    curl -fsSL "https://github.com/sharkdp/bat/releases/download/${VERSION}/${ASSET}" \
+      | tar -xz -C /tmp "bat-*/bat"
+    install /tmp/bat-*/bat ~/.local/bin/bat
+    rm -rf /tmp/bat-*
+fi
+
 # ── uv (Python package manager, needed by aider) ───────────────
 if ! already uv; then
     echo "Installing uv..."
@@ -74,6 +95,16 @@ if { [ "$OS" = "linux" ] || [ "$OS" = "darwin" ]; } && ! already github-mcp-serv
     curl -fsSL "https://github.com/github/github-mcp-server/releases/latest/download/github-mcp-server_${GITHUB_OS}_${GITHUB_ARCH}.tar.gz" \
       | tar -xz -C /tmp github-mcp-server
     install /tmp/github-mcp-server ~/.local/bin/github-mcp-server
+fi
+
+# ── lf (terminal file manager) ─────────────────────────────────
+if { [ "$OS" = "linux" ] || [ "$OS" = "darwin" ]; } && ! already lf; then
+    echo "Installing lf..."
+    VERSION="r41"
+    curl -fsSL "https://github.com/gokcehan/lf/releases/download/${VERSION}/lf-${OS}-${ARCH}.tar.gz" \
+      | tar -xz -C /tmp lf
+    install /tmp/lf ~/.local/bin/lf
+    rm -rf /tmp/lf
 fi
 
 # ── tmux plugins ───────────────────────────────────────────────

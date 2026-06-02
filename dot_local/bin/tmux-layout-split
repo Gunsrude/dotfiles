@@ -1,0 +1,21 @@
+#!/bin/bash
+# Creates 3-pane layout: [lf 30%] [nvim 60% top] [terminal 40% bottom]
+# Deployed to ~/.local/bin/tmux-layout-split via chezmoi
+
+# Split horizontally: 30% left for lf, 70% right for other panes
+tmux split-window -h -p 30 'lf'
+
+# Select the right pane (pane 2)
+tmux select-pane -t :1
+
+# Split vertically: 60% top for nvim
+tmux split-window -v -p 60 'nvim'
+
+# Select the bottom pane (pane 3)
+tmux select-pane -t :2
+
+# Split remaining space for terminal
+tmux split-window -v 'zsh'
+
+# Return to nvim pane
+tmux select-pane -t :1
