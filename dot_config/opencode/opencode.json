@@ -99,7 +99,8 @@
       "git fetch*": "allow",
       "git status*": "allow",
       "git log*": "allow"
-    }
+    },
+    "exa_*": "deny"
   },
   "instructions": [
     "~/.config/opencode/PROFILE.md"

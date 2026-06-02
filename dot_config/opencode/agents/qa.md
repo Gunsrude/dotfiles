@@ -11,6 +11,8 @@ permission:
   grep: allow
   edit: allow
   write: allow
+  skill:
+    "*": deny
   bash:
     "*": allow
     "git *": deny

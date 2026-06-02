@@ -13,6 +13,9 @@ permission:
   bash: deny
   websearch: deny
   webfetch: deny
+  skill:
+    "*": deny
+  exa_*: allow
 ---
 
 # Researcher
