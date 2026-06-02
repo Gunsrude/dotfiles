@@ -13,6 +13,7 @@ permission:
   write: allow
   bash:
     "*": allow
+    "git *": deny
 ---
 
 # QA Engineer

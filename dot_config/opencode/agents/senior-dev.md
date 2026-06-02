@@ -15,6 +15,7 @@ permission:
   write: allow
   bash:
     "*": allow
+    "git *": deny
 ---
 
 # Senior Developer

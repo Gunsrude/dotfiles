@@ -13,6 +13,7 @@ permission:
   write: deny
   bash:
     "*": allow
+    "git *": deny
 ---
 
 # Security Engineer
