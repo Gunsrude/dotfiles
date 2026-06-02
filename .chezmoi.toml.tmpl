@@ -17,12 +17,13 @@
 {{- $hasBattery := false -}}
 {{- if not $isContainer -}}
 {{-   if eq .chezmoi.os "darwin" -}}
-{{-     $pmsetOutput := output "pmset" "-g" "batt" -}}
+{{-     $pmsetOutput := or (try (output "pmset" "-g" "batt")) "" -}}
 {{-     if contains "present: true" $pmsetOutput -}}
 {{-       $hasBattery = true -}}
 {{-     end -}}
 {{-   else if eq .chezmoi.os "linux" -}}
-{{-     $batteryPresent := output "sh" "-c" "test -f /sys/class/power_supply/BAT0/uevent && grep -q 'POWER_SUPPLY_PRESENT=1' /sys/class/power_supply/BAT0/uevent && echo true || echo false" | trim -}}
+{{-     $batteryCheck := or (try (output "sh" "-c" "test -f /sys/class/power_supply/BAT0/uevent && grep -q 'POWER_SUPPLY_PRESENT=1' /sys/class/power_supply/BAT0/uevent && echo true || echo false")) "" -}}
+{{-     $batteryPresent := trim $batteryCheck -}}
 {{-     if eq $batteryPresent "true" -}}
 {{-       $hasBattery = true -}}
 {{-     end -}}

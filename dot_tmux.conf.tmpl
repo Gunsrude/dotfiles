@@ -68,7 +68,7 @@ set -agF status-right "#{E:@catppuccin_status_ram}"
 {{- end }}
 set -ag status-right "#{E:@catppuccin_status_session}"
 set -ag status-right "#{E:@catppuccin_status_uptime}"
-{{- if and (not .is_container) .has_battery }}
+{{- if and (not .is_container) (index . "has_battery") }}
 set -agF status-right "#{E:@catppuccin_status_battery}"
 {{- end }}
 
