@@ -8,8 +8,6 @@ set info size
 
 # Vim-style quit command
 cmd q quit
-set reverse delete
-set showhidden
 set ignorecase
 set smartcase
 
@@ -18,7 +16,7 @@ set smartcase
 # -----------------------------------------------------------------------------
 set tabstop 4
 set sortby name
-set reversesort false
+set noreverse
 
 # Show file previews
 set previewer ~/.local/bin/lf_previewer.sh
@@ -26,10 +24,8 @@ set previewer ~/.local/bin/lf_previewer.sh
 # -----------------------------------------------------------------------------
 # Open Files
 # -----------------------------------------------------------------------------
-set opener ~/.local/bin/nvim_opener.sh
-
-map o execute $open {f}
-map O execute $open {f}
+# Custom open command to open files in nvim
+cmd open ~/.local/bin/nvim_opener.sh "$f"
 
 # -----------------------------------------------------------------------------
 # Clipboard
@@ -45,7 +41,6 @@ set mouse
 # -----------------------------------------------------------------------------
 # Visual
 # -----------------------------------------------------------------------------
-set border none
 set hidden
 
 # -----------------------------------------------------------------------------
