@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # lf previewer script
 # Deployed to ~/.local/bin/lf_previewer.sh via chezmoi
+#chezmoi:executable=true
 
 set -o pipefail
 

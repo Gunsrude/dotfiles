@@ -1,4 +1,5 @@
 #!/bin/bash
+#chezmoi:executable=true
 # Open file in existing nvim instance using --remote
 # If nvim server not running, open new instance
 # Deployed to ~/.local/bin/nvim_opener.sh via chezmoi
