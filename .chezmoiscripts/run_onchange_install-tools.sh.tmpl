@@ -1,0 +1,260 @@
+#!/bin/sh
+# run_onchange_install-tools.sh
+# chezmoi:template: hash={{ include "dot_config/nvim/lua/plugins/lsp.lua" | sha256sum }}{{ include "dot_config/opencode/opencode.json" | sha256sum }}
+# chezmoi:executable=true
+
+set -eu
+
+# =============================================================================
+# Common helpers
+# =============================================================================
+mkdir -p ~/.local/bin
+ARCH=$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/')
+ARCH="${ARCH:-$(uname -m)}"
+OS=$(uname -s | tr '[:upper:]' '[:lower:]')
+
+already() { command -v "$1" >/dev/null 2>&1; }
+
+# =============================================================================
+# nvm (Node Version Manager) - install early since other tools may need node
+# =============================================================================
+# Both nvm and its installer require bash
+if ! command -v bash >/dev/null 2>&1; then
+    echo "Skipping nvm install: bash not found. Please install bash and re-run chezmoi apply." >&2
+else
+    # Skip nvm on Alpine/musl (node.js doesn't publish musl binaries, nvm installer fails)
+    if [ -f /etc/alpine-release ] || [ -x /bin/apk ]; then
+        echo "Skipping nvm install: Alpine/musl detected. Node/nvm not installed by default." >&2
+    else
+        NVM_VERSION="v0.40.1"
+        export NVM_DIR="${NVM_DIR:-$HOME/.nvm}"
+        export PROFILE=/dev/null
+        MIN_NODE_VERSION=18
+
+        # Install nvm if not present
+        if [ ! -d "$NVM_DIR" ]; then
+            echo "Installing nvm $NVM_VERSION..."
+            curl -fsSL "https://raw.githubusercontent.com/nvm-sh/nvm/${NVM_VERSION}/install.sh" | bash
+        else
+            echo "nvm already installed at $NVM_DIR"
+        fi
+
+        # Source nvm for this script
+        [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+        # Check if we need to install/upgrade node
+        NEED_INSTALL=false
+
+        if ! nvm which default >/dev/null 2>&1; then
+            NEED_INSTALL=true
+            echo "No default node set"
+        else
+            CURRENT=$(nvm version default 2>/dev/null | sed 's/v//')
+            MAJOR=$(echo "$CURRENT" | cut -d. -f1)
+            if [ "$MAJOR" -lt "$MIN_NODE_VERSION" ]; then
+                NEED_INSTALL=true
+                echo "Node v$CURRENT is below v${MIN_NODE_VERSION}, upgrading"
+            else
+                echo "Node v$CURRENT meets minimum v${MIN_NODE_VERSION}"
+            fi
+        fi
+
+        if [ "$NEED_INSTALL" = "true" ]; then
+            nvm install --lts
+            nvm alias default 'lts/*'
+        fi
+
+        echo "Done. node: $(node --version), npm: $(npm --version)"
+    fi
+fi
+
+# =============================================================================
+# uv (Python package manager)
+# =============================================================================
+if ! already uv; then
+    echo "Installing uv..."
+    curl -LsSf https://astral.sh/uv/install.sh | sh
+fi
+# Ensure uv is on PATH for subsequent steps
+export PATH="$HOME/.local/bin:$PATH"
+
+# =============================================================================
+# aider (AI pair programming, via uv)
+# =============================================================================
+if ! already aider; then
+    echo "Installing aider..."
+    uv tool install --python 3.12 aider-chat
+fi
+
+# =============================================================================
+# neovim
+# =============================================================================
+INSTALL_DIR="$HOME/.local"
+BIN_DIR="$INSTALL_DIR/bin"
+NVIM_DIR="$INSTALL_DIR/nvim"
+
+mkdir -p "$BIN_DIR"
+
+# Detect architecture
+case "$(uname -m)" in
+    x86_64)  ARCH_NVIM="x86_64" ;;
+    aarch64) ARCH_NVIM="arm64" ;;
+    *)       echo "WARNING: unsupported architecture $(uname -m), attempting with raw arch" ;;
+esac
+ARCH_NVIM="${ARCH_NVIM:-$(uname -m)}"
+
+if [ "$OS" = "linux" ]; then
+    TARBALL="nvim-linux-${ARCH_NVIM}.tar.gz"
+elif [ "$OS" = "darwin" ]; then
+    TARBALL="nvim-macos-${ARCH_NVIM}.tar.gz"
+else
+    echo "ERROR: unsupported OS $OS for neovim installation"
+    exit 1
+fi
+
+URL="https://github.com/neovim/neovim/releases/latest/download/${TARBALL}"
+
+echo "Downloading latest Neovim tarball ($OS, $ARCH_NVIM)..."
+curl -L "$URL" | tar xz -C /tmp
+
+if [ "$OS" = "linux" ]; then
+    rm -rf "$NVIM_DIR"
+    mv "/tmp/nvim-linux-${ARCH_NVIM}" "$NVIM_DIR"
+elif [ "$OS" = "darwin" ]; then
+    rm -rf "$NVIM_DIR"
+    mv "/tmp/nvim-macos-${ARCH_NVIM}" "$NVIM_DIR"
+fi
+# Symlink is the same for both platforms (nvim binary is in bin/nvim)
+ln -sf "$NVIM_DIR/bin/nvim" "$BIN_DIR/nvim"
+
+echo "Neovim installed: $("$BIN_DIR/nvim" --version | head -1)"
+
+# =============================================================================
+# bat (syntax-highlighting cat)
+# =============================================================================
+if ! already bat; then
+    echo "Installing bat..."
+    VERSION="v0.26.1"
+    case "$OS" in
+        darwin)
+            BAT_ARCH=$(echo "$ARCH" | sed 's/amd64/x86_64/;s/arm64/aarch64/')
+            ASSET="bat-${VERSION}-${BAT_ARCH}-apple-darwin.tar.gz"
+            ;;
+        linux)
+            BAT_ARCH=$(echo "$ARCH" | sed 's/amd64/x86_64/;s/arm64/aarch64/')
+            ASSET="bat-${VERSION}-${BAT_ARCH}-unknown-linux-gnu.tar.gz"
+            ;;
+        *)      echo "ERROR: unsupported OS ${OS} for bat"; exit 1 ;;
+    esac
+    curl -fsSL "https://github.com/sharkdp/bat/releases/download/${VERSION}/${ASSET}" \
+      | tar -xz -C /tmp "bat-*/bat"
+    install /tmp/bat-*/bat ~/.local/bin/bat
+    rm -rf /tmp/bat-*
+fi
+
+# =============================================================================
+# direnv (env var manager)
+# =============================================================================
+if ! already direnv; then
+    echo "Installing direnv..."
+    curl -LsSf https://direnv.net/install.sh | sh
+fi
+
+# =============================================================================
+# age (encryption)
+# =============================================================================
+if ! already age; then
+    echo "Installing age..."
+    VERSION="1.3.1"
+    ARCHIVE="age-v${VERSION}-${OS}-${ARCH}.tar.gz"
+    curl -fsSL "https://github.com/FiloSottile/age/releases/download/v${VERSION}/${ARCHIVE}" \
+      | tar -xz -C /tmp age/age age/age-keygen
+    install /tmp/age/age ~/.local/bin/age
+    install /tmp/age/age-keygen ~/.local/bin/age-keygen
+    rm -rf /tmp/age
+fi
+
+# =============================================================================
+# sops (secret manager)
+# =============================================================================
+if ! already sops; then
+    echo "Installing sops..."
+    VERSION="3.13.1"
+    case "$OS" in
+        darwin) ASSET="sops-v${VERSION}.darwin.${ARCH}" ;;
+        linux)  ASSET="sops-v${VERSION}.linux.${ARCH}" ;;
+        *)      echo "ERROR: unsupported OS ${OS} for sops"; exit 1 ;;
+    esac
+    curl -fsSL "https://github.com/getsops/sops/releases/download/v${VERSION}/${ASSET}" \
+        -o /tmp/sops
+    chmod +x /tmp/sops
+    install /tmp/sops ~/.local/bin/sops
+fi
+
+# =============================================================================
+# forgejo-mcp (Linux only)
+# =============================================================================
+if [ "$OS" = "linux" ] && ! already forgejo-mcp; then
+    echo "Installing forgejo-mcp..."
+    VERSION="2.18.0"
+    curl -fsSL "https://codeberg.org/goern/forgejo-mcp/releases/download/v${VERSION}/forgejo-mcp_${VERSION}_linux_${ARCH}.tar.gz" \
+      | tar -xz -C /tmp "forgejo-mcp_${VERSION}_linux_${ARCH}/forgejo-mcp"
+    install "/tmp/forgejo-mcp_${VERSION}_linux_${ARCH}/forgejo-mcp" ~/.local/bin/forgejo-mcp
+    rm -rf "/tmp/forgejo-mcp_${VERSION}_linux_${ARCH}"
+fi
+
+# =============================================================================
+# github-mcp-server (macOS + Linux)
+# =============================================================================
+if { [ "$OS" = "linux" ] || [ "$OS" = "darwin" ]; } && ! already github-mcp-server; then
+    echo "Installing github-mcp-server..."
+    GITHUB_OS=$(echo "$OS" | tr '[:lower:]' '[:upper:]')
+    GITHUB_ARCH=$(uname -m)
+    curl -fsSL "https://github.com/github/github-mcp-server/releases/latest/download/github-mcp-server_${GITHUB_OS}_${GITHUB_ARCH}.tar.gz" \
+      | tar -xz -C /tmp github-mcp-server
+    install /tmp/github-mcp-server ~/.local/bin/github-mcp-server
+fi
+
+# =============================================================================
+# lf (terminal file manager)
+# =============================================================================
+if { [ "$OS" = "linux" ] || [ "$OS" = "darwin" ]; } && ! already lf; then
+    echo "Installing lf..."
+    VERSION="r41"
+    curl -fsSL "https://github.com/gokcehan/lf/releases/download/${VERSION}/lf-${OS}-${ARCH}.tar.gz" \
+      | tar -xz -C /tmp lf
+    install /tmp/lf ~/.local/bin/lf
+    rm -rf /tmp/lf
+fi
+
+# =============================================================================
+# opencode
+# =============================================================================
+# The opencode installer script requires bash
+if ! command -v bash >/dev/null 2>&1; then
+    echo "Skipping opencode install: bash not found. Please install bash and re-run chezmoi apply." >&2
+else
+    # Install opencode if not present
+    OPENCODE_BIN="$HOME/.opencode/bin/opencode"
+    if command -v opencode >/dev/null 2>&1 || [ -f "$OPENCODE_BIN" ]; then
+        echo "opencode already installed: $(opencode --version 2>/dev/null || $OPENCODE_BIN --version 2>/dev/null || echo 'installed')"
+    else
+        echo "Installing opencode..."
+        curl -fsSL https://opencode.ai/install | bash
+        OPENCODE_BIN="$HOME/.opencode/bin/opencode"
+        if [ -f "$OPENCODE_BIN" ]; then
+            ln -sf "$OPENCODE_BIN" "$HOME/.local/bin/opencode"
+            echo "Symlinked opencode to ~/.local/bin/"
+        fi
+    fi
+fi
+
+# =============================================================================
+# tmux-tpm (tmux plugin manager)
+# =============================================================================
+TPM_DIR="$HOME/.tmux/plugins/tpm"
+if [ ! -d "$TPM_DIR" ]; then
+    mkdir -p "$HOME/.tmux/plugins"
+    git clone --quiet https://github.com/tmux-plugins/tpm "$TPM_DIR"
+    # Run prefix+I inside tmux to install plugins
+fi

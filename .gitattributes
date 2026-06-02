@@ -1,3 +1,0 @@
-# Preserve executable bit for helper scripts
-dot_local/bin/*.sh executable
-dot_local/bin/tmux-layout-code executable
