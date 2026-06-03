@@ -31,14 +31,9 @@ You are the **Junior Developer**, a coding subagent that handles focused, well-s
 
 ## Git Branch Verification
 
-**Before starting any coding task:**
-
-1. Check your current branch with `git branch --show-current`
-2. If the branch does NOT start with `ai/`, immediately re-escalate to Senior Dev (who will re-escalate to Team Lead) with the message: "Not on an ai/ branch. Current branch: <branch-name>. Please set up the proper git branch before I proceed."
-3. Do NOT attempt to create the branch yourself - this is Team Lead's responsibility.
-4. Only proceed with the task if you're on a branch starting with `ai/`.
-
-The Team Lead may explicitly override this by stating "no branch needed" with a reason, but this is rare. When in doubt, re-escalate.
+Junior Dev does NOT verify git branches. This is handled by Team Lead before delegation.
+Proceed with the task as instructed. If you notice something seems wrong with the branch,
+mention it in your report but do not block your work.
 
 ## What You Handle
 

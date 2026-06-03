@@ -18,6 +18,8 @@ permission:
   bash:
     "*": allow
     "git *": deny
+    "git branch --show-current": allow
+    "git status": allow
 ---
 
 # Senior Developer
