@@ -139,17 +139,19 @@ if ! already bat; then
         darwin)
             BAT_ARCH=$(echo "$ARCH" | sed 's/amd64/x86_64/;s/arm64/aarch64/')
             ASSET="bat-${VERSION}-${BAT_ARCH}-apple-darwin.tar.gz"
+            BAT_DIR="bat-${VERSION}-${BAT_ARCH}-apple-darwin"
             ;;
         linux)
             BAT_ARCH=$(echo "$ARCH" | sed 's/amd64/x86_64/;s/arm64/aarch64/')
             ASSET="bat-${VERSION}-${BAT_ARCH}-unknown-linux-gnu.tar.gz"
+            BAT_DIR="bat-${VERSION}-${BAT_ARCH}-unknown-linux-gnu"
             ;;
         *)      echo "ERROR: unsupported OS ${OS} for bat"; exit 1 ;;
     esac
     curl -fsSL "https://github.com/sharkdp/bat/releases/download/${VERSION}/${ASSET}" \
-      | tar -xz -C /tmp "bat-*/bat"
-    install /tmp/bat-*/bat ~/.local/bin/bat
-    rm -rf /tmp/bat-*
+      | tar -xz -C /tmp "${BAT_DIR}/bat"
+    install /tmp/${BAT_DIR}/bat ~/.local/bin/bat
+    rm -rf /tmp/${BAT_DIR}
 fi
 
 # =============================================================================
