@@ -18,10 +18,13 @@ permission:
     "ai-git-workflow": allow
   bash:
     "*": deny
-    "git *": allow
-    "git push": ask
-    "chezmoi *": allow
+    "cd *": allow
     "ls *": allow
+    "tail *": allow
+    "head *": allow
+    "git *": allow
+    "git push *": ask
+    "chezmoi *": allow
 ---
 
 # Team Lead
