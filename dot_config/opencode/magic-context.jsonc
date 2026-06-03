@@ -47,11 +47,25 @@
     "enabled": true,
     "grace_compartments": 10
   },
+  "temporal_awareness": true,
+  "caveman_text_compression": {
+    "enabled": true
+  },
   "memory": {
     "enabled": true,
     "injection_budget_tokens": 4000,
     "auto_promote": true,
-    "retrieval_count_promotion_threshold": 3
+    "retrieval_count_promotion_threshold": 3,
+    "auto_search": {
+      "enabled": true,
+      "score_threshold": 0.55,
+      "min_prompt_chars": 20
+    },
+    "git_commit_indexing": {
+      "enabled": true,
+      "since_days": 365,
+      "max_commits": 2000
+    }
   },
   "embedding": {
     "provider": "openai-compatible",
@@ -87,20 +101,4 @@
       "min_reads": 4
     }
   },
-  "experimental": {
-    "temporal_awareness": true,
-    "git_commit_indexing": {
-      "enabled": true,
-      "since_days": 365,
-      "max_commits": 2000
-    },
-    "auto_search": {
-      "enabled": true,
-      "score_threshold": 0.55,
-      "min_prompt_chars": 20
-    },
-    "caveman_text_compression": {
-      "enabled": true
-    }
-  }
-}
+ }
