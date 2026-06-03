@@ -71,10 +71,10 @@
   },
   "mcp": {
     "brave": {
-      "type": "remote",
-      "url": "https://mcp.brave.com/mcp",
-      "headers": {
-        "x-api-key": "{env:BRAVE_API_KEY}"
+      "command": "npx",
+      "args": ["-y", "@brave/brave-search-mcp-server"],
+      "env": {
+        "BRAVE_API_KEY": "{env:BRAVE_API_KEY}"
       },
       "enabled": true
     },
