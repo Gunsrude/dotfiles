@@ -79,17 +79,6 @@ set -agF status-right "#{E:@catppuccin_status_battery}"
 set -ga status-right "#[bg=#{@thm_bg},fg=#{@thm_blue}] 󰭦 %Y-%m-%d 󰅐 %H:%M "
 
 # -----------------------------------------------------------------------------
-# lf File Browser Integration
-# -----------------------------------------------------------------------------
-# Spawn 3-pane layout: [lf 30%] [nvim 60% top] [terminal 40% bottom]
-# Manual call only when needed
-bind S run-shell "~/.local/bin/tmux-layout-code"
-
-# Quick lf launcher in current window (30% left split)
-# If lf pane exists, focus it; otherwise create new lf pane
-bind e run-shell "tmux list-panes -F '#{pane_title}' | grep -q 'lf' && tmux select-pane -t :. || tmux split-window -h -p 30 'lf'"
-
-# -----------------------------------------------------------------------------
 # Custom Keybindings
 # -----------------------------------------------------------------------------
 # Split panes with vi-style keys (h/j/k/l)

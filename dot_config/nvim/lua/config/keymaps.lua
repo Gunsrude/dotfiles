@@ -13,7 +13,7 @@ keymap.set("n", "<leader>tx", "<cmd>tabclose<CR>", { desc = "Close current tab" 
 keymap.set("n", "<leader>tn", "<cmd>tabn<CR>", { desc = "Go to next tab" })
 keymap.set("n", "<leader>tp", "<cmd>tabp<CR>", { desc = "Go to previous tab" })
 
-keymap.set("n", "<leader>e", "<cmd>lua require('lf-tmux').toggle()<CR>", { desc = "Toggle/focus lf file browser" })
+keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle file explorer" })
 
 keymap.set("n", "<S-l>", "<cmd>bnext<CR>", { desc = "Next buffer" })
 keymap.set("n", "<S-h>", "<cmd>bprevious<CR>", { desc = "Previous buffer" })
