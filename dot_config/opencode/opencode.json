@@ -31,6 +31,26 @@
         }
       }
     },
+    "StellarVision": {
+      "npm": "@ai-sdk/openai-compatible",
+      "options": {
+        "baseURL": "http://dumblm.stellar.build:8080/v1",
+        "includeUsage": true
+      },
+      "models": {
+        "vision": {
+          "name": "Yandere Eyes",
+          "limit": {
+            "context": 32768,
+            "output": 8192
+          },
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          }
+        }
+      }
+    },
     "opencode": {
       "apiKey": "{env:OPENCODE_ZEN_API_KEY}",
       "models": {
