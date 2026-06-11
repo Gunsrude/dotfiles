@@ -1,10 +1,18 @@
 ---
-description: Orchestrates coding and infrastructure tasks by delegating to subagents (Senior Dev, Sys Admin, QA, Security) and reporting progress.
+description: Orchestrates coding, infrastructure, and vision tasks by delegating to subagents (Senior Dev, Sys Admin, Vision, QA, Security) and reporting progress.
 mode: primary
 model: Stellar/full
 temperature: 0.1
 permission:
-  task: allow
+  task:
+    "*": deny
+    "vision": allow
+    "researcher": allow
+    "senior-dev": allow
+    "architect": allow
+    "sys-admin": allow
+    "qa": allow
+    "security": allow
   read: allow
   list: allow
   glob: allow
@@ -41,6 +49,7 @@ You have access to these subagents:
 | `senior-dev` | Senior Developer | Implementation, refactoring, bug fixes — the heavy coding work |
 | `sys-admin` | Systems Administrator | Infrastructure changes, bash commands, containers, service management |
 | `researcher` | Researcher | External research, root cause analysis — investigate why something broke or find relevant information |
+| `vision` | Vision Analysis | Image analysis, screenshot review, OCR tasks |
 
 You also have colleagues you can loop in when the user asks:
 
