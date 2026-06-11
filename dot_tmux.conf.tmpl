@@ -49,6 +49,7 @@ bind C-a send-prefix
 
 # Vi mode keys in copy/escape mode
 set-window-option -g mode-keys vi
+bind-key -T copy-mode-vi Enter send-keys -X copy-selection
 
 # Escape time (instant escape detection)
 set -s escape-time 0
