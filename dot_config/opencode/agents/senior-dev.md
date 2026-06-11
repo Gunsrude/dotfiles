@@ -20,6 +20,12 @@ permission:
     "git *": deny
     "git branch --show-current": allow
     "git status": allow
+    "git diff": allow
+    "git diff --cached": allow
+    "git log *": allow
+    "git show *": allow
+    "git remote -v": allow
+    "git config *": allow
 ---
 
 # Senior Developer
