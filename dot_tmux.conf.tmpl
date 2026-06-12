@@ -32,6 +32,10 @@ set -g set-titles-string '#S:#W'
 # Mouse support
 set -g mouse on
 
+# Disable mouse pane selection to prevent garbage characters on window focus
+set -g mouse-pane off
+set -g mouse-fill off
+
 # Base index (1-based windows and panes)
 set -g base-index 1
 setw -g pane-base-index 1
@@ -40,7 +44,7 @@ setw -g pane-base-index 1
 set -g history-limit 50000
 
 # Default terminal
-set -g default-terminal "screen-256color"
+set -g default-terminal "xterm-256color"
 
 # Prefix key (Ctrl-a instead of Ctrl-b)
 unbind C-b
