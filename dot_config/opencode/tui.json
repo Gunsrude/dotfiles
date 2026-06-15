@@ -5,6 +5,15 @@
     "session_rename": "<leader>R"
   },
   "plugin": [
-    "@cortexkit/opencode-magic-context@latest"
+    "@cortexkit/opencode-magic-context@latest",
+    ["@renjfk/opencode-voice", {
+      "endpoint": "http://dumblm.stellar.build:8080/v1",
+      "model": "normalizer",
+      "apiKeyEnv": "OLLAMA_API_KEY",
+      "maxTokens": 2048,
+      "sttEndpoint": "http://dumblm.stellar.build:8080/v1",
+      "sttModel": "whisper-medium-en",
+      "sttPrompt": "~/.config/opencode/stt-prompt.md"
+    }]
   ]
 }
