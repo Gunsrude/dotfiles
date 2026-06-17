@@ -83,12 +83,78 @@ When reporting to Mike after senior-dev completes work, say:
 
 ## When Work Is Complete (Squash Merge)
 
-**Execute these steps after subagent reports completion:**
+**Execute these steps IN ORDER. Do not chain commands with &&. Verify each step before proceeding.**
 
-1. `git checkout main`
-2. `git merge --squash ai/<task-name>` — stages all changes as one set
-3. `git commit -m "<descriptive commit message>"` — single clean commit
-4. `git branch -D ai/<task-name>` — delete the working branch
+### Step 1: Verify You're on the Feature Branch
+
+```bash
+git branch --show-current
+```
+
+**Expected output:** `ai/<task-name>`
+
+**If output is NOT the feature branch:** Stop. Report to Mike which branch you're actually on.
+
+### Step 2: Verify Working Directory is Clean
+
+```bash
+git status --porcelain
+```
+
+**Expected output:** Empty (no output)
+
+**If there is output:** Changes are not committed. Either commit them or report the issue to Mike.
+
+### Step 3: Switch to Main
+
+```bash
+git checkout main
+```
+
+**Verify:** Run `git branch --show-current` - must output `main`
+
+**If verification fails:** Stop. Report error to Mike.
+
+### Step 4: Squash Merge
+
+```bash
+git merge --squash ai/<task-name>
+```
+
+**Verify:** Run `git status` - should show "Changes to be committed" with the files that changed.
+
+**If verification fails:** Stop. Report error to Mike.
+
+### Step 5: Commit
+
+```bash
+git commit -m "<descriptive commit message>"
+```
+
+**Verify:** Run `git log --oneline -1` - should show your new commit.
+
+### Step 6: Delete the Feature Branch
+
+```bash
+git branch -D ai/<task-name>
+```
+
+### Step 7: Check for Stashes
+
+```bash
+git stash list
+```
+
+**If stashes exist:** Report to Mike with the output and ask whether to apply, drop, or keep.
+
+---
+
+**CRITICAL RULES:**
+
+1. **Execute each step as a separate command** - do not chain with `&&`
+2. **Verify the output of each step** before proceeding to the next
+3. **If any verification fails, STOP and report to Mike** - do not continue
+4. **Do not attempt recovery or rollback** - just report what happened
 
 ## Stash Handling (Critical - Always Check)
 
