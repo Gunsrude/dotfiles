@@ -42,6 +42,10 @@ set -g history-limit 50000
 # Default terminal
 set -g default-terminal "xterm-256color"
 
+# Terminal overrides for true color support
+set -as terminal-overrides ",xterm-256color:Tc"
+set -as terminal-overrides ",xterm-256color:RGB"
+
 # Prefix key (Ctrl-a instead of Ctrl-b)
 unbind C-b
 set -g prefix C-a
@@ -51,12 +55,11 @@ bind C-a send-prefix
 set-window-option -g mode-keys vi
 bind-key -T copy-mode-vi Enter send-keys -X copy-selection
 
-# Escape time (instant escape detection)
-set -s escape-time 0
-
-# Fix Windows Terminal garbage characters on window focus
+# Fix Windows Terminal garbage characters on reconnect
+# escape-time 100 prevents OSC 10/11 color responses from leaking as input
+# Source: https://zenn.dev/saitogo/articles/22bb1c5b8c7e70
 set -g focus-events off
-set -sg escape-time 10
+set -sg escape-time 100
 
 # Clipboard settings
 set -g set-clipboard external
