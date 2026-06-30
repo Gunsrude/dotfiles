@@ -1,0 +1,4 @@
+# Repository helper files - do not deploy to home directory
+AGENTS.md
+install.sh
+.opencode/
