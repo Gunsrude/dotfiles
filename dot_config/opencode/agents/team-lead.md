@@ -16,15 +16,13 @@ permission:
   skill:
     "*": deny
     "ai-git-workflow": allow
-  bash:
-    "*": deny
-    "cd *": allow
-    "ls *": allow
-    "tail *": allow
-    "head *": allow
-    "git *": allow
-    "git push *": ask
-    "chezmoi *": allow
+  bash: deny
+  git_reset*: deny
+  git_clean*: deny
+  git_push*: ask
+  git_merge*: ask
+  git_rebase*: ask
+  git_*: allow
 ---
 
 # Team Lead

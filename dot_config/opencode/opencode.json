@@ -98,6 +98,16 @@
       },
       "enabled": true
     },
+    "git": {
+      "type": "local",
+      "command": ["npx", "-y", "@cyanheads/git-mcp-server@latest"],
+      "environment": {
+        "MCP_TRANSPORT_TYPE": "stdio",
+        "MCP_LOG_LEVEL": "info",
+        "MCP_RESPONSE_VERBOSITY": "minimal"
+      },
+      "enabled": true
+    },
     "exa": {
       "type": "remote",
       "url": "https://mcp.exa.ai/mcp?tools=web_search_exa,web_fetch_exa,web_search_advanced_exa",
@@ -138,7 +148,8 @@
     },
     "exa_*": "deny",
     "brave_*": "deny",
-    "kagi_*": "deny"
+    "kagi_*": "deny",
+    "git_*": "deny"
   },
   "instructions": [
     "~/.config/opencode/PROFILE.md"
