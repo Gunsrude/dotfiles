@@ -140,11 +140,7 @@
       "/tmp/**": "allow"
     },
     "bash": {
-      "git *": "ask",
-      "git diff*": "allow",
-      "git fetch*": "allow",
-      "git status*": "allow",
-      "git log*": "allow"
+      "git *": "deny",
     },
     "exa_*": "deny",
     "brave_*": "deny",

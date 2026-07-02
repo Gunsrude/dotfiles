@@ -1,0 +1,104 @@
+{
+  "$schema": "https://raw.githubusercontent.com/cortexkit/magic-context/master/assets/magic-context.schema.json",
+  "enabled": true,
+  "ctx_reduce_enabled": false,
+  "cache_ttl": "30m",
+  "execute_threshold_tokens": {
+    "Stellar/full": 100000,
+    "Stellar/coder": 100000,
+    "opencode/gpt-5-codex": 320000,
+    "opencode/gpt-5.1-codex-max": 320000,
+    "opencode/gpt-5.1-codex-mini": 300000,
+    "opencode/kimi-k2.5": 200000,
+    "opencode/big-pickle": 100000,
+    "default": 20000
+  },
+  "modelMaxLimits": {
+    "Stellar/full": 131072,
+    "Stellar/coder": 131072,
+    "opencode/gpt-5-codex": 320000,
+    "opencode/gpt-5.1-codex-max": 320000,
+    "opencode/gpt-5.1-codex-mini": 300000,
+    "opencode/kimi-k2.5": 200000,
+    "opencode/big-pickle": 100000
+  },
+  "protected_tags": 20,
+  "nudge_interval_tokens": 10000,
+  "auto_drop_tool_age": 30,
+  "drop_tool_structure": true,
+  "clear_reasoning_age": 30,
+  "iteration_nudge_threshold": 15,
+  "system_message_merge": true,
+  "historian": {
+    "model": "opencode/big-pickle",
+    "fallback_models": [
+      "RatOnAStick/explorer"
+    ],
+    "temperature": 0.3,
+    "two_pass": true
+  },
+  "historian_timeout_ms": 600000,
+  "history_budget_percentage": 0.15,
+  "commit_cluster_trigger": {
+    "enabled": true,
+    "min_clusters": 3
+  },
+  "compressor": {
+    "enabled": true,
+    "grace_compartments": 10
+  },
+  "temporal_awareness": true,
+  "caveman_text_compression": {
+    "enabled": true
+  },
+  "memory": {
+    "enabled": true,
+    "injection_budget_tokens": 4000,
+    "auto_promote": true,
+    "retrieval_count_promotion_threshold": 3,
+    "auto_search": {
+      "enabled": true,
+      "score_threshold": 0.55,
+      "min_prompt_chars": 20
+    },
+    "git_commit_indexing": {
+      "enabled": true,
+      "since_days": 365,
+      "max_commits": 2000
+    }
+  },
+  "embedding": {
+    "provider": "openai-compatible",
+    "model": "embed",
+    "endpoint": "http://llm.stellar.build:8080/v1",
+    "api_key": "none"
+  },
+  "sidekick": {
+    "model": "opencode/big-pickle",
+    "temperature": 0.2,
+    "timeout_ms": 30000
+  },
+  "dreamer": {
+    "model": "Stellar/full",
+    "temperature": 0.3,
+    "schedule": "02:00-06:00",
+    "max_runtime_minutes": 120,
+    "task_timeout_minutes": 20,
+    "tasks": [
+      "consolidate",
+      "verify",
+      "archive-stale",
+      "improve"
+    ],
+    "inject_docs": true,
+    "user_memories": {
+      "enabled": true,
+      "promotion_threshold": 3
+    },
+    "pin_key_files": {
+      "enabled": false,
+      "token_budget": 10000,
+      "min_reads": 4
+    }
+  },
+ }
