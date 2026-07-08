@@ -104,7 +104,7 @@
       "environment": {
         "MCP_TRANSPORT_TYPE": "stdio",
         "MCP_LOG_LEVEL": "info",
-        "MCP_RESPONSE_VERBOSITY": "minimal"
+        "MCP_RESPONSE_VERBOSITY": "standard"
       },
       "enabled": true
     },

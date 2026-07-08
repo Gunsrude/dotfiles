@@ -1,7 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/cortexkit/magic-context/master/assets/magic-context.schema.json",
   "enabled": true,
-  "ctx_reduce_enabled": false,
   "cache_ttl": "30m",
   "execute_threshold_tokens": {
     "Stellar/full": 100000,
@@ -91,10 +90,6 @@
       "improve"
     ],
     "inject_docs": true,
-    "user_memories": {
-      "enabled": true,
-      "promotion_threshold": 3
-    },
     "pin_key_files": {
       "enabled": false,
       "token_budget": 10000,
