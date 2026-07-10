@@ -11,8 +11,8 @@
         "full": {
           "name": "Brain Gooder",
           "limit": {
-            "context": 131072,
-            "output": 16384
+            "context": 32768,
+            "output": 8192
           }
         },
         "coder": {
@@ -100,35 +100,17 @@
     },
     "git": {
       "type": "local",
-      "command": ["npx", "-y", "@cyanheads/git-mcp-server@latest"],
-      "environment": {
-        "MCP_TRANSPORT_TYPE": "stdio",
-        "MCP_LOG_LEVEL": "info",
-        "MCP_RESPONSE_VERBOSITY": "standard"
-      },
+      "command": ["uvx", "mcp-server-git"],
+      "args": ["--repository", "."],
       "enabled": true
-    },
-    "exa": {
-      "type": "remote",
-      "url": "https://mcp.exa.ai/mcp?tools=web_search_exa,web_fetch_exa,web_search_advanced_exa",
-      "headers": {
-        "x-api-key": "{env:EXA_API_KEY}"
-      },
-      "enabled": false
-    },
-    "kagi": {
-      "type": "remote",
-      "url": "https://mcp.kagi.com/mcp",
-      "headers": {
-        "x-api-key": "{env:KAGI_API_KEY}"
-      },
-      "enabled": false
     }
   },
   "model": "Stellar/full",
   "small_model": "opencode/big-pickle",
   "tools": {
-    "websearch": false
+    "websearch": false,
+    "webfetch": false,
+    "git_*": false
   },
   "lsp": true,
   "compaction": {

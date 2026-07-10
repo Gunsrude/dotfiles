@@ -2,25 +2,7 @@
   "$schema": "https://raw.githubusercontent.com/cortexkit/magic-context/master/assets/magic-context.schema.json",
   "enabled": true,
   "cache_ttl": "30m",
-  "execute_threshold_tokens": {
-    "Stellar/full": 100000,
-    "Stellar/coder": 100000,
-    "opencode/gpt-5-codex": 320000,
-    "opencode/gpt-5.1-codex-max": 320000,
-    "opencode/gpt-5.1-codex-mini": 300000,
-    "opencode/kimi-k2.5": 200000,
-    "opencode/big-pickle": 100000,
-    "default": 20000
-  },
-  "modelMaxLimits": {
-    "Stellar/full": 131072,
-    "Stellar/coder": 131072,
-    "opencode/gpt-5-codex": 320000,
-    "opencode/gpt-5.1-codex-max": 320000,
-    "opencode/gpt-5.1-codex-mini": 300000,
-    "opencode/kimi-k2.5": 200000,
-    "opencode/big-pickle": 100000
-  },
+  "execute_threshold_percentage": 80,
   "protected_tags": 20,
   "nudge_interval_tokens": 10000,
   "auto_drop_tool_age": 30,
@@ -78,7 +60,7 @@
     "timeout_ms": 30000
   },
   "dreamer": {
-    "model": "Stellar/full",
+    "model": "Stellar/coder",
     "temperature": 0.3,
     "schedule": "02:00-06:00",
     "max_runtime_minutes": 120,
