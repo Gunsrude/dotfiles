@@ -28,6 +28,13 @@
             "context": 131072,
             "output": 16384
           }
+        },
+        "dirtycode": {
+            "name": "Dirty Coder",
+            "limit": {
+                "context": 131072,
+                "output": 16384
+            }
         }
       }
     },
@@ -66,17 +73,9 @@
           "name": "Big Pickle",
           "limit": { "context": 131072, "output": 16384 }
         },
-        "gpt-5-codex": {
-          "name": "GPT-5 Codex",
-          "limit": { "context": 400000, "output": 131072 }
-        },
-        "gpt-5.1-codex-max": {
-          "name": "Codex Max",
-          "limit": { "context": 400000, "output": 131072 }
-        },
-        "gpt-5.1-codex-mini": {
-          "name": "Codex Mini",
-          "limit": { "context": 400000, "output": 131072 }
+        "deepseek-v4-flash": {
+          "name": "Deepseek flash",
+          "limit": { "context": 800000, "output": 131072 }
         },
         "kimi-k2.5": {
           "name": "Kimi K2.5",
@@ -106,7 +105,7 @@
     }
   },
   "model": "Stellar/full",
-  "small_model": "opencode/big-pickle",
+  "small_model": "opencode/deepseek-v4-flash",
   "tools": {
     "websearch": false,
     "webfetch": false,

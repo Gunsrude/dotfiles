@@ -11,7 +11,7 @@
   "iteration_nudge_threshold": 15,
   "system_message_merge": true,
   "historian": {
-    "model": "opencode/big-pickle",
+    "model": "opencode/deepseek-v4-flash",
     "fallback_models": [
       "opencode/kimi-k2.5"
     ],
@@ -55,7 +55,7 @@
     "api_key": "none"
   },
   "sidekick": {
-    "model": "opencode/big-pickle",
+    "model": "opencode/deepseek-v4-flash",
     "temperature": 0.2,
     "timeout_ms": 30000
   },
