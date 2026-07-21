@@ -11,7 +11,7 @@
         "full": {
           "name": "Brain Gooder",
           "limit": {
-            "context": 32768,
+            "context": 65536,
             "output": 8192
           }
         },

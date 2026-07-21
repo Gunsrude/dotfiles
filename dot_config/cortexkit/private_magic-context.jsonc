@@ -13,7 +13,7 @@
   "historian": {
     "model": "opencode/big-pickle",
     "fallback_models": [
-      "RatOnAStick/explorer"
+      "opencode/kimi-k2.5"
     ],
     "temperature": 0.3,
     "two_pass": true
