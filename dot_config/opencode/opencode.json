@@ -38,48 +38,25 @@
         }
       }
     },
-    "StellarVision": {
-      "npm": "@ai-sdk/openai-compatible",
-      "options": {
-        "baseURL": "http://dumblm.stellar.build:8080/v1",
-        "includeUsage": true
-      },
-      "models": {
-        "vision": {
-          "name": "Yandere Eyes",
-          "limit": {
-            "context": 32768,
-            "output": 8192
-          },
-          "modalities": {
-            "input": ["text", "image"],
-            "output": ["text"]
-          }
-        }
-      }
-    },
     "opencode": {
       "apiKey": "{env:OPENCODE_ZEN_API_KEY}",
       "models": {
-        "gpt-5-nano": {
-          "name": "Zen Nano",
-          "limit": { "context": 32768, "output": 4096 }
-        },
-        "qwen3.5-plus": {
-          "name": "Zen Qwen Small",
-          "limit": { "context": 32768, "output": 4096 }
+        "qwen3.7-max": {
+          "name": "Q",
+          "limit": { "context": 65536, "output": 16384 }
         },
         "big-pickle": {
           "name": "Big Pickle",
           "limit": { "context": 131072, "output": 16384 }
         },
         "deepseek-v4-flash": {
-          "name": "Deepseek flash",
+          "name": "Red Scare",
           "limit": { "context": 800000, "output": 131072 }
         },
-        "kimi-k2.5": {
-          "name": "Kimi K2.5",
-          "limit": { "context": 262144, "output": 65536 }
+        "deepseek-v4-flash-limited": {
+          "id": "deepseek-v4-flash",
+          "name": "Red Scare (limited)",
+          "limit": { "context": 80000, "output": 8192 }
         }
       }
     }

@@ -27,6 +27,6 @@ This is a **[chezmoi](https://chezmoi.io)** dotfiles repository, not a tradition
 **CRITICAL RULE**: No agent in `dot_config/opencode/agents/` may ever have `websearch: allow` or `webfetch: allow` in their YAML header.
 
 - The `researcher` agent is the ONLY agent with web research capabilities
-- All other agents (team-lead, senior-dev, junior-dev, pm, qa, security) must have `websearch: deny` and `webfetch: deny`
+- All other agents (team-lead, senior-dev, sys-admin) must have `websearch: deny` and `webfetch: deny`
 - If an agent needs external research, it must delegate to the `researcher` subagent via the `task` tool
 - This is a hard constraint - never enable websearch/webfetch on any agent except researcher

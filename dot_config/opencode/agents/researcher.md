@@ -1,7 +1,7 @@
 ---
 description: Research subagent that finds external information, determines root causes, and delivers definitive answers with citations.
 mode: subagent
-model: Stellar/research
+model: opencode/deepseek-v4-flash 
 temperature: 0.7
 permission:
   task: allow
