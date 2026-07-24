@@ -15,6 +15,8 @@ permission:
     "git push*": ask
     "git merge*": ask
     "git *": allow
+    "echo": allow
+    "grep": allow
 ---
 
 # Git Agent
