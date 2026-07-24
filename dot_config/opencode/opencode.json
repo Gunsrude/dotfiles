@@ -73,12 +73,6 @@
         "BRAVE_API_KEY": "{env:BRAVE_API_KEY}"
       },
       "enabled": true
-    },
-    "git": {
-      "type": "local",
-      "command": ["uvx", "mcp-server-git"],
-      "args": ["--repository", "."],
-      "enabled": true
     }
   },
   "model": "Stellar/full",

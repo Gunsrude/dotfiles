@@ -6,7 +6,6 @@ This is a **[chezmoi](https://chezmoi.io)** dotfiles repository, not a tradition
 
 - **Prefixes**: `dot_<name>` → `~/<name>`, `dot_config/<name>` → `~/.config/<name>`, `dot_local/share/<name>` → `~/.local/share/<name>`. Template files use `.tmpl` extension and Go template syntax (`{{ }}`).
 - **machine_type**: All templates branch on `{{ .machine_type }}` (work / personal / server / container). SSH key ignores in `.chezmoiignore.tmpl` differ per machine_type.
-- **Remote**: `ssh://git@codeberg.org/Gunsrude/dotfiles.git` (Codeberg)
 - **No build/test pipeline** — `chezmoi apply` is the deployment step.
 
 ## Key Directories
