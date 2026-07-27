@@ -10,9 +10,6 @@ This is a **[chezmoi](https://chezmoi.io)** dotfiles repository, not a tradition
 
 ## Key Directories
 
-- **dot_config/hypr/** — Hyprland Wayland WM (16 files, entry: `hyprland.conf`)
-- **dot_config/nvim/** — Neovim (Lua, lazy.nvim)
-- **dot_config/kitty/** / **dot_config/alacritty/** — Terminal emulators
 - **dot_config/opencode/** — OpenCode IDE assistant config
 - **.chezmoiscripts/** — Auto-install scripts (nvim, nvm)
 
@@ -20,12 +17,3 @@ This is a **[chezmoi](https://chezmoi.io)** dotfiles repository, not a tradition
 
 - **`.opencode/`** — Repo-local OpenCode config. Contains `opencode.json` (external dir permissions), `INSTRUCTIONS.md` (chezmoi workflow), `package.json` (plugin dep). Stays in the source tree — does not deploy to host.
 - **`dot_config/opencode/`** — Deploys to `~/.config/opencode/` on the host. Contains `opencode.json` (provider/model), `AGENTS.md` (git rules), `PROFILE.md` (user name), `tui.json` (theme). Always edit this directory for global settings.
-
-## Agent Web Permissions
-
-**CRITICAL RULE**: No agent in `dot_config/opencode/agents/` may ever have `websearch: allow` or `webfetch: allow` in their YAML header.
-
-- The `researcher` agent is the ONLY agent with web research capabilities
-- All other agents (team-lead, senior-dev, sys-admin) must have `websearch: deny` and `webfetch: deny`
-- If an agent needs external research, it must delegate to the `researcher` subagent via the `task` tool
-- This is a hard constraint - never enable websearch/webfetch on any agent except researcher

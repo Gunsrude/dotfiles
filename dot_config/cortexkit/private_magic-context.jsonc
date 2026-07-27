@@ -2,19 +2,24 @@
   "$schema": "https://raw.githubusercontent.com/cortexkit/magic-context/master/assets/magic-context.schema.json",
   "enabled": true,
   "cache_ttl": "30m",
-  "execute_threshold_percentage": 80,
+  "execute_threshold_tokens": {
+    "default": 100000,
+    "Stellar/full": 80000,
+    "Stellar/coder": 80000,
+    "Stellar/research": 80000,
+    "Stellar/dirtycode": 131072,
+    "opencode/qwen3.7-max": 100000,
+    "opencode/big-pickle": 100000,
+    "opencode/qwen3.5-plus-limited": 80000,
+    "opencode/qwen3.5-plus-full": 1000000,
+    "opencode/kimi-k2.5": 100000,
+    "gemini-3.5-flash-lite": 40000
+  },
   "protected_tags": 20,
-  "nudge_interval_tokens": 10000,
-  "auto_drop_tool_age": 30,
-  "drop_tool_structure": true,
   "clear_reasoning_age": 30,
-  "iteration_nudge_threshold": 15,
-  "system_message_merge": true,
   "historian": {
-    "model": "opencode/deepseek-v4-flash",
-    "fallback_models": [
-      "opencode/kimi-k2.5"
-    ],
+    "model": "opencode/qwen3.5-plus",
+    "fallback_models": [],
     "temperature": 0.3,
     "two_pass": true
   },
@@ -55,27 +60,21 @@
     "api_key": "none"
   },
   "sidekick": {
-    "model": "opencode/deepseek-v4-flash",
+    "model": "opencode/qwen3.5-plus",
     "temperature": 0.2,
     "timeout_ms": 30000
   },
   "dreamer": {
     "model": "Stellar/coder",
     "temperature": 0.3,
-    "schedule": "02:00-06:00",
+    "schedule": "0 2 * * *",
     "max_runtime_minutes": 120,
     "task_timeout_minutes": 20,
-    "tasks": [
-      "consolidate",
-      "verify",
-      "archive-stale",
-      "improve"
-    ],
-    "inject_docs": true,
-    "pin_key_files": {
-      "enabled": false,
-      "token_budget": 10000,
-      "min_reads": 4
+    "tasks": {
+      "consolidate": {"enabled": true},
+      "verify": {"enabled": true},
+      "archive-stale": {"enabled": true},
+      "improve": {"enabled": true}
     }
-  },
- }
+  }
+}

@@ -43,25 +43,33 @@
       "models": {
         "qwen3.7-max": {
           "name": "Q",
-          "limit": { "context": 65536, "output": 16384 }
+          "limit": { "context": 1000000, "output": 32768 }
         },
-        "big-pickle": {
-          "name": "Big Pickle",
-          "limit": { "context": 131072, "output": 16384 }
+        "qwen3.5-plus-limited": {
+          "id": "qwen3.5-plus-limited",
+          "name": "M",
+          "reasoning": false,
+          "reasoning_effort": "none",
+          "think": false,
+          "limit": { "context": 80000, "output": 16384 }
         },
-        "deepseek-v4-flash": {
-          "name": "Red Scare",
-          "limit": { "context": 800000, "output": 131072 }
+        "qwen3.5-plus-full": {
+          "id": "qwen3.5-plus-full",
+          "name": "M",
+          "reasoning": false,
+          "reasoning_effort": "none",
+          "think": false,
+          "limit": { "context": 1000000, "output": 16384 }
         },
-        "deepseek-v4-flash-limited": {
-          "id": "deepseek-v4-flash",
-          "name": "Red Scare (limited)",
-          "limit": { "context": 80000, "output": 8192 }
+        "gemini-3.5-flash-lite": {
+          "name": "Don't be Evil",
+          "reasoning": false,
+          "limit": { "context": 40000, "output": 8192}
         }
       }
     }
   },
-  "default_agent": "team-lead",
+  "default_agent": "mouth",
   "watcher": {
     "ignore": ["node_modules/**", "dist/**", ".git/**"]
   },
@@ -75,8 +83,9 @@
       "enabled": true
     }
   },
-  "model": "Stellar/full",
-  "small_model": "opencode/deepseek-v4-flash",
+  "subagent_depth": 2,
+  "model": "opencode/qwen3.5-plus-limited",
+  "small_model": "opencode/qwen3.5-plus-limited",
   "tools": {
     "websearch": false,
     "webfetch": false,
@@ -92,7 +101,7 @@
       "/tmp/**": "allow"
     },
     "bash": {
-      "git *": "deny",
+      "git *": "deny"
     },
     "exa_*": "deny",
     "brave_*": "deny",
