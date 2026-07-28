@@ -1,7 +1,7 @@
 ---
 description: Fast codebase exploration agent for finding files, searching patterns, and understanding code layout
 mode: subagent
-model: openrouter/qwen3.7-plus
+model: openrouter/deepseek
 temperature: 0.2
 permission:
   task: deny

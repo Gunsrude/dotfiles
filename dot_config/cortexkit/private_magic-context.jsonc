@@ -8,7 +8,7 @@
     "Stellar/coder": 80000,
     "Stellar/research": 80000,
     "Stellar/dirtycode": 131072,
-    "openrouter/mistral": 80000
+    "openrouter/minimax": 80000
   },
   "protected_tags": 20,
   "clear_reasoning_age": 30,

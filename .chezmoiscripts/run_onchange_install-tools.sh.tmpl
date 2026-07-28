@@ -194,18 +194,6 @@ if ! already sops; then
 fi
 
 # =============================================================================
-# forgejo-mcp (Linux only)
-# =============================================================================
-if [ "$OS" = "linux" ] && ! already forgejo-mcp; then
-    echo "Installing forgejo-mcp..."
-    VERSION="2.18.0"
-    curl -fsSL "https://codeberg.org/goern/forgejo-mcp/releases/download/v${VERSION}/forgejo-mcp_${VERSION}_linux_${ARCH}.tar.gz" \
-      | tar -xz -C /tmp "forgejo-mcp_${VERSION}_linux_${ARCH}/forgejo-mcp"
-    install "/tmp/forgejo-mcp_${VERSION}_linux_${ARCH}/forgejo-mcp" ~/.local/bin/forgejo-mcp
-    rm -rf "/tmp/forgejo-mcp_${VERSION}_linux_${ARCH}"
-fi
-
-# =============================================================================
 # github-mcp-server (macOS + Linux)
 # =============================================================================
 if { [ "$OS" = "linux" ] || [ "$OS" = "darwin" ]; } && ! already github-mcp-server; then

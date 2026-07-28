@@ -1,10 +1,10 @@
 ---
 description: Research subagent that finds external information, investigates root causes, looks up API behavior, checks documentation, and delivers definitive answers.
 mode: subagent
-model: openrouter/qwen3.7-plus
+model: openrouter/minimax-big
 temperature: 0.7
 permission:
-  task: allow
+  task: deny
   read: deny
   list: deny
   glob: deny

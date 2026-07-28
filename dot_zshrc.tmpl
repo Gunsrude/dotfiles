@@ -43,7 +43,7 @@ MAKEFLAGS="-j$(sysctl -n hw.ncpu)"
 {{- if eq .chezmoi.os "linux" }}
 export SSH_AUTH_SOCK="$HOME/.local/share/ssh/ssh-agent.socket"
 {{- end }}
-export DOTFILES_REPO="https://codeberg.org/Gunsrude/dotfiles.git"
+export DOTFILES_REPO="https://github.com/Gunsrude/dotfiles.git"
 {{- end }}
 
 # Goose AI agent
@@ -114,7 +114,7 @@ alias devvim='devcontainer exec --workspace-folder . vim .'
 alias devdown='docker rm -f $(docker ps -aq --filter "label=devcontainer.local_folder=$(pwd)")'
 alias devup='devcontainer up \
   --workspace-folder . \
-  --dotfiles-repository https://codeberg.org/Gunsrude/dotfiles \
+  --dotfiles-repository https://github.com/Gunsrude/dotfiles \
   --dotfiles-install-command install.sh \
   --mount "type=bind,source=${SSH_AUTH_SOCK},target=/tmp/ssh-agent.sock" \
   --remote-env SSH_AUTH_SOCK=/tmp/ssh-agent.sock'

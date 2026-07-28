@@ -66,6 +66,38 @@
             "id": "qwen/qwen3.7-plus",
             "name": "Heart"
         },
+        "deepseek": {
+          "id": "deepseek/deepseek-v4-flash",
+          "name": "Mouth",
+          "limit": { "context": 800000, "output": 32768 },
+          "options": {
+            "provider": {
+              "order": ["deepinfra", "venice"],
+              "allow_fallbacks": false
+            }
+          }
+        },
+        "minimax-big": {
+          "id": "minimax/minimax-m3",
+          "name": "Eyes",
+          "options": {
+            "provider": {
+              "order": ["venice", "deepinfra"],
+              "allow_fallbacks": false
+            }
+          }
+        },
+        "minimax": {
+          "id": "minimax/minimax-m3",
+          "name": "Mouth",
+          "limit": { "context": 80000, "output": 16384 },
+          "options": {
+            "provider": {
+              "order": ["venice", "deepinfra"],
+              "allow_fallbacks": false
+            }
+          }
+        },
         "mistral": {
           "id": "mistralai/mistral-small-3.2-24b-instruct",
           "name": "Mouth",
@@ -95,8 +127,8 @@
     }
   },
   "subagent_depth": 2,
-  "model": "openrouter/mistral",
-  "small_model": "openrouter/mistral",
+  "model": "openrouter/minimax",
+  "small_model": "openrouter/minimax",
   "tools": {
     "websearch": false,
     "webfetch": false,

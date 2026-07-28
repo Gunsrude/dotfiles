@@ -1,7 +1,7 @@
 ---
 description: Pure router/delegator agent — the entry point that routes requests to specialized sub-agents without executing any work itself.
 mode: primary
-model: openrouter/mistral
+model: openrouter/minimax
 temperature: 0.2
 permission:
   task: allow

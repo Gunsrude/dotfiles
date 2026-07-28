@@ -13,7 +13,7 @@ if ! command -v chezmoi &> /dev/null; then
   export PATH="$HOME/.local/bin:$PATH"
 fi
 
-chezmoi init --apply git@codeberg.org:Gunsrude/dotfiles.git
+chezmoi init --apply git@github.com:Gunsrude/dotfiles.git
 
 
 
