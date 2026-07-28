@@ -1,7 +1,7 @@
 ---
 description: Research subagent that finds external information, investigates root causes, looks up API behavior, checks documentation, and delivers definitive answers.
 mode: subagent
-model: opencode/qwen3.5-plus-full
+model: openrouter/qwen3.7-plus
 temperature: 0.7
 permission:
   task: allow

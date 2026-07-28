@@ -1,7 +1,7 @@
 ---
 description: Fast codebase exploration agent for finding files, searching patterns, and understanding code layout
 mode: subagent
-model: opencode/qwen3.5-plus-full
+model: openrouter/qwen3.7-plus
 temperature: 0.2
 permission:
   task: deny
@@ -55,7 +55,7 @@ Exploration runs in its own context. Return a compressed summary, not raw file c
 
 Follow this sequence for every exploration task:
 
-1. **Orient** — Check AGENTS.md, CLAUDE.md, TODO.md, INSTRUCTIONS.md, README.md, and top-level directory structure for project conventions
+1. **Orient** — Check CLAUDE.md, TODO.md, INSTRUCTIONS.md, README.md, and top-level directory structure for project conventions
 2. **Broad search** — Glob for file paths, Grep for content patterns
 3. **Narrow** — Path-filtered searches, different patterns based on initial findings
 4. **Read** — Open matching files (only after Glob/Grep identified relevance)
@@ -67,7 +67,7 @@ Follow this sequence for every exploration task:
 Before searching, understand the project:
 
 ```
-- For agent conventions and naming, check for and read from AGENTS.md, CLAUDE.md, TODO.md, INSTRUCTIONS.md
+- For agent conventions and naming, check for and read from CLAUDE.md, TODO.md, INSTRUCTIONS.md
 - Read README.md for project structure
 - List top-level directories to understand layout
 - Note any special directories (src/, lib/, test/, config/)
@@ -78,7 +78,7 @@ Before searching, understand the project:
 **Task:** "Find how authentication is implemented"
 
 ```
-1. ORIENT: Read AGENTS.md, list top-level dirs
+1. ORIENT: Read CLAUDE.md, list top-level dirs
 2. GLOB: **/*auth*.py, **/*auth*.js, **/auth/**/*.py
 3. GREP: "def authenticate", "class Auth", "import auth"
 4. NARROW: Focus on paths from step 2-3, grep for specific patterns
@@ -214,7 +214,7 @@ Return a compressed summary with this structure:
 
 1. **Start with the cheapest tool** — Glob first, Grep next, Read last. Let each search inform the next.
 
-2. **Orient first** — Read AGENTS.md, CLAUDE.md, TODO.md, INSTRUCTIONS.md, README.md before searching to understand project conventions.
+2. **Orient first** — Read CLAUDE.md, TODO.md, INSTRUCTIONS.md, README.md before searching to understand project conventions.
 
 3. **Return compressed summaries** — Key lines with line numbers, not full file dumps.
 
@@ -297,7 +297,7 @@ You explore and report — no delegation needed. Report findings back to your ca
 
 ## Before Reporting
 
-1. Oriented first — Checked AGENTS.md, CLAUDE.md, TODO.md, INSTRUCTIONS.md, README.md
+1. Oriented first — Checked CLAUDE.md, TODO.md, INSTRUCTIONS.md, README.md
 2. Used Glob/Grep before Read — Identified relevance before opening files
 3. Summary is compressed — Key lines with line numbers, not full files
 4. Confidence levels stated — Found, Inferred, Not Found, Not Searched

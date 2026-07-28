@@ -39,32 +39,43 @@
       }
     },
     "opencode": {
-      "apiKey": "{env:OPENCODE_ZEN_API_KEY}",
+      "options": {
+        "apiKey": "{env:OPENCODE_ZEN_API_KEY}"
+      },
       "models": {
         "qwen3.7-max": {
-          "name": "Q",
+          "name": "Brainier",
           "limit": { "context": 1000000, "output": 32768 }
         },
-        "qwen3.5-plus-limited": {
-          "id": "qwen3.5-plus-limited",
-          "name": "M",
-          "reasoning": false,
-          "reasoning_effort": "none",
-          "think": false,
-          "limit": { "context": 80000, "output": 16384 }
-        },
-        "qwen3.5-plus-full": {
-          "id": "qwen3.5-plus-full",
-          "name": "M",
-          "reasoning": false,
-          "reasoning_effort": "none",
-          "think": false,
+        "qwen3.7-plus": {
+          "id": "qwen3.7-plus",
+          "name": "Eyes",
           "limit": { "context": 1000000, "output": 16384 }
         },
         "gemini-3.5-flash-lite": {
           "name": "Don't be Evil",
           "reasoning": false,
           "limit": { "context": 40000, "output": 8192}
+        }
+      }
+    },
+    "openrouter": {
+      "apiKey": "{env:OPENROUTER_API_KEY}",
+      "models": {
+        "qwen3.7-plus": {
+            "id": "qwen/qwen3.7-plus",
+            "name": "Heart"
+        },
+        "mistral": {
+          "id": "mistralai/mistral-small-3.2-24b-instruct",
+          "name": "Mouth",
+          "limit": { "context": 80000, "output": 16384 },
+          "options": {
+            "provider": {
+              "order": ["mistral", "deepinfra"],
+              "allow_fallbacks": true
+            }
+          }
         }
       }
     }
@@ -84,8 +95,8 @@
     }
   },
   "subagent_depth": 2,
-  "model": "opencode/qwen3.5-plus-limited",
-  "small_model": "opencode/qwen3.5-plus-limited",
+  "model": "openrouter/mistral",
+  "small_model": "openrouter/mistral",
   "tools": {
     "websearch": false,
     "webfetch": false,

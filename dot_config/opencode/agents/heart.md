@@ -1,7 +1,7 @@
 ---
 description: Heart — Git Operations Agent. The version control specialist handling all git operations.
 mode: subagent
-model: opencode/qwen3.5-plus-full
+model: openrouter/qwen3.7-plus
 temperature: 0.1
 permission:
   task: deny

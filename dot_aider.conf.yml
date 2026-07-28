@@ -34,4 +34,4 @@ attribute-committer: true
 #   auto-test: true
 #   auto-lint: true
 #   read:
-#     - AGENTS.md
+#     - CLAUDE.md

@@ -1,8 +1,8 @@
 ---
 description: Pure router/delegator agent — the entry point that routes requests to specialized sub-agents without executing any work itself.
 mode: primary
-model: opencode/qwen3.5-plus-limited
-temperature: 0.3
+model: openrouter/mistral
+temperature: 0.2
 permission:
   task: allow
   read: deny
