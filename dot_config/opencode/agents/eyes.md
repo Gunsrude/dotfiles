@@ -4,21 +4,18 @@ mode: subagent
 model: openrouter/minimax-big
 temperature: 0.7
 permission:
-  task: deny
-  read: deny
-  list: deny
-  glob: deny
-  grep: deny
-  websearch: deny
-  webfetch: allow
+  read: allow
+  list: allow
+  glob: allow
+  grep: allow
   edit: deny
   write: deny
+  bash: deny
+  websearch: deny
+  webfetch: allow
   skill:
     "*": deny
-  bash:
-    "*": deny
-  brave_web_search: allow
-  brave_llm_context: allow
+  brave_*: allow
 ---
 
 # Eyes — Research Agent
