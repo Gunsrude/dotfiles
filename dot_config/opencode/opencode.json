@@ -64,11 +64,11 @@
       "models": {
         "qwen3.7-plus": {
             "id": "qwen/qwen3.7-plus",
-            "name": "Heart"
+            "name": "Commitment Issues"
         },
         "deepseek": {
           "id": "deepseek/deepseek-v4-flash",
-          "name": "Eyes",
+          "name": "Nosy Bitch",
           "options": {
             "provider": {
               "order": ["deepinfra", "venice"],
@@ -78,7 +78,7 @@
         },
         "kimi2.7": {
           "id": "moonshotai/kimi-k2.7-code",
-          "name": "Mouth",
+          "name": "Chatty Bitch",
           "limit": { "context": 80000, "output": 16384 },
           "options": {
             "provider": {
@@ -89,7 +89,7 @@
         },
         "mistral": {
           "id": "mistralai/mistral-small-3.2-24b-instruct",
-          "name": "Mouth",
+          "name": "Backup Bitch",
           "limit": { "context": 80000, "output": 16384 },
           "options": {
             "provider": {
