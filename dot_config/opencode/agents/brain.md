@@ -1,7 +1,7 @@
 ---
 description: Pure planning & architecture specialist. Produces plans, specs, and ADRs. Delegates exploration to legs, research to eyes. Reports findings and plans to Mouth for further processing.
 mode: subagent
-model: Stellar/coder
+model: Stellar/brainer
 temperature: 0.4
 permission:
   task: allow

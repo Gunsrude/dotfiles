@@ -15,15 +15,33 @@
             "output": 8192
           }
         },
+        "brainer": {
+          "id": "coder",
+          "name": "I brain for you",
+          "limit": {
+            "context": 131072,
+            "output": 16384
+          }
+        },
+        "spine": {
+          "id": "coder",
+          "name": "Slipped Disk",
+          "limit": {
+            "context": 131072,
+            "output": 16384
+          }
+        },
         "coder": {
+          "id": "coder",
           "name": "Coding Bitch",
           "limit": {
             "context": 131072,
             "output": 16384
           }
         },
-        "research": {
-          "name": "Researcher",
+        "butterfingers": {
+          "id": "coder",
+          "name": "Butter Fingers",
           "limit": {
             "context": 131072,
             "output": 16384
@@ -38,37 +56,32 @@
         }
       }
     },
-    "opencode": {
-      "options": {
-        "apiKey": "{env:OPENCODE_ZEN_API_KEY}"
-      },
-      "models": {
-        "qwen3.7-max": {
-          "name": "Brainier",
-          "limit": { "context": 1000000, "output": 32768 }
-        },
-        "qwen3.7-plus": {
-          "id": "qwen3.7-plus",
-          "name": "Eyes",
-          "limit": { "context": 1000000, "output": 16384 }
-        },
-        "gemini-3.5-flash-lite": {
-          "name": "Don't be Evil",
-          "reasoning": false,
-          "limit": { "context": 40000, "output": 8192}
-        }
-      }
-    },
     "openrouter": {
       "apiKey": "{env:OPENROUTER_API_KEY}",
       "models": {
-        "qwen3.7-plus": {
-            "id": "qwen/qwen3.7-plus",
-            "name": "Commitment Issues"
+        "deepseek-git": {
+          "id": "deepseek/deepseek-v4-flash",
+          "name": "Commitment Issues",
+          "options": {
+            "provider": {
+              "order": ["deepinfra", "venice"],
+              "allow_fallbacks": false
+            }
+          }
         },
-        "deepseek": {
+        "deepseek-research": {
           "id": "deepseek/deepseek-v4-flash",
           "name": "Nosy Bitch",
+          "options": {
+            "provider": {
+              "order": ["deepinfra", "venice"],
+              "allow_fallbacks": false
+            }
+          }
+        },
+        "deepseek-explorer": {
+          "id": "deepseek/deepseek-v4-flash",
+          "name": "Thicc",
           "options": {
             "provider": {
               "order": ["deepinfra", "venice"],

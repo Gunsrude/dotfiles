@@ -1,7 +1,7 @@
 ---
 description: Infrastructure and operations agent for system config, containers, services, deployment, and command execution.
 mode: subagent
-model: Stellar/coder
+model: Stellar/spine
 temperature: 0.2
 permission:
   task: allow

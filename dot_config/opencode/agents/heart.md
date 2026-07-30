@@ -1,7 +1,7 @@
 ---
 description: Heart — Git Operations Agent. The version control specialist handling all git operations.
 mode: subagent
-model: openrouter/deepseek
+model: openrouter/deepseek-git
 temperature: 0.1
 permission:
   task: deny
