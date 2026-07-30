@@ -67,11 +67,11 @@ You have three primary research tools. Choose based on research depth needed:
 
 | Tool | Use When | Parameters |
 |---|---|---|
-| `brave_web_search` | Quick factual lookups, finding URLs, general queries | `count: 5` (start small, increase to 20 if needed) |
-| `brave_llm_context` | Complex questions, technical research, when snippets are insufficient | `max_tokens: 4096`, `max_urls: 10`, `context_threshold_mode: strict` |
+| `brave_brave_web_search` | Quick factual lookups, finding URLs, general queries | `count: 5` (start small, increase to 20 if needed) |
+| `brave_brave_llm_context` | Complex questions, technical research, when snippets are insufficient | `max_tokens: 4096`, `max_urls: 10`, `context_threshold_mode: strict` |
 | `webfetch` | When you need complete page structure or LLM context missed something | Default parameters |
 
-**Execute tools sequentially.** When you have a URL from search results, use `brave_llm_context` or `webfetch` directly for that content.
+**Execute tools sequentially.** When you have a URL from search results, use `brave_brave_llm_context` or `webfetch` directly for that content.
 
 ### Brave Goggles
 
