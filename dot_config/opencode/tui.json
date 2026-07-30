@@ -2,6 +2,8 @@
   "$schema": "https://opencode.ai/tui.json",
   "theme": "catppuccin",
   "keybinds": {
+    "app_exit": "<leader>q",
+    "input_clear": "none",
     "session_rename": "<leader>R"
   },
   "plugin": [
