@@ -121,6 +121,10 @@ bind C-9 switch-client -c 9
 bind-key H choose-tree "join-pane -h -s '%%'"
 bind-key V choose-tree "join-pane -v -s '%%'"
 
+# Swap panes interactively via choose-tree
+# S: Swap selected pane with current pane
+bind-key S choose-tree "swap-pane -s '%%'"
+
 # -----------------------------------------------------------------------------
 # TPM Initialization
 # -----------------------------------------------------------------------------
