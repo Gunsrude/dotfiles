@@ -5,7 +5,10 @@ model: openrouter/deepseek
 temperature: 0.1
 permission:
   task: deny
-  read: deny
+  read: allow
+  list: allow
+  glob: allow
+  grep: allow
   edit: deny
   write: deny
   websearch: deny
@@ -18,8 +21,11 @@ permission:
     "git merge*": ask
     "git merge *": ask
     "git *": allow
-    "echo": allow
-    "grep": allow
+    "echo *": allow
+    "grep *": allow
+    "head *": allow
+    "less *": allow
+    "return *": allow
 ---
 
 # Heart — Git Operations Agent

@@ -16,6 +16,7 @@ permission:
   skill:
     "*": deny
   bash:
+    "git*": deny
     "*": allow
 ---
 

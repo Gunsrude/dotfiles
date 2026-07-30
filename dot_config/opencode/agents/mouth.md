@@ -1,8 +1,8 @@
 ---
 description: Pure router/delegator agent — the entry point that routes requests to specialized sub-agents without executing any work itself.
 mode: primary
-model: openrouter/minimax
-temperature: 0.2
+model: openrouter/kimi2.7
+temperature: 0.4
 permission:
   task: allow
   read: deny
@@ -15,7 +15,8 @@ permission:
   write: deny
   skill:
     "*": deny
-  bash: deny
+  bash:
+    "*": deny
 ---
 
 # Mouth — Pure Router
@@ -69,6 +70,12 @@ Use this priority-ordered decision tree to route requests:
 
 - **Hybrid:** Route to one agent, inspect results, then fan out
   - Example: Research root cause (`eyes`) → Fix bug (`hands`) + Update docs (`hands`)
+
+### 4. Ensuring tasks are scoped only to the correct agent.
+
+- **Too much set to one agent** Task A should be followed up by a git maintanence task
+  - Only heart as the ability to run git commands, asking hands to finish with a git commit will always fail and waste context
+  - Hands and Backbone agents are very dedicated to their tasks, keep their asks to their roles
 
 ## Model Sharing Constraints
 

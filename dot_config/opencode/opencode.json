@@ -68,8 +68,7 @@
         },
         "deepseek": {
           "id": "deepseek/deepseek-v4-flash",
-          "name": "Mouth",
-          "limit": { "context": 800000, "output": 32768 },
+          "name": "Eyes",
           "options": {
             "provider": {
               "order": ["deepinfra", "venice"],
@@ -77,23 +76,13 @@
             }
           }
         },
-        "minimax-big": {
-          "id": "minimax/minimax-m3",
-          "name": "Eyes",
-          "options": {
-            "provider": {
-              "order": ["venice", "deepinfra"],
-              "allow_fallbacks": false
-            }
-          }
-        },
-        "minimax": {
-          "id": "minimax/minimax-m3",
+        "kimi2.7": {
+          "id": "moonshotai/kimi-k2.7-code",
           "name": "Mouth",
           "limit": { "context": 80000, "output": 16384 },
           "options": {
             "provider": {
-              "order": ["venice", "deepinfra"],
+              "order": ["coreweave", "inceptron", "deepinfra"],
               "allow_fallbacks": false
             }
           }
@@ -116,6 +105,17 @@
   "watcher": {
     "ignore": ["node_modules/**", "dist/**", ".git/**"]
   },
+  "agent": {
+    "explore": {
+      "disable": true
+    },
+    "general": {
+      "disable": true
+    },
+    "scout": {
+      "disable": true
+    }
+  },
   "mcp": {
     "brave": {
       "type": "local",
@@ -127,8 +127,8 @@
     }
   },
   "subagent_depth": 2,
-  "model": "openrouter/minimax",
-  "small_model": "openrouter/minimax",
+  "model": "openrouter/deepseek",
+  "small_model": "openrouter/deepseek",
   "tools": {
     "websearch": false,
     "webfetch": false,

@@ -1,7 +1,7 @@
 ---
 description: Research subagent that finds external information, investigates root causes, looks up API behavior, checks documentation, and delivers definitive answers.
 mode: subagent
-model: openrouter/minimax-big
+model: openrouter/deepseek
 temperature: 0.7
 permission:
   read: allow
