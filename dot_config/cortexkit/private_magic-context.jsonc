@@ -2,19 +2,19 @@
   "$schema": "https://raw.githubusercontent.com/cortexkit/magic-context/master/assets/magic-context.schema.json",
   "enabled": true,
   "cache_ttl": "30m",
-  "execute_threshold_tokens": {
-    "default": 1000000,
-    "Stellar/full": 80000,
-    "Stellar/coder": 80000,
-    "Stellar/research": 80000,
-    "Stellar/dirtycode": 131072,
-    "openrouter/minimax": 80000
+  "execute_threshold_percentage": {
+    "default": 80,
+    "Stellar/full": 80,
+    "Stellar/coder": 80,
+    "Stellar/research": 80,
+    "Stellar/dirtycode": 80,
+    "openrouter/minimax": 80
   },
   "protected_tags": 20,
   "clear_reasoning_age": 30,
   "historian": {
     "model": "openrouter/mistral",
-    "fallback_models": [],
+    "fallback_models": ["openrouter/deepseek-explorer"],
     "temperature": 0.3,
     "two_pass": true
   },
@@ -23,10 +23,6 @@
   "commit_cluster_trigger": {
     "enabled": true,
     "min_clusters": 3
-  },
-  "compressor": {
-    "enabled": true,
-    "grace_compartments": 10
   },
   "temporal_awareness": true,
   "caveman_text_compression": {
@@ -56,20 +52,24 @@
   },
   "sidekick": {
     "model": "openrouter/mistral",
+    "fallback_models": ["openrouter/deepseek-explorer"],
     "temperature": 0.2,
     "timeout_ms": 30000
   },
   "dreamer": {
     "model": "Stellar/coder",
+    "fallback_models": ["openrouter/deepseek-explorer"],
     "temperature": 0.3,
-    "schedule": "0 2 * * *",
-    "max_runtime_minutes": 120,
-    "task_timeout_minutes": 20,
+    "disable": false,
     "tasks": {
-      "consolidate": {"enabled": true},
-      "verify": {"enabled": true},
-      "archive-stale": {"enabled": true},
-      "improve": {"enabled": true}
+      "map-memories": { "schedule": "0 2 * * *" },
+      "verify": { "schedule": "0 3 * * *" },
+      "verify-broad": { "schedule": "0 4 * * 0" },
+      "curate": { "schedule": "0 4 * * 0" },
+      "classify-memories": { "schedule": "0 6 * * *" },
+      "retrospective": { "schedule": "0 5 * * *" },
+      "maintain-docs": { "schedule": "" },
+      "review-user-memories": { "schedule": "0 3 * * *", "promotion_threshold": 3 }
     }
   }
 }

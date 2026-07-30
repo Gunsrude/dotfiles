@@ -115,6 +115,12 @@ bind C-7 switch-client -c 7
 bind C-8 switch-client -c 8
 bind C-9 switch-client -c 9
 
+# Join panes interactively via choose-tree
+# H: Join selected pane horizontally into current pane
+# V: Join selected pane vertically into current pane
+bind-key H choose-tree "join-pane -h -s '%%'"
+bind-key V choose-tree "join-pane -v -s '%%'"
+
 # -----------------------------------------------------------------------------
 # TPM Initialization
 # -----------------------------------------------------------------------------
