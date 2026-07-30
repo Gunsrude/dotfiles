@@ -10,8 +10,6 @@
 ~/.config/opencode/agents/team-lead.md
 ~/.config/opencode/agents/vision.md
 
-# Replaced by ~/.config/opencode/CLAUDE.md
-~/.config/opencode/AGENTS.md
 
 # Old magic-context files superseded by ~/.config/cortexkit/magic-context.jsonc
 ~/.config/opencode/magic-context.jsonc

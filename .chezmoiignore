@@ -1,4 +1,5 @@
 # Repository helper files - do not deploy to home directory
+AGENTS.md
 CLAUDE.md
 install.sh
 .opencode/
