@@ -1,35 +1,24 @@
-# Theme
-ZSH_THEMES_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh/themes"
-ZSH_THEME="oxide"
-source "$ZSH_THEMES_DIR/$ZSH_THEME.zsh-theme"
 
-# SetOpts
-setopt completealiases
-setopt inc_append_history
-setopt share_history
-setopt autocd
-setopt autopushd
-setopt completeinword
-setopt correct
-setopt histexpiredupsfirst
-setopt histignorealldups
-setopt histignorespace
-setopt interactive
+# SetOpts (bash equivalents using shopt)
+shopt -s complete_aliases
+shopt -s checkwinsize
+shopt -s autocd
+shopt -s cdable_vars
+shopt -s dirspell
+shopt -s expand_aliases
 
-# Keyboard
-bindkey -e
-source "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/zkbd"
-
-# History Setting
-HISTFILE=~/.zsh_history
+# History Settings
+HISTFILE=~/.bash_history
 HISTSIZE=10010
-SAVEHIST=10000
+HISTFILESIZE=10000
+HISTCONTROL=ignoreboth:erasedups
+HISTIGNORE="&:ls:cd:exit:history"
 
 # Completions
-zstyle ':completion:*' menu select
-autoload -Uz compinit && compinit
-autoload -U +X bashcompinit && bashcompinit
-autoload -Uz promptinit && promptinit
+# Bash completion is typically sourced from /etc/bash_completion or similar
+if [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+fi
 complete -o nospace -C /usr/bin/vault vault
 
 # MAKE environment
@@ -51,7 +40,7 @@ alias c=chezmoi
 
 # docker stuff
 dockerrm() {
-    docker container stop $1 && docker container rm $1
+    docker container stop "$1" && docker container rm "$1"
 }
 
 # Aliases
@@ -85,7 +74,7 @@ alias nano='nvim'
 export EDITOR=nvim
 alias :q='exit'
 alias e='nvim .'
-function vsclear {
+vsclear() {
     rm -f ~/.local/share/nvim/sessions/*
     rm -f ~/.local/state/nvim/sessions/*
     rm -rf ~/.cache/nvim
@@ -95,41 +84,35 @@ function vsclear {
 alias venv='python -m venv'
 
 # Other Stuff
-alias s='source ${HOME}/.zshrc'
-alias z='vim ${HOME}/.zshrc'
+alias s='source "${HOME}/.bashrc"'
+alias z='vim "${HOME}/.bashrc"'
 alias neofetch='neofetch --color_blocks off'
 alias powershell=pwsh
-alias pwsh=pwsh /nologo
-function mc {
-    mkdir $1
-    cd $1
+alias pwsh='pwsh /nologo'
+mc() {
+    mkdir "$1"
+    cd "$1"
 }
 alias fucking='sudo'
 
-function fuck() {
-  local app_name=$1
+fuck() {
+  local app_name="$1"
 
-  for i in $(ps aux | grep -i "$app_name" | grep -v grep | awk '{print $2}');do
-    sudo kill -9 $i
+  for i in $(ps aux | grep -i "$app_name" | grep -v grep | awk '{print $2}'); do
+    sudo kill -9 "$i"
   done
 }
 
 # PATH
 {{- if and (eq .chezmoi.os "darwin") (not .is_container) }}
-if [ -d "/opt/homebrew/bin" ]; then path+=("/opt/homebrew/bin"); fi
-if [ -d "${HOME}/Library/Python/3.9/bin" ]; then path+=("${HOME}/Library/Python/3.9/bin"); fi
+if [ -d "/opt/homebrew/bin" ]; then export PATH="/opt/homebrew/bin:$PATH"; fi
+if [ -d "${HOME}/Library/Python/3.9/bin" ]; then export PATH="${HOME}/Library/Python/3.9/bin:$PATH"; fi
 {{- end }}
-if [ -d "${HOME}/.local/bin" ]; then path+=("${HOME}/.local/bin"); fi
-if [ -d "${HOME}/bin" ]; then path+=("${HOME}/bin"); fi
+if [ -d "${HOME}/.local/bin" ]; then export PATH="${HOME}/.local/bin:$PATH"; fi
+if [ -d "${HOME}/bin" ]; then export PATH="${HOME}/bin:$PATH"; fi
 
 # Dummy API key for opencode-voice (ollama doesn't authenticate, but plugin requires a value)
 export OLLAMA_API_KEY="ollama"
-
-function set_terminal_title() {
-    local user_host="%n@%m"
-    local current_dir="%~"
-    print -Pn "\e]0;$user_host\a"
-}
 
 # Add workstation specific things like WSL settings
 if [[ -f ~/.zshrc.local ]]; then
@@ -141,8 +124,6 @@ if [[ -d "$HOME/.nvm" ]]; then
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 fi
 
-precmd_functions+=(set_terminal_title)
-
 # Opencode CLI
 if [[ -d "$HOME/.opencode/bin" ]]; then
     export PATH="$HOME/.opencode/bin:$PATH"
@@ -150,6 +131,5 @@ fi
 
 # Direnv
 if [[ -x "$(command -v direnv)" ]]; then
-    eval "$(direnv hook zsh)"
+    eval "$(direnv hook bash)"
 fi
-
