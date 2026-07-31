@@ -240,6 +240,14 @@ else
 fi
 
 # =============================================================================
+# Agent of Empires (AI agent framework)
+# =============================================================================
+if ! already aoe; then
+    echo "Installing Agent of Empires..."
+    curl -fsSL https://raw.githubusercontent.com/agent-of-empires/agent-of-empires/main/scripts/install.sh | bash
+fi
+
+# =============================================================================
 # tmux-tpm (tmux plugin manager)
 # =============================================================================
 TPM_DIR="$HOME/.tmux/plugins/tpm"
