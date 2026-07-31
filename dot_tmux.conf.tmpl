@@ -39,12 +39,15 @@ setw -g pane-base-index 1
 # Scrollback buffer
 set -g history-limit 50000
 
-# Default terminal
-set -g default-terminal "xterm-256color"
+# Default terminal with fallback
+if-shell "infocmp tmux-256color >/dev/null 2>&1" \
+    "set -g default-terminal 'tmux-256color'" \
+    "set -g default-terminal 'xterm-256color'"
 
 # Terminal overrides for true color support
-set -as terminal-overrides ",xterm-256color:Tc"
-set -as terminal-overrides ",xterm-256color:RGB"
+if-shell "infocmp tmux-256color >/dev/null 2>&1" \
+    "set -as terminal-overrides ',tmux-256color:Tc'; set -as terminal-overrides ',tmux-256color:RGB'" \
+    "set -as terminal-overrides ',xterm-256color:Tc'; set -as terminal-overrides ',xterm-256color:RGB'"
 
 # Prefix key (Ctrl-a instead of Ctrl-b)
 unbind C-b
