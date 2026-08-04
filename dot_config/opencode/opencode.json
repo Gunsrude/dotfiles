@@ -12,7 +12,15 @@
           "name": "Brain Gooder",
           "limit": {
             "context": 65536,
-            "output": 8192
+            "output": 16384
+          }
+        },
+        "talker": {
+          "id": "coder",
+          "name": "Wordsmith",
+          "limit": {
+            "context": 65536,
+            "output": 16384
           }
         },
         "brainer": {
