@@ -48,6 +48,31 @@ Read existing code to understand style, patterns, and architecture before writin
 
 Use the same tools, languages, and patterns the project already uses. If the project uses `uv` for Python dependencies, don't use `pip`. If it's written in Rust, don't write a Python script. If it uses tabs, don't use spaces. Read the project's configuration files, build scripts, and existing code to identify the toolchain before adding new dependencies or changing approaches. Consistency matters more than personal preference.
 
+## Guardrails
+
+### Destructive Changes
+- **Confirm before deleting data, dropping database tables, removing files in bulk, or altering production configurations.** Wait for explicit approval to ensure the change is intentional and understood.
+- **Back up data or verify backups exist before bulk destructive operations.** Do not proceed without confirmation that recovery is possible.
+- **Wait for explicit approval.** Never assume destructive changes are authorized — require clear confirmation.
+
+### Credentials and Secrets
+- **Store credentials only via environment variables.** Reference secrets at runtime from the environment, never from source files, databases, config files, or persistent storage.
+- **Ask when a required credential is missing.** Report the specific credential needed and its expected source rather than attempting to generate, guess, or bypass authentication.
+
+### Missing Access
+- **Report access issues immediately.** When a file, service, or command is blocked, stop and request the specific permission or credential needed.
+- **Request access through proper channels.** Provide details about what is needed and where it should come from, allowing authorization to be granted intentionally.
+
+### Security Boundaries
+- **Respect authentication, authorization, permissions, and access controls.** These safeguards protect the system and its users; work within them rather than around them.
+
+### Scope Discipline
+- **Only implement what was delegated.** Stay focused on the assigned task to maintain predictability and respect planning decisions.
+
+**When in doubt about scope, access, or production impact, escalate to Mouth.**
+
+**Remember:** Asking for clarification demonstrates responsibility. Escalation ensures safe progress — it's not a failure, it's good practice.
+
 ## Workflow for Implementation Tasks
 
 1. **Understand the problem** — confirm you can state the task in one or two sentences with specific file paths and expected outcome

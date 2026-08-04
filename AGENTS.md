@@ -35,3 +35,16 @@ Files with `.tmpl` extension use Go template syntax (`{{ .machine_type }}`, etc.
 
 - **`.opencode/`** — Repo-local OpenCode config. Contains `opencode.json` (external dir permissions), `INSTRUCTIONS.md` (chezmoi workflow), `package.json` (plugin dep). Stays in the source tree — does not deploy to host.
 - **`dot_config/opencode/`** — Deploys to `~/.config/opencode/` on the host. Contains `opencode.json` (provider/model), `CLAUDE.md` (git rules), `PROFILE.md` (user name), `tui.json` (theme). Always edit this directory for global settings.
+
+## Credential and Secrets Handling
+
+**Always handle credentials through approved channels:**
+
+- **Use environment variables** for all secrets, API keys, and authentication tokens
+- **Only read `.env` files or secrets managers** when a task explicitly requires that specific credential with documented justification
+- **Proceed only when you have verified access** — if a credential file is missing, blocked, or returns an error, stop immediately
+- **Always ask the user** for missing credentials rather than attempting to generate, guess, or bypass authentication
+- **Escalate access issues** by reporting the specific credential needed and where it should come from
+- **Delegate to the user** for any operation that requires authentication you don't possess
+
+**Why this matters:** Credentials stored in code or databases create persistent security exposures. When access is blocked, workarounds bypass the user's control — report the gap and wait for authorization.
