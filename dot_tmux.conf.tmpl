@@ -56,13 +56,16 @@ bind C-a send-prefix
 
 # Vi mode keys in copy/escape mode
 set-window-option -g mode-keys vi
-bind-key -T copy-mode-vi Enter send-keys -X copy-selection
+bind-key -T copy-mode-vi Enter send-keys -X copy-selection-and-cancel
+
+# Emergency toggle to disable mouse tracking if terminal starts spewing garbage sequences
+bind-key M set -g mouse off \; display-message "Mouse tracking disabled"
 
 # Fix Windows Terminal garbage characters on reconnect
 # escape-time 100 prevents OSC 10/11 color responses from leaking as input
 # Source: https://zenn.dev/saitogo/articles/22bb1c5b8c7e70
 set -g focus-events off
-set -sg escape-time 100
+set -sg escape-time 500
 
 # Clipboard settings
 set -g set-clipboard external
