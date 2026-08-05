@@ -26,6 +26,8 @@ permission:
     "head *": allow
     "less *": allow
     "return *": allow
+    "glab *": allow
+    "gh *": allow
 ---
 
 # Heart — Git Operations Agent
