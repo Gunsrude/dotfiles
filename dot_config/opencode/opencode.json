@@ -68,56 +68,31 @@
       "apiKey": "{env:OPENROUTER_API_KEY}",
       "models": {
         "deepseek-git": {
-          "id": "deepseek/deepseek-v4-flash",
-          "name": "Commitment Issues",
-          "options": {
-            "provider": {
-              "order": ["deepinfra", "venice"],
-              "allow_fallbacks": false
-            }
-          }
+          "id": "deepseek/deepseek-v4-flash-latest",
+          "name": "Commitment Issues"
         },
         "deepseek-research": {
-          "id": "deepseek/deepseek-v4-flash",
-          "name": "Nosy Bitch",
-          "options": {
-            "provider": {
-              "order": ["deepinfra", "venice"],
-              "allow_fallbacks": false
-            }
-          }
+          "id": "deepseek/deepseek-v4-flash-latest",
+          "name": "Nosy Bitch"
         },
         "deepseek-explorer": {
-          "id": "deepseek/deepseek-v4-flash",
-          "name": "Thicc",
-          "options": {
-            "provider": {
-              "order": ["deepinfra", "venice"],
-              "allow_fallbacks": false
-            }
-          }
+          "id": "deepseek/deepseek-v4-flash-latest",
+          "name": "Thicc"
+        },
+        "deepseek-chat": {
+          "id": "deepseek/deepseek-v4-flash-latest",
+          "name": "From China with Love",
+          "limit": { "context": 80000, "output": 16384 },
         },
         "kimi2.7": {
           "id": "moonshotai/kimi-k2.7-code",
           "name": "Chatty Bitch",
-          "limit": { "context": 80000, "output": 16384 },
-          "options": {
-            "provider": {
-              "order": ["coreweave", "inceptron", "deepinfra"],
-              "allow_fallbacks": false
-            }
-          }
+          "limit": { "context": 80000, "output": 16384 }
         },
         "mistral": {
           "id": "mistralai/mistral-small-3.2-24b-instruct",
           "name": "Backup Bitch",
-          "limit": { "context": 80000, "output": 16384 },
-          "options": {
-            "provider": {
-              "order": ["mistral", "deepinfra"],
-              "allow_fallbacks": true
-            }
-          }
+          "limit": { "context": 80000, "output": 16384 }
         }
       }
     }
@@ -148,8 +123,8 @@
     }
   },
   "subagent_depth": 2,
-  "model": "openrouter/deepseek",
-  "small_model": "openrouter/deepseek",
+  "model": "openrouter/deepseek-chat",
+  "small_model": "openrouter/deepseek-chat",
   "tools": {
     "websearch": false,
     "webfetch": false,
