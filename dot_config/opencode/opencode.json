@@ -68,21 +68,21 @@
       "apiKey": "{env:OPENROUTER_API_KEY}",
       "models": {
         "deepseek-git": {
-          "id": "deepseek/deepseek-v4-flash-latest",
+          "id": "deepseek/deepseek-v4-flash-0731",
           "name": "Commitment Issues"
         },
         "deepseek-research": {
-          "id": "deepseek/deepseek-v4-flash-latest",
+          "id": "deepseek/deepseek-v4-flash-0731",
           "name": "Nosy Bitch"
         },
         "deepseek-explorer": {
-          "id": "deepseek/deepseek-v4-flash-latest",
+          "id": "deepseek/deepseek-v4-flash-0731",
           "name": "Thicc"
         },
-        "deepseek-chat": {
-          "id": "deepseek/deepseek-v4-flash-latest",
+        "deepseek-talker": {
+          "id": "deepseek/deepseek-v4-flash-0731",
           "name": "From China with Love",
-          "limit": { "context": 80000, "output": 16384 },
+          "limit": { "context": 80000, "output": 16384 }
         },
         "kimi2.7": {
           "id": "moonshotai/kimi-k2.7-code",
@@ -92,6 +92,11 @@
         "mistral": {
           "id": "mistralai/mistral-small-3.2-24b-instruct",
           "name": "Backup Bitch",
+          "limit": { "context": 80000, "output": 16384 }
+        },
+        "qwen-main": {
+          "id": "qwen/qwen3.6-27b",
+          "name": "What a tool",
           "limit": { "context": 80000, "output": 16384 }
         }
       }
@@ -123,8 +128,8 @@
     }
   },
   "subagent_depth": 2,
-  "model": "openrouter/deepseek-chat",
-  "small_model": "openrouter/deepseek-chat",
+  "model": "openrouter/qwen-main",
+  "small_model": "openrouter/qwen-main",
   "tools": {
     "websearch": false,
     "webfetch": false,
