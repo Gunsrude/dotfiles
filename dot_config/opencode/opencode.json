@@ -82,22 +82,27 @@
         "deepseek-talker": {
           "id": "deepseek/deepseek-v4-flash-0731",
           "name": "From China with Love",
-          "limit": { "context": 80000, "output": 16384 }
+          "limit": { "context": 60000, "output": 16384 }
         },
         "kimi2.7": {
           "id": "moonshotai/kimi-k2.7-code",
           "name": "Chatty Bitch",
-          "limit": { "context": 80000, "output": 16384 }
+          "limit": { "context": 60000, "output": 16384 }
         },
         "mistral": {
           "id": "mistralai/mistral-small-3.2-24b-instruct",
           "name": "Backup Bitch",
-          "limit": { "context": 80000, "output": 16384 }
+          "limit": { "context": 60000, "output": 16384 }
         },
         "qwen-main": {
           "id": "qwen/qwen3.6-27b",
           "name": "What a tool",
-          "limit": { "context": 80000, "output": 16384 }
+          "limit": { "context": 60000, "output": 16384 }
+        },
+        "testing": {
+          "id": "z-ai/glm-4.7-flash",
+          "name": "I can't even",
+          "limit": { "context": 60000, "output": 16384 }
         }
       }
     }
@@ -128,8 +133,8 @@
     }
   },
   "subagent_depth": 2,
-  "model": "openrouter/qwen-main",
-  "small_model": "openrouter/qwen-main",
+  "model": "Stellar/coder",
+  "small_model": "openrouter/deepseek-explorer",
   "tools": {
     "websearch": false,
     "webfetch": false,
@@ -156,6 +161,6 @@
     "~/.config/opencode/PROFILE.md"
   ],
   "plugin": [
-    "@cortexkit/opencode-magic-context@latest"
+    "@cortexkit/opencode-magic-context@0.33.1"
   ]
 }

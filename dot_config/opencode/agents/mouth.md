@@ -1,8 +1,8 @@
 ---
 description: Pure router/delegator agent — the entry point that routes requests to specialized sub-agents without executing any work itself.
 mode: primary
-model: openrouter/kimi2.7
-temperature: 0.4
+model: openrouter/testing
+temperature: 0.3
 permission:
   task: allow
   read: deny
