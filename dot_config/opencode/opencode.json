@@ -89,6 +89,11 @@
           "name": "Chatty Bitch",
           "limit": { "context": 60000, "output": 16384 }
         },
+        "kimi3": {
+          "id": "moonshotai/kimi-k3",
+          "name": "Coffee Power",
+          "limit": { "context": 100000, "output": 16384 }
+        },
         "mistral": {
           "id": "mistralai/mistral-small-3.2-24b-instruct",
           "name": "Backup Bitch",
