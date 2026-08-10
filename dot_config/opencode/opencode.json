@@ -112,7 +112,7 @@
       }
     }
   },
-  "default_agent": "mouth",
+  "default_agent": "router",
   "watcher": {
     "ignore": ["node_modules/**", "dist/**", ".git/**"]
   },

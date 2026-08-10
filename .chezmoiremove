@@ -14,3 +14,12 @@
 # Old magic-context files superseded by ~/.config/cortexkit/magic-context.jsonc
 ~/.config/opencode/magic-context.jsonc
 ~/.config/opencode/magic-context.jsonc.MOVED_READPLEASE
+
+# Old body-part agent files - migrated to functional names
+~/.config/opencode/agents/mouth.md
+~/.config/opencode/agents/eyes.md
+~/.config/opencode/agents/legs.md
+~/.config/opencode/agents/hands.md
+~/.config/opencode/agents/backbone.md
+~/.config/opencode/agents/brain.md
+~/.config/opencode/agents/heart.md
