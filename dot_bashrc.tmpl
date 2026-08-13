@@ -1,6 +1,6 @@
 
 # SetOpts (bash equivalents using shopt)
-shopt -s complete_aliases
+shopt -s progcomp_alias
 shopt -s checkwinsize
 shopt -s autocd
 shopt -s cdable_vars
@@ -19,8 +19,6 @@ HISTIGNORE="&:ls:cd:exit:history"
 if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
-complete -o nospace -C /usr/bin/vault vault
-
 # MAKE environment
 {{ if eq .chezmoi.os "linux" }}
 MAKEFLAGS="-j$(nproc)"
@@ -72,7 +70,7 @@ alias vim='nvim'
 alias ni='nvim'
 alias nano='nvim'
 export EDITOR=nvim
-alias :q='exit'
+
 alias e='nvim .'
 vsclear() {
     rm -f ~/.local/share/nvim/sessions/*
