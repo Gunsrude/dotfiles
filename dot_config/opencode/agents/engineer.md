@@ -66,6 +66,8 @@ You do not have web access. When you need external information — command synta
 |---|---|
 | `quick-research` | Need external information (command syntax, config formats, service behavior, API docs) |
 
+Start a fresh session for every delegation. Omit the `task_id` parameter when calling the `task` tool.
+
 ## Failure Handling
 
 Track your attempts when commands fail or verification does not match expected state:

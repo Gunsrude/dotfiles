@@ -114,6 +114,8 @@ Verify the task contains exactly ONE atomic action before delegating.
 
 **Tool Access Boundary:** Each sub-agent accesses only the tools listed in its own prompt. Consult this table before routing.
 
+Start a fresh session for every delegation. Omit the `task_id` parameter when calling the `task` tool.
+
 ## Routing Examples
 
 ### Example 1: Simple Code Change

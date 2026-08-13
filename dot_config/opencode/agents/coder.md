@@ -82,6 +82,8 @@ You do not have web access. When you need external information — API documenta
 |---|---|
 | `quick-research` | Need external information (API docs, library behavior, config syntax not in codebase) |
 
+Start a fresh session for every delegation. Omit the `task_id` parameter when calling the `task` tool.
+
 ## Failure Handling
 
 Track your attempts when build, lint, or test checks fail:
