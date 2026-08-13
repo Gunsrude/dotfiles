@@ -11,7 +11,7 @@
         "full": {
           "name": "Brain Gooder",
           "limit": {
-            "context": 65536,
+            "context": 80000,
             "output": 16384
           }
         },
@@ -19,7 +19,7 @@
           "id": "coder",
           "name": "Wordsmith",
           "limit": {
-            "context": 65536,
+            "context": 100000,
             "output": 16384
           }
         },
@@ -91,8 +91,7 @@
         },
         "kimi3": {
           "id": "moonshotai/kimi-k3",
-          "name": "Coffee Power",
-          "limit": { "context": 100000, "output": 16384 }
+          "name": "Coffee Power"
         },
         "mistral": {
           "id": "mistralai/mistral-small-3.2-24b-instruct",
@@ -104,10 +103,9 @@
           "name": "What a tool",
           "limit": { "context": 60000, "output": 16384 }
         },
-        "testing": {
-          "id": "z-ai/glm-4.7-flash",
-          "name": "I can't even",
-          "limit": { "context": 60000, "output": 16384 }
+        "qwen-mem": {
+          "id": "qwen/qwen3-next-80b-a3b-instruct",
+          "name": "Memory Keeper"
         }
       }
     }
@@ -138,7 +136,7 @@
     }
   },
   "subagent_depth": 2,
-  "model": "Stellar/coder",
+  "model": "Stellar/full",
   "small_model": "openrouter/deepseek-explorer",
   "tools": {
     "websearch": false,
@@ -166,6 +164,7 @@
     "~/.config/opencode/PROFILE.md"
   ],
   "plugin": [
-    "@cortexkit/opencode-magic-context@0.33.1"
+    "@cortexkit/opencode-magic-context@0.33.6"
   ]
 }
+

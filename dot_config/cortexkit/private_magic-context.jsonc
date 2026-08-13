@@ -13,8 +13,8 @@
   "protected_tags": 20,
   "clear_reasoning_age": 30,
   "historian": {
-    "model": "openrouter/mistral",
-    "fallback_models": ["openrouter/deepseek-explorer"],
+    "model": "openrouter/qwen-mem",
+    "fallback_models": ["openrouter/mistral"],
     "temperature": 0.3,
     "two_pass": true
   },
@@ -51,13 +51,13 @@
     "api_key": "none"
   },
   "sidekick": {
-    "model": "openrouter/mistral",
-    "fallback_models": ["openrouter/deepseek-explorer"],
+    "model": "openrouter/qwen-mem",
+    "fallback_models": ["openrouter/mistral"],
     "temperature": 0.2,
     "timeout_ms": 30000
   },
   "dreamer": {
-    "model": "Stellar/coder",
+    "model": "openrouter/deepseek-explorer",
     "fallback_models": ["openrouter/deepseek-explorer"],
     "temperature": 0.3,
     "disable": false,
