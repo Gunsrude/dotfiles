@@ -7,7 +7,7 @@
     "session_rename": "<leader>R"
   },
   "plugin": [
-    "@cortexkit/opencode-magic-context@0.33.6",
+    "@cortexkit/opencode-magic-context@0.36.1",
     ["@renjfk/opencode-voice", {
       "endpoint": "http://dumblm.stellar.build:8080/v1",
       "model": "normalizer",
