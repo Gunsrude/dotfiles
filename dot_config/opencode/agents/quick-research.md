@@ -1,7 +1,7 @@
 ---
 description: Quick external research agent for web search, documentation lookup, and fast information gathering. Use for single-topic queries and rapid fact-checking.
 mode: subagent
-model: openrouter/deepseek-research
+model: openrouter/glm5-low
 temperature: 0.7
 permission:
   read: allow

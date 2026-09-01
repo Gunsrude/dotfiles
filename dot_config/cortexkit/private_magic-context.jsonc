@@ -13,10 +13,12 @@
   "protected_tags": 20,
   "clear_reasoning_age": 30,
   "historian": {
-    "model": "openrouter/qwen-mem",
-    "fallback_models": ["openrouter/mistral"],
     "temperature": 0.3,
-    "two_pass": true
+    "two_pass": true,
+    "opencode": {
+      "model": "openrouter/qwen-mem",
+      "fallback_models": ["openrouter/mistral"]
+    }
   },
   "historian_timeout_ms": 600000,
   "history_budget_percentage": 0.15,
@@ -57,10 +59,12 @@
     "timeout_ms": 30000
   },
   "dreamer": {
-    "model": "openrouter/deepseek-explorer",
-    "fallback_models": ["openrouter/deepseek-explorer"],
     "temperature": 0.3,
     "disable": false,
+    "opencode": {
+      "model": "openrouter/deepseek-explorer",
+      "fallback_models": ["openrouter/deepseek-explorer"]
+    },
     "tasks": {
       "map-memories": { "schedule": "0 2 * * *" },
       "verify": { "schedule": "0 3 * * *" },
