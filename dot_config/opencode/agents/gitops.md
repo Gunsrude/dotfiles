@@ -1,7 +1,7 @@
 ---
 description: Git operations and version control specialist handling branching, commits, pushes, merges, and repository state management.
 mode: subagent
-model: openrouter/deepseek-git
+model: openrouter/glm5-low
 temperature: 0.1
 permission:
   task: deny

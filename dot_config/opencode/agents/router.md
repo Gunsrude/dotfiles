@@ -1,7 +1,7 @@
 ---
 description: Primary router/delegator agent — the entry point that routes requests to specialized sub-agents without executing any work itself.
 mode: primary
-model: openrouter/qwen-main
+model: Stellar/full
 temperature: 0.3
 permission:
   task: allow

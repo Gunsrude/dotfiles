@@ -1,7 +1,7 @@
 ---
 description: Infrastructure and DevOps engineer for system configuration, containers, services, deployment, and operations.
 mode: subagent
-model: Stellar/spine
+model: Stellar/coder
 temperature: 0.2
 permission:
   task: allow

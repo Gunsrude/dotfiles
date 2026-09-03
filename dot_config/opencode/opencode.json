@@ -11,34 +11,11 @@
         "full": {
           "name": "Brain Gooder",
           "limit": {
-            "context": 80000,
-            "output": 16384
-          }
-        },
-        "talker": {
-          "id": "coder",
-          "name": "Wordsmith",
-          "limit": {
             "context": 100000,
             "output": 16384
           }
         },
-        "brainer": {
-          "id": "coder",
-          "name": "I brain for you",
-          "limit": {
-            "context": 131072,
-            "output": 16384
-          }
-        },
-        "spine": {
-          "id": "coder",
-          "name": "Slipped Disk",
-          "limit": {
-            "context": 131072,
-            "output": 16384
-          }
-        },
+
         "coder": {
           "id": "coder",
           "name": "Coding Bitch",
@@ -47,14 +24,7 @@
             "output": 16384
           }
         },
-        "butterfingers": {
-          "id": "coder",
-          "name": "Butter Fingers",
-          "limit": {
-            "context": 131072,
-            "output": 16384
-          }
-        },
+
         "dirtycode": {
             "name": "Dirty Coder",
             "limit": {
@@ -67,42 +37,7 @@
     "openrouter": {
       "apiKey": "{env:OPENROUTER_API_KEY}",
       "models": {
-        "deepseek-git": {
-          "id": "deepseek/deepseek-v4-flash-0731",
-          "name": "Commitment Issues"
-        },
-        "deepseek-research": {
-          "id": "deepseek/deepseek-v4-flash-0731",
-          "name": "Nosy Bitch"
-        },
-        "deepseek-explorer": {
-          "id": "deepseek/deepseek-v4-flash-0731",
-          "name": "Thicc"
-        },
-        "deepseek-talker": {
-          "id": "deepseek/deepseek-v4-flash-0731",
-          "name": "From China with Love",
-          "limit": { "context": 60000, "output": 16384 }
-        },
-        "kimi2.7": {
-          "id": "moonshotai/kimi-k2.7-code",
-          "name": "Chatty Bitch",
-          "limit": { "context": 60000, "output": 16384 }
-        },
-        "kimi3": {
-          "id": "moonshotai/kimi-k3",
-          "name": "Coffee Power"
-        },
-        "mistral": {
-          "id": "mistralai/mistral-small-3.2-24b-instruct",
-          "name": "Backup Bitch",
-          "limit": { "context": 60000, "output": 16384 }
-        },
-        "qwen-main": {
-          "id": "qwen/qwen3.6-27b",
-          "name": "What a tool",
-          "limit": { "context": 60000, "output": 16384 }
-        },
+
         "qwen-mem": {
           "id": "qwen/qwen3-next-80b-a3b-instruct",
           "name": "Memory Keeper"
@@ -114,7 +49,7 @@
           "options": {
             "reasoning": { "effort": "xhigh" }
           },
-          "limit": { "context": 60000, "output": 16384 }
+          "limit": { "context": 100000, "output": 16384 }
         },
         "glm5-low": {
           "id": "z-ai/glm-5.3-flash",
@@ -154,7 +89,7 @@
   },
   "subagent_depth": 2,
   "model": "Stellar/full",
-  "small_model": "openrouter/deepseek-explorer",
+  "small_model": "openrouter/glm5-low",
   "tools": {
     "websearch": false,
     "webfetch": false,

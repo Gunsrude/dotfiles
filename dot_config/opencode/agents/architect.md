@@ -1,7 +1,7 @@
 ---
 description: Architecture and planning specialist that produces technical specifications, design documents, and ADRs. Delegates exploration to file-explorer and research to quick-research.
 mode: subagent
-model: Stellar/brainer
+model: Stellar/coder
 temperature: 0.4
 permission:
   task: allow

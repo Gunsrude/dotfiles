@@ -6,9 +6,8 @@
     "default": 80,
     "Stellar/full": 80,
     "Stellar/coder": 80,
-    "Stellar/research": 80,
     "Stellar/dirtycode": 80,
-    "openrouter/minimax": 80
+
   },
   "protected_tags": 20,
   "clear_reasoning_age": 30,
@@ -16,8 +15,7 @@
     "temperature": 0.3,
     "two_pass": true,
     "opencode": {
-      "model": "openrouter/qwen-mem",
-      "fallback_models": ["openrouter/mistral"]
+      "model": "openrouter/qwen-mem"
     }
   },
   "historian_timeout_ms": 600000,
@@ -54,7 +52,6 @@
   },
   "sidekick": {
     "model": "openrouter/qwen-mem",
-    "fallback_models": ["openrouter/mistral"],
     "temperature": 0.2,
     "timeout_ms": 30000
   },
@@ -62,8 +59,7 @@
     "temperature": 0.3,
     "disable": false,
     "opencode": {
-      "model": "openrouter/deepseek-explorer",
-      "fallback_models": ["openrouter/deepseek-explorer"]
+      "model": "openrouter/glm5-low"
     },
     "tasks": {
       "map-memories": { "schedule": "0 2 * * *" },

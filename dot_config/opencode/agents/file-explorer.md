@@ -1,7 +1,7 @@
 ---
 description: Fast codebase file exploration agent for finding files, searching patterns, and understanding code structure and layout
 mode: subagent
-model: openrouter/deepseek-explorer
+model: openrouter/glm5-low
 temperature: 0.2
 permission:
   task: deny
