@@ -58,6 +58,15 @@
           "options": {
             "reasoning": { "effort": "low" }
           }
+        },
+        "glm5.3-max": {
+          "id": "z-ai/glm-5.3",
+          "name": "QA",
+          "reasoning": true,
+          "options": {
+            "reasoning": { "effort": "max" }
+          },
+          "limit": { "context": 262144, "output": 16384 }
         }
       }
     }

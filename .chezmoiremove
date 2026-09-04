@@ -1,7 +1,7 @@
 # Orphaned agent files removed from dot_config/opencode/agents/
+.config/opencode/agents/engineer.md
 .config/opencode/agents/git-agent.md
 .config/opencode/agents/junior-dev.md
-.config/opencode/agents/qa.md
 .config/opencode/agents/researcher.md
 .config/opencode/agents/security.md
 .config/opencode/agents/senior-dev.md

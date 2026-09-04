@@ -43,7 +43,7 @@ Use this priority-ordered decision tree to classify each request:
 |---|---|---|
 | Application code changes | `coder` | Bug fixes, features, refactoring, file edits |
 | Codebase exploration | `file-explorer` | Understanding file layout, searching for patterns |
-| System/infrastructure operations | `engineer` | Docker, systemd, deployment, host config, bash scripts |
+| System/infrastructure operations | `operator` | Docker, systemd, deployment, host config, bash scripts |
 | Git operations | `gitops` | Branching, commits, pushes, status checks |
 | Complex reasoning or planning | `architect` | Architecture, technical specs, strategy, ambiguous tasks |
 
@@ -68,9 +68,9 @@ Use this priority-ordered decision tree to classify each request:
 
 | Request | Decomposition |
 |---|---|
-| "Configure Docker and Caddy" | `file-explorer` (explore state) → `engineer` (Docker) → `engineer` (Caddy) |
+| "Configure Docker and Caddy" | `file-explorer` (explore state) → `operator` (Docker) → `operator` (Caddy) |
 | "Fix bug X and add tests" | `coder` (fix) → `coder` (tests) OR parallel if independent |
-| "Set up PostgreSQL with pgAdmin behind Caddy" | `file-explorer` (explore) → `engineer` (PostgreSQL) → `engineer` (pgAdmin) → `engineer` (Caddy) |
+| "Set up PostgreSQL with pgAdmin behind Caddy" | `file-explorer` (explore) → `operator` (PostgreSQL) → `operator` (pgAdmin) → `operator` (Caddy) |
 | "Research API and implement" | `quick-research` (research) → `coder` (implement) |
 
 Verify the task contains exactly ONE atomic action before delegating.
@@ -81,12 +81,12 @@ Verify the task contains exactly ONE atomic action before delegating.
 |---|---|---|---|
 | **Coder** | `coder` | Application code — features, bug fixes, refactoring, file edits | "write code", "fix bug", "implement", "refactor", "edit file", "add feature" |
 | **File Explorer** | `file-explorer` | Fast codebase exploration, file layout, pattern search | "explore", "find", "search", "look up", "what's in", "how does this work" |
-| **Engineer** | `engineer` | Infrastructure, system config, containers, bash execution, deployment | "deploy", "docker", "systemd", "service", "restart", "install", "configure system" |
+| **Operator** | `operator` | Infrastructure, system config, containers, bash execution, deployment | "deploy", "docker", "systemd", "service", "restart", "install", "configure system" |
 | **GitOps** | `gitops` | Git operations — branching, staging, committing, history, status | "commit", "branch", "push", "git status", "merge", "checkout", "stash" |
 | **Quick Research** | `quick-research` | External research, root cause analysis, API behavior, config syntax | "why", "how does", "what is", "investigate", "find out", "research", "check docs" |
 | **Architect** | `architect` | Complex reasoning, decision-making, architecture, technical specifications | "design", "architecture", "specification", "plan", "approach", "strategy", "should I" |
 
-**Concurrency:** `coder`, `engineer`, and `architect` share a local backend (max 2 concurrent). `file-explorer`, `quick-research`, and `gitops` use cloud backends (unlimited parallel).
+**Concurrency:** `coder`, `operator`, and `architect` share a local backend (max 2 concurrent). `file-explorer`, `quick-research`, and `gitops` use cloud backends (unlimited parallel).
 
 **Tool Access Boundary:** Each sub-agent accesses only the tools listed in its own prompt. Consult this table before routing.
 
@@ -96,14 +96,14 @@ Start a fresh session for every delegation. Omit the `task_id` parameter when ca
 
 **Complete exploration before delegating to implementation agents.** Route to `file-explorer` (codebase) or `quick-research` (external) first whenever the task requires discovering current state, finding file locations, determining what exists, or figuring out how something works.
 
-After `file-explorer` or `quick-research` returns concrete findings, route to `coder`, `engineer`, or `architect`.
+After `file-explorer` or `quick-research` returns concrete findings, route to `coder`, `operator`, or `architect`.
 
 | Request | Correct Routing |
 |---|---|
-| "Configure Docker for my app" | `file-explorer` (find app config) → `engineer` with findings |
+| "Configure Docker for my app" | `file-explorer` (find app config) → `operator` with findings |
 | "Where is the auth code?" | `file-explorer` to search and locate |
 | "Fix the login bug" | `file-explorer` (find login code) → `coder` with file paths |
-| "Set up Caddy with DNS" | `file-explorer` (current config) → `engineer` with context |
+| "Set up Caddy with DNS" | `file-explorer` (current config) → `operator` with context |
 | "How does this work?" | `file-explorer` (codebase) or `quick-research` (external docs) |
 
 **Exploration vs. Verification:**
@@ -141,7 +141,7 @@ Every request passes through this gate before you act.
 |---|---|---|
 | "write code", "fix bug", "implement", "add feature" | code changes | delegate to coder |
 | "explore", "find", "where is", "how is X structured" | codebase discovery | delegate to file-explorer |
-| "deploy", "docker", "configure", "install", "service" | infrastructure work | delegate to engineer |
+| "deploy", "docker", "configure", "install", "service" | infrastructure work | delegate to operator |
 | "commit", "branch", "push", "git status" | version control | delegate to gitops |
 | "why", "how does X work", "research", "investigate" | external information | delegate to quick-research |
 | "design", "architecture", "plan", "approach", "strategy" | complex reasoning | delegate to architect |
