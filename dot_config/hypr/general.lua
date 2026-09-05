@@ -1,0 +1,16 @@
+hl.config({
+    general = {
+        gaps_in = 5,
+        gaps_out = 10,
+        border_size = 2,
+        col = {
+            active_border = { gradient = true, colors = {"rgb(ff9d00)", "rgb(dd00ff)"}, angle = 45 },
+            inactive_border = "rgba(595959aa)",
+        },
+        layout = "master",
+        allow_tearing = false,
+    },
+    xwayland = {
+        force_zero_scaling = true,
+    },
+})
