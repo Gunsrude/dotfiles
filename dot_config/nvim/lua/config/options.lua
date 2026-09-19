@@ -60,3 +60,29 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 --     end,
 -- })
 
+-- Quit nvim when the window of the last real file buffer closes and only
+-- nvim-tree windows remain (fixes :wq leaving the tree fullscreen).
+-- The filereadable guard keeps `vim .` directory browsing unaffected: when
+-- nvim-tree hijacks the startup directory buffer, BufWinLeave fires for the
+-- directory buffer, which is not a readable file, so we never quit then.
+vim.api.nvim_create_autocmd("BufWinLeave", {
+  callback = function(args)
+    if vim.bo[args.buf].buftype ~= "" or vim.fn.filereadable(args.file) == 0 then
+      return
+    end
+    vim.schedule(function()
+      local wins = vim.api.nvim_list_wins()
+      if #wins == 0 then
+        return
+      end
+      for _, win in ipairs(wins) do
+        local buf = vim.api.nvim_win_get_buf(win)
+        if vim.bo[buf].filetype ~= "NvimTree" then
+          return
+        end
+      end
+      vim.cmd("quit")
+    end)
+  end,
+})
+

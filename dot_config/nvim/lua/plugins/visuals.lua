@@ -177,10 +177,10 @@ return {
   {
     "famiu/bufdelete.nvim",
     cmd = { "Bdelete", "Bwipeout" },
-    config = function()
-      vim.keymap.set("n", "<leader>bd", "<cmd>Bdelete<CR>", { desc = "Delete buffer (keep window)" })
-      vim.keymap.set("n", "<leader>bD", "<cmd>Bdelete!<CR>", { desc = "Force delete buffer" })
-    end,
+    keys = {
+      { "<leader>bd", "<cmd>Bdelete<CR>", desc = "Delete buffer (keep window)" },
+      { "<leader>bD", "<cmd>Bdelete!<CR>", desc = "Force delete buffer" },
+    },
   },
 }
 

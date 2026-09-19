@@ -9,7 +9,6 @@
 # -----------------------------------------------------------------------------
 set -g @plugin 'tmux-plugins/tpm'
 set -g @plugin 'catppuccin/tmux'
-set -g @plugin 'tmux-plugins/tmux-cpu'
 set -g @plugin 'tmux-plugins/tmux-battery'
 
 # -----------------------------------------------------------------------------
@@ -24,10 +23,6 @@ run '~/.tmux/plugins/catppuccin/tmux/catppuccin.tmux'
 # -----------------------------------------------------------------------------
 # User Preferences
 # -----------------------------------------------------------------------------
-
-# Terminal titles
-set -g set-titles on
-set -g set-titles-string '#S:#W'
 
 # Mouse support
 set -g mouse on
@@ -44,10 +39,15 @@ if-shell "infocmp tmux-256color >/dev/null 2>&1" \
     "set -g default-terminal 'tmux-256color'" \
     "set -g default-terminal 'xterm-256color'"
 
-# Terminal overrides for true color support
-if-shell "infocmp tmux-256color >/dev/null 2>&1" \
-    "set -as terminal-overrides ',tmux-256color:Tc'; set -as terminal-overrides ',tmux-256color:RGB'" \
-    "set -as terminal-overrides ',xterm-256color:Tc'; set -as terminal-overrides ',xterm-256color:RGB'"
+# True color + extended keys (CSI u) for the OUTER terminal
+# (kitty reports xterm-kitty; ssh clients typically report xterm-256color)
+set -as terminal-features ',xterm-kitty:RGB,xterm-256color:RGB'
+set -as terminal-features ',xterm-kitty:extkeys'
+
+# Forward modified keys (Shift+Enter, Alt+Backspace) to panes even when the
+# inner app does not opt in — fixes hit-or-miss Shift+Enter in TUI apps.
+set -s extended-keys always
+set -s extended-keys-format csi-u
 
 # Prefix key (Ctrl-a instead of Ctrl-b)
 unbind C-b
@@ -61,11 +61,9 @@ bind-key -T copy-mode-vi Enter send-keys -X copy-selection-and-cancel
 # Emergency toggle to disable mouse tracking if terminal starts spewing garbage sequences
 bind-key M set -g mouse off \; display-message "Mouse tracking disabled"
 
-# Fix Windows Terminal garbage characters on reconnect
-# escape-time 100 prevents OSC 10/11 color responses from leaking as input
-# Source: https://zenn.dev/saitogo/articles/22bb1c5b8c7e70
-set -g focus-events off
-set -sg escape-time 500
+# Low escape-time so multi-byte sequences (alt+backspace, shift+enter) are
+# not split/misread. Kitty sends these fast; 10ms is safe for local use.
+set -sg escape-time 10
 
 # Clipboard settings
 set -g set-clipboard external
@@ -74,7 +72,7 @@ set -g set-clipboard external
 # Status Bar Configuration
 # -----------------------------------------------------------------------------
 # Status bar refresh interval
-set -g status-interval 1
+set -g status-interval 5
 set -g status-justify left
 
 # Status bar configuration
@@ -84,10 +82,6 @@ set -g status-right-length 100
 # Status bar content
 set -g status-left ""
 set -g status-right "#{E:@catppuccin_status_application}"
-{{- if not .is_container }}
-set -agF status-right "#{E:@catppuccin_status_cpu}"
-set -agF status-right "#{E:@catppuccin_status_ram}"
-{{- end }}
 set -ag status-right "#{E:@catppuccin_status_session}"
 set -ag status-right "#{E:@catppuccin_status_uptime}"
 {{- if and (not .is_container) (index . "has_battery") }}
@@ -111,15 +105,15 @@ bind C-k resize-pane -U 5
 bind C-l resize-pane -R 5
 
 # Switch windows with Ctrl+number
-bind C-1 switch-client -c 1
-bind C-2 switch-client -c 2
-bind C-3 switch-client -c 3
-bind C-4 switch-client -c 4
-bind C-5 switch-client -c 5
-bind C-6 switch-client -c 6
-bind C-7 switch-client -c 7
-bind C-8 switch-client -c 8
-bind C-9 switch-client -c 9
+bind C-1 select-window -t :1
+bind C-2 select-window -t :2
+bind C-3 select-window -t :3
+bind C-4 select-window -t :4
+bind C-5 select-window -t :5
+bind C-6 select-window -t :6
+bind C-7 select-window -t :7
+bind C-8 select-window -t :8
+bind C-9 select-window -t :9
 
 # Join panes interactively via choose-tree
 # H: Join selected pane horizontally into current pane

@@ -19,6 +19,5 @@ keymap.set("n", "<S-l>", "<cmd>bnext<CR>", { desc = "Next buffer" })
 keymap.set("n", "<S-h>", "<cmd>bprevious<CR>", { desc = "Previous buffer" })
 keymap.set("n", "<leader>bb", "<cmd>Telescope buffers<CR>", { desc = "List buffers" })
 
---fuckit button
-keymap.set("n", "111", "<cmd>qa<CR>", { nowait = true, desc = "Quit Entirely" })
+keymap.set("n", "<leader>qq", "<cmd>qa<CR>", { desc = "Quit all" })
 
