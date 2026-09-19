@@ -149,6 +149,13 @@ install_desktop() {
     fi
 
     install_fonts
+
+    # sshd — offer on desktops too (openssh is installed in core)
+    if have systemctl && ask "${PREFIX} Enable SSH daemon? [y/N] "; then
+        local ssh_unit; ssh_unit=$([[ $DISTRO == "arch" ]] && echo "sshd.service" || echo "ssh.service")
+        echo "${PREFIX} Enabling ${ssh_unit}..."
+        $SUDO systemctl enable --now "$ssh_unit" || log_skip "sshd enable failed"
+    elif ! have systemctl; then log_skip "sshd — no systemctl"; fi
 }
 
 install_fonts() {
