@@ -1,0 +1,334 @@
+// niri config.kdl
+// Migrated from Hyprland 2026-09
+// Run `niri validate -c <file>` to check syntax before deploying.
+// In-session, run `niri msg action show-hotkey-overlay` (Mod+Shift+/ by default) to see all binds.
+
+// Ask apps to omit client-side decorations (title bars)
+prefer-no-csd
+
+// ============================================================
+// INPUT
+// ============================================================
+
+input {
+    // Focus follows mouse (Hyprland follow_mouse=1)
+    focus-follows-mouse
+
+    touchpad {
+        natural-scroll
+        tap
+        dwt
+    }
+}
+
+// ============================================================
+// LAYOUT & THEME
+// ============================================================
+
+layout {
+    // Compromise between Hyprland's gaps-in 5 / gaps-out 10
+    gaps 8
+
+    focus-ring {
+        off
+    }
+
+    border {
+        width 2
+        // Orange→purple gradient (was Hyprland col.active_border ff9d00 → dd00ff at 45deg)
+        active-gradient from="#ff9d00" to="#dd00ff" angle=45 relative-to="window"
+        // relative-to="workspace-view" would make the gradient flow across the whole monitor instead
+        inactive-color "#595959aa"
+    }
+
+    // New windows open full-width; Mod+M toggles half/full
+    default-column-width { proportion 1.0; }
+
+    preset-column-widths {
+        proportion 0.5
+        proportion 1.0
+    }
+}
+
+// No shadows (user's Hyprland shadow config was already commented out/dead)
+
+// ============================================================
+// ANIMATIONS
+// ============================================================
+
+// Porting Hyprland's slight-overshoot feel (bezier 0.05,0.9,0.1,1.05) to niri spring animations
+// Using underdamping (damping-ratio ~0.75) for slight bounce effect
+
+animations {
+    window-open {
+        spring damping-ratio=0.75 stiffness=800 epsilon=0.0001
+    }
+    window-close {
+        spring damping-ratio=0.75 stiffness=800 epsilon=0.0001
+    }
+    window-movement {
+        spring damping-ratio=0.75 stiffness=800 epsilon=0.0001
+    }
+    window-resize {
+        spring damping-ratio=0.75 stiffness=800 epsilon=0.0001
+    }
+    horizontal-view-movement {
+        spring damping-ratio=0.75 stiffness=800 epsilon=0.0001
+    }
+    workspace-switch {
+        spring damping-ratio=0.75 stiffness=800 epsilon=0.0001
+    }
+    overview-open-close {
+        spring damping-ratio=0.75 stiffness=800 epsilon=0.0001
+    }
+}
+
+// ============================================================
+// GESTURES
+// ============================================================
+
+// Disable the top-left overview hot corner
+gestures {
+    hot-corners {
+        off
+    }
+}
+
+// ============================================================
+// RECENT-WINDOWS SWITCHER
+// ============================================================
+
+// Alt-Tab recent windows switcher (live previews, MRU order).
+// These binds only work while holding a modifier; S cycles scope inside the switcher.
+recent-windows {
+    binds {
+        Alt+Tab         { next-window; }
+        Alt+Shift+Tab   { previous-window; }
+        Alt+grave       { next-window     filter="app-id"; }
+        Alt+Shift+grave { previous-window filter="app-id"; }
+    }
+}
+
+// ============================================================
+// WORKSPACES
+// ============================================================
+
+// Three pinned workspaces; the rest are created on demand via positional binds
+workspace "1"
+workspace "2"
+workspace "3"
+
+// ============================================================
+// WINDOW RULES
+// ============================================================
+
+// Global corner radius with clip-to-geometry
+window-rule {
+    geometry-corner-radius 10
+    clip-to-geometry true
+}
+
+// Inactive windows at opacity 0.95
+window-rule {
+    match is-active=false
+    opacity 0.95
+}
+
+// Thunar Wayland dialogs don't declare transient-for, so they tile as
+// full-width windows — float them instead.
+window-rule {
+    match app-id="^thunar$" title="Rename .*"
+    match app-id="^thunar$" title="Properties .*"
+    open-floating true
+    open-focused true
+}
+
+// Steam games (app-id steam_app_<id>) open fullscreen by default
+window-rule {
+    match app-id=r#"^steam_app_\d+$"#
+    open-fullscreen true
+}
+
+// Layer rules for blur (waybar, rofi, notifications)
+// Note: blur needs client-side ext-background-effect support or the layer-rule fallback.
+// The layer-rule fallback needs geometry-corner-radius set to look right.
+layer-rule {
+    match namespace="^waybar$"
+    background-effect {
+        blur true
+        noise 0.02
+        saturation 1.2
+    }
+}
+
+layer-rule {
+    match namespace="^rofi$"
+    background-effect {
+        blur true
+        noise 0.02
+        saturation 1.2
+    }
+}
+
+layer-rule {
+    match namespace="^notifications$"
+    background-effect {
+        blur true
+        noise 0.02
+        saturation 1.2
+    }
+}
+
+// ============================================================
+// BINDS
+// ============================================================
+
+binds {
+    // Hotkey overlay (built-in)
+    Mod+Shift+Slash { show-hotkey-overlay; }
+
+    // Core actions
+    Mod+Return { spawn "kitty"; }
+    Mod+Escape { close-window; }
+    Mod+Shift+Q { quit; }
+    // Maximize keeps gaps and waybar visible; true fullscreen on Shift for theater mode
+    Mod+F { maximize-column; }
+    Mod+Shift+F { fullscreen-window; }
+    Mod+Space { toggle-window-floating; }
+    // Primary launcher (original Hyprland command)
+    Mod+R { spawn "rofi" "-show" "drun" "-modi" "window"; }
+    // Overview
+    Mod+O { toggle-overview; }
+
+    // Lock — moved off Mod+L (old Hyprland collision); Mod+Shift+L is move-column-right
+    Mod+Shift+X { spawn "hyprlock"; }
+
+    // Navigation — focus
+    Mod+H { focus-column-left; }
+    Mod+L { focus-column-right; }
+    // Focus the window below/above in the column, or the workspace below/above
+    Mod+J { focus-window-or-workspace-down; }
+    Mod+K { focus-window-or-workspace-up; }
+
+    // Navigation — move columns/windows
+    Mod+Shift+H { move-column-left; }
+    Mod+Shift+L { move-column-right; }
+    Mod+Shift+K { move-window-up; }
+    Mod+Shift+J { move-window-down; }
+
+    // Workspace switching: 1-3 pinned by name, 4-0 positional (overflow = new workspace)
+    Mod+1 { focus-workspace "1"; }
+    Mod+2 { focus-workspace "2"; }
+    Mod+3 { focus-workspace "3"; }
+    Mod+4 { focus-workspace 4; }
+    Mod+5 { focus-workspace 5; }
+    Mod+6 { focus-workspace 6; }
+    Mod+7 { focus-workspace 7; }
+    Mod+8 { focus-workspace 8; }
+    Mod+9 { focus-workspace 9; }
+    Mod+0 { focus-workspace 10; }
+
+    // Move column to workspace: 1-3 pinned by name, 4-0 positional (overflow = new workspace)
+    Mod+Shift+1 { move-column-to-workspace "1"; }
+    Mod+Shift+2 { move-column-to-workspace "2"; }
+    Mod+Shift+3 { move-column-to-workspace "3"; }
+    Mod+Shift+4 { move-column-to-workspace 4; }
+    Mod+Shift+5 { move-column-to-workspace 5; }
+    Mod+Shift+6 { move-column-to-workspace 6; }
+    Mod+Shift+7 { move-column-to-workspace 7; }
+    Mod+Shift+8 { move-column-to-workspace 8; }
+    Mod+Shift+9 { move-column-to-workspace 9; }
+    Mod+Shift+0 { move-column-to-workspace 10; }
+
+    // Horizontal strip cycling with wrap-around
+    Mod+Tab { focus-column-right-or-first; }
+    Mod+Shift+Tab { focus-column-left-or-last; }
+
+    // Toggle column width between presets (half/full)
+    Mod+M { switch-preset-column-width; }
+
+    // Stack windows into a column / pull out (gives J/K vertical targets)
+    Mod+Comma { consume-window-into-column; }
+    Mod+Period { expel-window-from-column; }
+
+    // Move column to adjacent workspaces with arrow keys
+    // Hyprland e-1/e+1 maps to niri up/down respectively
+    // Left = e-1 = previous index = up (lower index)
+    // Right = e+1 = next index = down (higher index)
+    Mod+Shift+Left { move-column-to-workspace-up; }
+    Mod+Shift+Right { move-column-to-workspace-down; }
+
+    // Mouse wheel workspace navigation
+    Mod+WheelScrollDown cooldown-ms=150 { focus-workspace-down; }
+    Mod+WheelScrollUp cooldown-ms=150 { focus-workspace-up; }
+    Mod+Shift+WheelScrollDown cooldown-ms=150 { move-column-to-workspace-down; }
+    Mod+Shift+WheelScrollUp cooldown-ms=150 { move-column-to-workspace-up; }
+
+    // Mod+mouse-drag move/resize is built into niri by default — no binds needed
+
+    // Screenshots
+    Mod+S { screenshot-screen; }
+    Mod+Shift+S { screenshot; }
+    Mod+Ctrl+S { spawn-sh "grimblast save area ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png"; }  // needs grimblast package
+
+    // Media keys — bare keys, no modifier (standard desktop behavior)
+    XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-"; }
+    XF86AudioMute allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
+    XF86AudioMicMute allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+    XF86AudioPlay { spawn "playerctl" "play-pause"; }
+    XF86AudioPrev { spawn "playerctl" "previous"; }
+    XF86AudioNext { spawn "playerctl" "next"; }
+
+    // Brightness control — bare keys, no modifier
+    XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "set" "10%+"; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "set" "10%-"; }
+}
+
+// NOTE: Deliberately omitted (fossils/dead code):
+// - All app-launch binds except kitty
+// - togglegroup/group binds
+// - pseudo
+// - gamemode F1
+// - OBS sendshortcut
+// - Alt+1..0 workspace 21-30 set
+// - Mod+Ctrl+1..4 move-workspace-to-monitor (monitor refs in niri are by output name)
+//   To add monitor binds, use: move-workspace-to-monitor "DP-1" style, or focus-monitor-left/right
+
+// ============================================================
+// STARTUP
+// ============================================================
+
+spawn-at-startup "gnome-keyring-daemon" "--start" "--components=secrets"
+spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
+spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP"
+spawn-at-startup "pavucontrol-qt" "--start-minimized"
+spawn-at-startup "wpaperd"
+spawn-at-startup "dunst"
+spawn-at-startup "waybar"
+spawn-at-startup "hypridle"
+
+// xwayland-satellite: niri auto-spawns/manages it since 25.08 (requires xwayland-satellite >= 0.7 in PATH).
+// Just install the package — no spawn-at-startup needed.
+
+// NOTE: Do NOT spawn ags (confirmed fossil, removed)
+// NOTE: Do NOT spawn hyprshade or gamemode.sh (dropped)
+
+// ============================================================
+// ENVIRONMENT
+// ============================================================
+
+environment {
+    XDG_SESSION_TYPE "wayland"
+    XDG_CURRENT_DESKTOP "niri"  // changed from Hyprland
+    XDG_SESSION_DESKTOP "niri"
+    XCURSOR_SIZE "24"
+    GDK_BACKEND "wayland,x11"
+    QT_QPA_PLATFORM "wayland;xcb"
+    SDL_VIDEODRIVER "wayland"
+    CLUTTER_BACKEND "wayland"
+    QT_AUTO_SCREEN_SCALE_FACTOR "1"
+    QT_WAYLAND_DISABLE_WINDOWDECORATION "1"
+    QT_QPA_PLATFORMTHEME "qt5ct"
+    MOZ_ENABLE_WAYLAND "1"
+}

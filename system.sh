@@ -418,6 +418,68 @@ configure_ly() {
     fi
 }
 
+# ─── sshd: GitHub AuthorizedKeys ──────────────────────────────────────────────
+
+configure_sshd_github_keys() {
+    echo ""
+    echo "${PREFIX} === CONFIGURE sshd (GitHub keys) ==="
+
+    # Guard: skip if sshd is not present
+    if ! [[ -x /usr/bin/sshd ]] && [[ ! -f /etc/ssh/sshd_config ]]; then
+        log_skip "sshd GitHub keys — no sshd installed"
+        return
+    fi
+
+    local changed=false
+
+    # Step 2: Ensure Include directive in sshd_config
+    if ! $SUDO grep -q '^Include /etc/ssh/sshd_config\.d' /etc/ssh/sshd_config 2>/dev/null; then
+        $SUDO sed -i '1i Include /etc/ssh/sshd_config.d/*.conf' /etc/ssh/sshd_config
+        echo "  ${PREFIX} ADD: Include directive in sshd_config"
+        changed=true
+    else
+        echo "  ${PREFIX} OK: Include directive present"
+    fi
+
+    # Step 3: Ensure drop-in config
+    local dropin="/etc/ssh/sshd_config.d/10-github-keys.conf"
+
+    if [[ -f "$dropin" ]] && $SUDO grep -q 'AuthorizedKeysCommandUser nobody' "$dropin" 2>/dev/null; then
+        echo "  ${PREFIX} OK: drop-in config present"
+    else
+        $SUDO bash -c "cat > '$dropin'" <<'SSHEOF'
+# GitHub public keys for Gunsrude (managed by system.sh)
+AuthorizedKeysCommand /usr/bin/curl -fsSL --max-time 10 https://github.com/Gunsrude.keys
+AuthorizedKeysCommandUser nobody
+SSHEOF
+        echo "  ${PREFIX} ADD: $dropin"
+        changed=true
+    fi
+
+    # Step 4: Validate config
+    if ! $SUDO sshd -t 2>/dev/null; then
+        echo "  ${PREFIX} ERROR: sshd -t failed — not reloading"
+        return
+    fi
+
+    # Step 5: Reload only if something changed and sshd is running
+    if [[ "$changed" != "true" ]]; then
+        echo "  ${PREFIX} OK: no changes, skipping reload"
+        return
+    fi
+
+    if ! systemctl is-active --quiet sshd; then
+        log_skip "sshd not running — config applies on next start"
+        return
+    fi
+
+    if $SUDO systemctl reload sshd 2>/dev/null; then
+        echo "  ${PREFIX} Reloaded sshd"
+    else
+        log_skip "sshd reload failed"
+    fi
+}
+
 # ─── Summary ───────────────────────────────────────────────────────────────────
 
 print_summary() {
@@ -488,8 +550,10 @@ main() {
 
     if [[ "$ROLE" == "desktop" ]] && pkg_installed ly; then configure_ly; fi
 
+    configure_sshd_github_keys
+
     print_summary
-    chezmoi_handoff
+    # chezmoi_handoff
 }
 
 main "$@"

@@ -6,14 +6,12 @@
     "default": 80,
     "Stellar/full": 80,
     "Stellar/coder": 80,
-    "Stellar/dirtycode": 80,
-
+    "Stellar/dirtycode": 80
   },
-  "protected_tags": 20,
   "clear_reasoning_age": 30,
   "historian": {
-    "temperature": 0.3,
     "two_pass": true,
+    "temperature": 0.3,
     "opencode": {
       "model": "openrouter/qwen-mem"
     }
@@ -50,14 +48,9 @@
     "endpoint": "http://llm.stellar.build:8080/v1",
     "api_key": "none"
   },
-  "sidekick": {
-    "model": "openrouter/qwen-mem",
-    "temperature": 0.2,
-    "timeout_ms": 30000
-  },
   "dreamer": {
-    "temperature": 0.3,
     "disable": false,
+    "temperature": 0.3,
     "opencode": {
       "model": "openrouter/glm5-low"
     },

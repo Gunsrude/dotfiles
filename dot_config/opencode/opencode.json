@@ -125,7 +125,7 @@
     "~/.config/opencode/PROFILE.md"
   ],
   "plugin": [
-    "@cortexkit/opencode-magic-context@0.40.1"
+    "@cortexkit/opencode-magic-context@0.42.6"
   ]
 }
 
