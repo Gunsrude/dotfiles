@@ -22,3 +22,12 @@
 .config/opencode/agents/backbone.md
 .config/opencode/agents/brain.md
 .config/opencode/agents/heart.md
+
+# Misc 
+.aider.conf.yml
+.aider.model.metadata.json
+.aider.model.settings.yml
+
+# Stale agent renamed from operator to runner
+.config/opencode/agents/operator.md
+

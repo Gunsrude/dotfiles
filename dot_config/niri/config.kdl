@@ -195,7 +195,7 @@ binds {
     Mod+F { maximize-column; }
     Mod+Shift+F { fullscreen-window; }
     Mod+Space { toggle-window-floating; }
-    // Primary launcher (original Hyprland command)
+    // Primary launcher
     Mod+R { spawn "rofi" "-show" "drun" "-modi" "window"; }
     // Overview
     Mod+O { toggle-overview; }
@@ -259,12 +259,10 @@ binds {
     Mod+Shift+Right { move-column-to-workspace-down; }
 
     // Mouse wheel workspace navigation
-    Mod+WheelScrollDown cooldown-ms=150 { focus-workspace-down; }
-    Mod+WheelScrollUp cooldown-ms=150 { focus-workspace-up; }
-    Mod+Shift+WheelScrollDown cooldown-ms=150 { move-column-to-workspace-down; }
-    Mod+Shift+WheelScrollUp cooldown-ms=150 { move-column-to-workspace-up; }
-
-    // Mod+mouse-drag move/resize is built into niri by default — no binds needed
+    Mod+WheelScrollDown cooldown-ms=10 { focus-workspace-down; }
+    Mod+WheelScrollUp cooldown-ms=10 { focus-workspace-up; }
+    Mod+Shift+WheelScrollDown cooldown-ms=10 { focus-column-right; }
+    Mod+Shift+WheelScrollUp cooldown-ms=10 { focus-column-left; }
 
     // Screenshots
     Mod+S { screenshot-screen; }
@@ -285,16 +283,6 @@ binds {
     XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "set" "10%-"; }
 }
 
-// NOTE: Deliberately omitted (fossils/dead code):
-// - All app-launch binds except kitty
-// - togglegroup/group binds
-// - pseudo
-// - gamemode F1
-// - OBS sendshortcut
-// - Alt+1..0 workspace 21-30 set
-// - Mod+Ctrl+1..4 move-workspace-to-monitor (monitor refs in niri are by output name)
-//   To add monitor binds, use: move-workspace-to-monitor "DP-1" style, or focus-monitor-left/right
-
 // ============================================================
 // STARTUP
 // ============================================================
@@ -308,19 +296,13 @@ spawn-at-startup "dunst"
 spawn-at-startup "waybar"
 spawn-at-startup "hypridle"
 
-// xwayland-satellite: niri auto-spawns/manages it since 25.08 (requires xwayland-satellite >= 0.7 in PATH).
-// Just install the package — no spawn-at-startup needed.
-
-// NOTE: Do NOT spawn ags (confirmed fossil, removed)
-// NOTE: Do NOT spawn hyprshade or gamemode.sh (dropped)
-
 // ============================================================
 // ENVIRONMENT
 // ============================================================
 
 environment {
     XDG_SESSION_TYPE "wayland"
-    XDG_CURRENT_DESKTOP "niri"  // changed from Hyprland
+    XDG_CURRENT_DESKTOP "niri"
     XDG_SESSION_DESKTOP "niri"
     XCURSOR_SIZE "24"
     GDK_BACKEND "wayland,x11"

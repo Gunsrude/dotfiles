@@ -100,7 +100,7 @@ install_core() {
 
     install_pkgs false \
         git curl zsh tmux ripgrep fzf bat direnv unzip tar \
-        openssh man-db git-lfs pciutils
+        openssh man-db git-lfs pciutils rsync
 
     # fd has different package names per distro
     if [[ $DISTRO == "arch" ]]; then
