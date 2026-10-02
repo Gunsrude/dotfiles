@@ -22,7 +22,13 @@
           "limit": {
             "context": 131072,
             "output": 16384
-          }
+          },
+          "variants": [
+            { "id": "fast", "body": { "reasoning_effort": "low", "reasoning_budget_tokens": 4096 } },
+            { "id": "balanced", "body": { "reasoning_effort": "medium", "reasoning_budget_tokens": 8192 } },
+            { "id": "xhigh", "body": { "reasoning_effort": "xhigh", "reasoning_budget_tokens": 16384 } },
+            { "id": "none", "body": { "reasoning_effort": "none" } }
+          ]
         },
 
         "dirtycode": {
