@@ -4,7 +4,7 @@ mode: subagent
 model: openrouter/glm5-low
 temperature: 0.2
 permission:
-  task: deny
+  task: allow
   read: allow
   list: allow
   glob: allow
