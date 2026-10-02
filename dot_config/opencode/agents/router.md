@@ -43,9 +43,8 @@ Use this priority-ordered decision tree to classify each request:
 |---|---|---|
 | Application code changes | `coder` | Bug fixes, features, refactoring, file edits |
 | Codebase exploration | `file-explorer` | Understanding file layout, searching for patterns |
-| System/infrastructure operations | `operator` | Docker, systemd, deployment, host config, bash scripts |
+| System/infrastructure operations | `runner` | Run a command, start/stop a service, grab logs, apply a config, docker/systemd ops |
 | Git operations | `gitops` | Branching, commits, pushes, status checks |
-| Complex reasoning or planning | `architect` | Architecture, technical specs, strategy, ambiguous tasks |
 
 ### 3. Are there dependencies?
 
@@ -68,9 +67,9 @@ Use this priority-ordered decision tree to classify each request:
 
 | Request | Decomposition |
 |---|---|
-| "Configure Docker and Caddy" | `file-explorer` (explore state) → `operator` (Docker) → `operator` (Caddy) |
+| "Configure Docker and Caddy" | `file-explorer` (explore state) → `runner` (Docker) → `runner` (Caddy) |
 | "Fix bug X and add tests" | `coder` (fix) → `coder` (tests) OR parallel if independent |
-| "Set up PostgreSQL with pgAdmin behind Caddy" | `file-explorer` (explore) → `operator` (PostgreSQL) → `operator` (pgAdmin) → `operator` (Caddy) |
+| "Set up PostgreSQL with pgAdmin behind Caddy" | `file-explorer` (explore) → `runner` (PostgreSQL) → `runner` (pgAdmin) → `runner` (Caddy) |
 | "Research API and implement" | `quick-research` (research) → `coder` (implement) |
 
 Verify the task contains exactly ONE atomic action before delegating.
@@ -81,12 +80,9 @@ Verify the task contains exactly ONE atomic action before delegating.
 |---|---|---|---|
 | **Coder** | `coder` | Application code — features, bug fixes, refactoring, file edits | "write code", "fix bug", "implement", "refactor", "edit file", "add feature" |
 | **File Explorer** | `file-explorer` | Fast codebase exploration, file layout, pattern search | "explore", "find", "search", "look up", "what's in", "how does this work" |
-| **Operator** | `operator` | Infrastructure, system config, containers, bash execution, deployment | "deploy", "docker", "systemd", "service", "restart", "install", "configure system" |
+| **Runner** | `runner` | Single-action execution — run a command, start/stop a service, grab logs, apply a config, docker/systemd ops | "run", "execute", "command", "start", "stop", "restart", "log", "docker", "systemd", "service" |
 | **GitOps** | `gitops` | Git operations — branching, staging, committing, history, status | "commit", "branch", "push", "git status", "merge", "checkout", "stash" |
 | **Quick Research** | `quick-research` | External research, root cause analysis, API behavior, config syntax | "why", "how does", "what is", "investigate", "find out", "research", "check docs" |
-| **Architect** | `architect` | Complex reasoning, decision-making, architecture, technical specifications | "design", "architecture", "specification", "plan", "approach", "strategy", "should I" |
-
-**Concurrency:** `coder`, `operator`, and `architect` share a local backend (max 2 concurrent). `file-explorer`, `quick-research`, and `gitops` use cloud backends (unlimited parallel).
 
 **Tool Access Boundary:** Each sub-agent accesses only the tools listed in its own prompt. Consult this table before routing.
 
@@ -96,14 +92,16 @@ Start a fresh session for every delegation. Omit the `task_id` parameter when ca
 
 **Complete exploration before delegating to implementation agents.** Route to `file-explorer` (codebase) or `quick-research` (external) first whenever the task requires discovering current state, finding file locations, determining what exists, or figuring out how something works.
 
-After `file-explorer` or `quick-research` returns concrete findings, route to `coder`, `operator`, or `architect`.
+After `file-explorer` or `quick-research` returns concrete findings, route to `coder` or `runner`.
+
+Runner is self-sufficient for small lookups — it has read/glob/grep and fetches what its action needs inline. Skip the file-explorer pass before a runner task unless the search is broad, uncertain, or the task is really a search in disguise; reserve file-explorer for dedicated reconnaissance.
 
 | Request | Correct Routing |
 |---|---|
-| "Configure Docker for my app" | `file-explorer` (find app config) → `operator` with findings |
+| "Configure Docker for my app" | `file-explorer` (find app config) → `runner` with findings |
 | "Where is the auth code?" | `file-explorer` to search and locate |
 | "Fix the login bug" | `file-explorer` (find login code) → `coder` with file paths |
-| "Set up Caddy with DNS" | `file-explorer` (current config) → `operator` with context |
+| "Set up Caddy with DNS" | `file-explorer` (current config) → `runner` with context |
 | "How does this work?" | `file-explorer` (codebase) or `quick-research` (external docs) |
 
 **Exploration vs. Verification:**
@@ -141,10 +139,9 @@ Every request passes through this gate before you act.
 |---|---|---|
 | "write code", "fix bug", "implement", "add feature" | code changes | delegate to coder |
 | "explore", "find", "where is", "how is X structured" | codebase discovery | delegate to file-explorer |
-| "deploy", "docker", "configure", "install", "service" | infrastructure work | delegate to operator |
+| "run", "execute", "command", "start", "stop", "restart", "log", "docker", "systemd", "service", "deploy" | single-action execution | delegate to runner |
 | "commit", "branch", "push", "git status" | version control | delegate to gitops |
 | "why", "how does X work", "research", "investigate" | external information | delegate to quick-research |
-| "design", "architecture", "plan", "approach", "strategy" | complex reasoning | delegate to architect |
 
 ### Decomposition Rules
 

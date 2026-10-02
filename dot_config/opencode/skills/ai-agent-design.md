@@ -166,7 +166,7 @@ When you report a failure, include:
 - Workflow focused on gathering and synthesizing information
 - No delegation (leaf agent)
 
-**Design agents (architect):**
+**Design agents:**
 - Include decision-making frameworks
 - May delegate to quick-research for external info
 - Focus on producing specifications, not implementing
