@@ -1,8 +1,3 @@
-// niri config.kdl
-// Migrated from Hyprland 2026-09
-// Run `niri validate -c <file>` to check syntax before deploying.
-// In-session, run `niri msg action show-hotkey-overlay` (Mod+Shift+/ by default) to see all binds.
-
 // Ask apps to omit client-side decorations (title bars)
 prefer-no-csd
 
@@ -11,8 +6,10 @@ prefer-no-csd
 // ============================================================
 
 input {
-    // Focus follows mouse (Hyprland follow_mouse=1)
-    focus-follows-mouse
+    // Cap how far the view may scroll to reveal a window on mouse-focus, so a
+    // large window can't yank its neighbor fully off-screen and trap the cursor.
+    // 0% = only focus windows already fully visible; higher = allow more scroll.
+    focus-follows-mouse max-scroll-amount="0%"
 
     touchpad {
         natural-scroll
@@ -41,8 +38,8 @@ layout {
         inactive-color "#595959aa"
     }
 
-    // New windows open full-width; Mod+M toggles half/full
-    default-column-width { proportion 1.0; }
+    // New windows open half-width; Mod+M toggles half/full
+    default-column-width { proportion 0.5; }
 
     preset-column-widths {
         proportion 0.5
@@ -258,11 +255,11 @@ binds {
     Mod+Shift+Left { move-column-to-workspace-up; }
     Mod+Shift+Right { move-column-to-workspace-down; }
 
-    // Mouse wheel workspace navigation
-    Mod+WheelScrollDown cooldown-ms=10 { focus-workspace-down; }
-    Mod+WheelScrollUp cooldown-ms=10 { focus-workspace-up; }
-    Mod+Shift+WheelScrollDown cooldown-ms=10 { focus-column-right; }
-    Mod+Shift+WheelScrollUp cooldown-ms=10 { focus-column-left; }
+    // Mouse wheel navigation: Mod = columns (left/right), Mod+Shift = workspaces (up/down)
+    Mod+WheelScrollDown cooldown-ms=10 { focus-column-right; }
+    Mod+WheelScrollUp cooldown-ms=10 { focus-column-left; }
+    Mod+Shift+WheelScrollDown cooldown-ms=10 { focus-workspace-down; }
+    Mod+Shift+WheelScrollUp cooldown-ms=10 { focus-workspace-up; }
 
     // Screenshots
     Mod+S { screenshot-screen; }
