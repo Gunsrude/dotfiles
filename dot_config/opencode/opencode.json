@@ -16,9 +16,10 @@
           },
           "variants": {
             "none": { "reasoningEffort": "none" },
-            "low": { "reasoningEffort": "low" },
-            "medium": { "reasoningEffort": "medium" },
-            "xhigh": { "reasoningEffort": "xhigh" }
+            "low": { "reasoningEffort": "low", "reasoning_budget_tokens": 2048 },
+            "medium": { "reasoningEffort": "medium", "reasoning_budget_tokens": 4096 },
+            "high": { "reasoningEffort": "high", "reasoning_budget_tokens": 8192 },
+            "xhigh": { "reasoningEffort": "xhigh", "reasoning_budget_tokens": 8192 }
           }
         },
 
@@ -135,7 +136,7 @@
     "~/.config/opencode/PROFILE.md"
   ],
   "plugin": [
-    "@cortexkit/opencode-magic-context@0.42.6"
+    "@cortexkit/opencode-magic-context@0.45.0"
   ]
 }
 
