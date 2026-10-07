@@ -13,7 +13,7 @@
     "two_pass": true,
     "temperature": 0.3,
     "opencode": {
-      "model": "openrouter/qwen-mem"
+      "model": "openrouter/glm5-low"
     }
   },
   "historian_timeout_ms": 600000,
