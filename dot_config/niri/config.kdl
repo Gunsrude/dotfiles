@@ -143,7 +143,24 @@ window-rule {
 // Steam games (app-id steam_app_<id>) open fullscreen by default
 window-rule {
     match app-id=r#"^steam_app_\d+$"#
+    exclude title="Mod Organizer"
     open-fullscreen true
+}
+
+// Mod Organizer 2 main window — tile normally, don't force fullscreen
+window-rule {
+    match app-id="steam_app_489830" title="Mod Organizer"
+    open-fullscreen false
+}
+
+// Mod Organizer 2 dialogs — don't declare transient-for, so float them manually
+window-rule {
+    match app-id="steam_app_489830"
+    exclude title="Mod Organizer"
+    exclude title="Skyrim Special Edition GOG"
+    open-floating true
+    open-fullscreen false
+    open-focused true
 }
 
 // Layer rules for blur (waybar, rofi, notifications)
