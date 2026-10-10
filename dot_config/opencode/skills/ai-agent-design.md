@@ -26,7 +26,7 @@ Agents need to be told to call tools, not just told what to delegate. Include th
 | Instead of | Write |
 |---|---|
 | "Delegate to quick-research" | "Call the \`task\` tool with \`quick-research\`" |
-| "Use file-explorer to find files" | "Call the \`task\` tool with \`file-explorer\`" |
+| "Use runner to find files" | "Call the \`task\` tool with \`runner\`" |
 
 **3. Single delegation item per table row**
 

@@ -114,7 +114,7 @@ Do not retry failed git operations. Report the failure with details.
 You may delegate to:
 
 - **quick-research** — For git behavior questions, command syntax verification, or anything uncertain about git capabilities
-- **file-explorer** — For codebase exploration if needed to understand what should be committed
+- **runner** — For codebase exploration if needed to understand what should be committed
 
 Any other question, report to router and reinforce that human intervention is needed if the situation requires it.
 

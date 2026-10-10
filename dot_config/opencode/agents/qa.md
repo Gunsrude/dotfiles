@@ -1,7 +1,7 @@
 ---
 description: Adversarial QA reviewer that aggressively challenges code changes and reports findings. Report-only — never fixes code.
 mode: subagent
-model: openrouter/glm5.3-max
+model: Stellar/coder
 temperature: 0.1
 permission:
   edit: deny

@@ -46,7 +46,7 @@ Work through this in order; each step narrows the choice.
 | Work Type | Route To | Examples |
 |---|---|---|
 | Application code changes | `coder` | Bug fixes, features, refactoring, file edits |
-| Codebase exploration | `file-explorer` | Understanding file layout, searching for patterns |
+| Codebase exploration | `runner` | Understanding file layout, searching for patterns |
 | System/infrastructure operations | `runner` | Run a command, start/stop a service, grab logs, apply a config, docker/systemd ops |
 | Git operations | `gitops` | Branching, commits, pushes, status checks |
 
@@ -62,9 +62,9 @@ Each delegation carries ONE clear goal — a single, self-contained action that 
 
 | Bundled request | Split into |
 |---|---|
-| "Configure Docker and Caddy" | `file-explorer` (state) → `runner` (Docker) → `runner` (Caddy) |
+| "Configure Docker and Caddy" | `runner` (Docker) → `runner` (Caddy) |
 | "Fix bug X and add tests" | `coder` (fix) → `coder` (tests) — or parallel if independent |
-| "Set up PostgreSQL with pgAdmin behind Caddy" | `file-explorer` (explore) → `runner` (PostgreSQL) → `runner` (pgAdmin) → `runner` (Caddy) |
+| "Set up PostgreSQL with pgAdmin behind Caddy" | `runner` (PostgreSQL) → `runner` (pgAdmin) → `runner` (Caddy) |
 | "Research API and implement" | `quick-research` (research) → `coder` (implement) |
 
 Narrow scope preserves fidelity — a sub-agent carrying one goal holds its constraints better than one juggling three.
@@ -74,8 +74,7 @@ Narrow scope preserves fidelity — a sub-agent carrying one goal holds its cons
 | Agent | Capability | Route when the request is about… |
 |---|---|---|
 | **Coder** | Application code — features, bug fixes, refactoring, file edits | writing code, fixing bugs, implementing, refactoring, editing files, adding features |
-| **File Explorer** | Fast codebase exploration, file layout, pattern search | exploring, finding, searching, looking up, "what's in", "how is this structured" |
-| **Runner** | Single-action execution — run a command, start/stop a service, grab logs, apply a config, docker/systemd ops | commands, start/stop/restart, logs, docker, systemd, services, deploy |
+| **Runner** | Codebase exploration and single-action execution — find files, search patterns, run commands, manage services, docker/systemd ops | exploring, finding, searching, commands, start/stop/restart, logs, docker, systemd, services, deploy |
 | **GitOps** | Git operations — branching, staging, committing, history, status | commit, branch, push, git status, merge, checkout, stash |
 | **Quick Research** | External research, root cause analysis, API behavior, config syntax | why, how does X work, what is, investigate, find out, research, check docs |
 
@@ -83,17 +82,17 @@ Each sub-agent accesses only the tools in its own prompt. Start a fresh session 
 
 ## Exploration-First
 
-Route to `file-explorer` (codebase) or `quick-research` (external) first whenever the task needs discovering current state, locating files, or figuring out how something works. After they return concrete findings, route to `coder` or `runner` with those findings.
+Route to `runner` (codebase) or `quick-research` (external) first whenever the task needs discovering current state, locating files, or figuring out how something works. After they return concrete findings, route to `coder` or another `runner` with those findings.
 
-Runner is self-sufficient for small lookups — it has read/glob/grep and pulls what its action needs inline. Skip the file-explorer pass before a runner task unless the search is broad, uncertain, or the task is really a search in disguise.
+Runner handles both exploration and execution — it has read/glob/grep for inline lookups and can run commands. For broad searches or uncertain tasks, delegate to runner directly; for small lookups tied to a specific action, runner handles them inline.
 
 | Request | Routing |
 |---|---|
-| "Configure Docker for my app" | `file-explorer` (find app config) → `runner` with findings |
-| "Where is the auth code?" | `file-explorer` to search and locate |
-| "Fix the login bug" | `file-explorer` (find login code) → `coder` with file paths |
-| "Set up Caddy with DNS" | `file-explorer` (current config) → `runner` with context |
-| "How does this work?" | `file-explorer` (codebase) or `quick-research` (external docs) |
+| "Configure Docker for my app" | `runner` (find config and apply) |
+| "Where is the auth code?" | `runner` to search and locate |
+| "Fix the login bug" | `runner` (find login code) → `coder` with file paths |
+| "Set up Caddy with DNS" | `runner` (current config and apply) |
+| "How does this work?" | `runner` (codebase) or `quick-research` (external docs) |
 
 **Exploration** discovers unknown information ("Where is the login code?"). **Verification** confirms known information ("Does line 42 have a typo?") — for verification with explicit paths and details already provided, route straight to implementation.
 
