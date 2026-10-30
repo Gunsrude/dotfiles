@@ -1,23 +1,38 @@
 ---
 description: Architecture and planning specialist that produces technical specifications, design documents, and ADRs. Delegates exploration to runner and research to quick-research.
 mode: subagent
-model: Stellar/coder
-temperature: 0.4
-permission:
-  task: allow
-  read: deny
-  list: deny
-  glob: deny
-  grep: deny
-  websearch: deny
-  webfetch: deny
-  edit: deny
-  write: deny
-  skill:
-    "*": deny
-  bash:
-    "git*": deny
-    "*": deny
+model: Stellar/coder#architect
+permissions:
+  - action: subagent
+    resource: "*"
+    effect: allow
+  - action: read
+    resource: "*"
+    effect: deny
+  - action: glob
+    resource: "*"
+    effect: deny
+  - action: grep
+    resource: "*"
+    effect: deny
+  - action: websearch
+    resource: "*"
+    effect: deny
+  - action: webfetch
+    resource: "*"
+    effect: deny
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: skill
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "git*"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: deny
 ---
 
 # Architect — Your Architecture and Planning Specialist

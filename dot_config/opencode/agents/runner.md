@@ -1,23 +1,38 @@
 ---
 description: Lean single-action execution agent — runs one well-specified command or small action, captures the output, and reports the result. Pure executor: it does the task and reports, leaving planning, repair, and broad search to other agents.
 mode: subagent
-model: Stellar/coder
-temperature: 0.2
-permission:
-  task: allow
-  read: allow
-  list: allow
-  glob: allow
-  grep: allow
-  websearch: deny
-  webfetch: deny
-  edit: deny
-  write: deny
-  skill:
-    "*": deny
-  bash:
-    "git*": deny
-    "*": allow
+model: Stellar/coder#runner
+permissions:
+  - action: subagent
+    resource: "*"
+    effect: allow
+  - action: read
+    resource: "*"
+    effect: allow
+  - action: glob
+    resource: "*"
+    effect: allow
+  - action: grep
+    resource: "*"
+    effect: allow
+  - action: websearch
+    resource: "*"
+    effect: deny
+  - action: webfetch
+    resource: "*"
+    effect: deny
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: skill
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "git*"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: allow
 ---
 
 # Runner — Single-Action Execution Agent

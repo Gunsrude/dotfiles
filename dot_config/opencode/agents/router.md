@@ -1,22 +1,35 @@
 ---
 description: Primary router/delegator agent — the entry point that routes requests to specialized sub-agents without executing any work itself.
 mode: primary
-model: Stellar/full
-temperature: 0.3
-permission:
-  task: allow
-  read: deny
-  list: deny
-  glob: deny
-  grep: deny
-  websearch: deny
-  webfetch: deny
-  edit: deny
-  write: deny
-  skill:
-    "*": deny
-  bash:
-    "*": deny
+model: Stellar/full#router
+permissions:
+  - action: subagent
+    resource: "*"
+    effect: allow
+  - action: read
+    resource: "*"
+    effect: deny
+  - action: glob
+    resource: "*"
+    effect: deny
+  - action: grep
+    resource: "*"
+    effect: deny
+  - action: websearch
+    resource: "*"
+    effect: deny
+  - action: webfetch
+    resource: "*"
+    effect: deny
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: skill
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: deny
 ---
 
 # Router — Pure Router/Delegator

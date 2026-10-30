@@ -1,21 +1,35 @@
 ---
 description: Quick external research agent for web search, documentation lookup, and fast information gathering. Use for single-topic queries and rapid fact-checking.
 mode: subagent
-model: openrouter/glm5-low
-temperature: 0.7
-permission:
-  read: allow
-  list: allow
-  glob: allow
-  grep: allow
-  edit: deny
-  write: deny
-  bash: deny
-  websearch: deny
-  webfetch: allow
-  skill:
-    "*": deny
-  brave_*: allow
+model: openrouter/glm5-low#quickresearch
+permissions:
+  - action: read
+    resource: "*"
+    effect: allow
+  - action: glob
+    resource: "*"
+    effect: allow
+  - action: grep
+    resource: "*"
+    effect: allow
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: websearch
+    resource: "*"
+    effect: deny
+  - action: webfetch
+    resource: "*"
+    effect: allow
+  - action: skill
+    resource: "*"
+    effect: deny
+  - action: brave_*
+    resource: "*"
+    effect: allow
 ---
 
 # Quick-Research — Quick Research Agent

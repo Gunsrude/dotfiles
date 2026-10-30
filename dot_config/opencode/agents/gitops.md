@@ -1,33 +1,71 @@
 ---
 description: Git operations and version control specialist handling branching, commits, pushes, merges, and repository state management.
 mode: subagent
-model: openrouter/glm5-low
-temperature: 0.1
-permission:
-  task: deny
-  read: allow
-  list: allow
-  glob: allow
-  grep: allow
-  edit: deny
-  write: deny
-  websearch: deny
-  webfetch: deny
-  bash:
-    "*": deny
-    "git push": ask
-    "git push*": ask
-    "git push *": ask
-    "git merge*": ask
-    "git merge *": ask
-    "git *": allow
-    "echo *": allow
-    "grep *": allow
-    "head *": allow
-    "less *": allow
-    "return *": allow
-    "glab *": allow
-    "gh *": allow
+model: openrouter/glm5-low#gitops
+permissions:
+  - action: subagent
+    resource: "*"
+    effect: deny
+  - action: read
+    resource: "*"
+    effect: allow
+  - action: glob
+    resource: "*"
+    effect: allow
+  - action: grep
+    resource: "*"
+    effect: allow
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: websearch
+    resource: "*"
+    effect: deny
+  - action: webfetch
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "git push"
+    effect: ask
+  - action: shell
+    resource: "git push*"
+    effect: ask
+  - action: shell
+    resource: "git push *"
+    effect: ask
+  - action: shell
+    resource: "git merge*"
+    effect: ask
+  - action: shell
+    resource: "git merge *"
+    effect: ask
+  - action: shell
+    resource: "git *"
+    effect: allow
+  - action: shell
+    resource: "echo *"
+    effect: allow
+  - action: shell
+    resource: "grep *"
+    effect: allow
+  - action: shell
+    resource: "head *"
+    effect: allow
+  - action: shell
+    resource: "less *"
+    effect: allow
+  - action: shell
+    resource: "return *"
+    effect: allow
+  - action: shell
+    resource: "glab *"
+    effect: allow
+  - action: shell
+    resource: "gh *"
+    effect: allow
 ---
 
 # GitOps — Version Control Specialist

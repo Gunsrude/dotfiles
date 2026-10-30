@@ -8,7 +8,7 @@
     "Stellar/coder": 80,
     "Stellar/dirtycode": 80
   },
-  "clear_reasoning_age": 30,
+  "keep_reasoning_tokens": 10000,
   "historian": {
     "two_pass": true,
     "temperature": 0.3,
@@ -30,7 +30,6 @@
     "enabled": true,
     "injection_budget_tokens": 4000,
     "auto_promote": true,
-    "retrieval_count_promotion_threshold": 3,
     "auto_search": {
       "enabled": true,
       "score_threshold": 0.55,

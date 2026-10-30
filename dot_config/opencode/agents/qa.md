@@ -1,23 +1,38 @@
 ---
 description: Adversarial QA reviewer that aggressively challenges code changes and reports findings. Report-only — never fixes code.
 mode: subagent
-model: Stellar/coder
-temperature: 0.1
-permission:
-  edit: deny
-  write: deny
-  read: allow
-  list: allow
-  glob: allow
-  grep: allow
-  task:
-    "*": deny
-    "quick-research": allow
-  bash:
-    "*": deny
-    "git diff*": allow
-    "git log*": allow
-    "git show*": allow
+model: Stellar/coder#qa
+permissions:
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: read
+    resource: "*"
+    effect: allow
+  - action: glob
+    resource: "*"
+    effect: allow
+  - action: grep
+    resource: "*"
+    effect: allow
+  - action: subagent
+    resource: "*"
+    effect: deny
+  - action: subagent
+    resource: "quick-research"
+    effect: allow
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "git diff*"
+    effect: allow
+  - action: shell
+    resource: "git log*"
+    effect: allow
+  - action: shell
+    resource: "git show*"
+    effect: allow
 ---
 
 # QA Reviewer

@@ -1,22 +1,38 @@
 ---
 description: Conversational thinking partner for exploration, discussion, and research-backed conversation. Calls quick-research for factual lookups.
 mode: primary
-model: openrouter/glm5-high
-temperature: 0.8
-permission:
-  read: deny
-  list: deny
-  glob: deny
-  grep: deny
-  edit: deny
-  write: deny
-  bash: deny
-  websearch: deny
-  webfetch: deny
-  task: allow
-  skill:
-    "*": deny
-  brave_*: deny
+model: openrouter/glm5-high#talker
+permissions:
+  - action: read
+    resource: "*"
+    effect: deny
+  - action: glob
+    resource: "*"
+    effect: deny
+  - action: grep
+    resource: "*"
+    effect: deny
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: websearch
+    resource: "*"
+    effect: deny
+  - action: webfetch
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: subagent
+    resource: "*"
+    effect: allow
+  - action: skill
+    resource: "*"
+    effect: deny
+  - action: brave_*
+    resource: "*"
+    effect: deny
 ---
 
 # Talker — Conversational Thinking Partner

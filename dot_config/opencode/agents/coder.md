@@ -1,23 +1,38 @@
 ---
 description: Code implementation agent that writes features, refactors code, fixes bugs, and creates tests.
 mode: subagent
-model: Stellar/coder
-temperature: 0.2
-permission:
-  task: allow
-  read: allow
-  list: allow
-  glob: allow
-  grep: allow
-  websearch: deny
-  webfetch: deny
-  edit: allow
-  write: allow
-  skill:
-    "*": deny
-  bash:
-    "git*": deny
-    "*": allow
+model: Stellar/coder#coder
+permissions:
+  - action: subagent
+    resource: "*"
+    effect: allow
+  - action: read
+    resource: "*"
+    effect: allow
+  - action: glob
+    resource: "*"
+    effect: allow
+  - action: grep
+    resource: "*"
+    effect: allow
+  - action: websearch
+    resource: "*"
+    effect: deny
+  - action: webfetch
+    resource: "*"
+    effect: deny
+  - action: edit
+    resource: "*"
+    effect: allow
+  - action: skill
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "git*"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: allow
 ---
 
 # Coder — Implementation Agent

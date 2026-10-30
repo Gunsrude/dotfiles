@@ -1,22 +1,35 @@
 ---
 description: Fast codebase file exploration agent for finding files, searching patterns, and understanding code structure and layout
 mode: subagent
-model: openrouter/glm5-low
-temperature: 0.2
-permission:
-  task: deny
-  read: allow
-  list: allow
-  glob: allow
-  grep: allow
-  websearch: deny
-  webfetch: deny
-  edit: deny
-  write: deny
-  skill:
-    "*": deny
-  bash:
-    "*": deny
+model: openrouter/glm5-low#fileexplorer
+permissions:
+  - action: subagent
+    resource: "*"
+    effect: deny
+  - action: read
+    resource: "*"
+    effect: allow
+  - action: glob
+    resource: "*"
+    effect: allow
+  - action: grep
+    resource: "*"
+    effect: allow
+  - action: websearch
+    resource: "*"
+    effect: deny
+  - action: webfetch
+    resource: "*"
+    effect: deny
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: skill
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: deny
 ---
 
 # File-Explorer — File Exploration Agent
