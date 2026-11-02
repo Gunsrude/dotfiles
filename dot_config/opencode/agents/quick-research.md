@@ -1,7 +1,7 @@
 ---
 description: Quick external research agent for web search, documentation lookup, and fast information gathering. Use for single-topic queries and rapid fact-checking.
 mode: subagent
-model: openrouter/glm5-low#quickresearch
+model: Stellar/coder#quickresearch
 permissions:
   - action: read
     resource: "*"

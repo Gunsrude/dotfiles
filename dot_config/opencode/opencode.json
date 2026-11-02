@@ -13,12 +13,6 @@
           "name": "Brain Gooder",
           "limit": { "context": 100000, "output": 16384 },
           "variants": [
-            { "id": "none",   "settings": { "reasoningEffort": "none" } },
-            { "id": "low",    "settings": { "reasoningEffort": "low" },    "body": { "reasoning_budget_tokens": 2048 } },
-            { "id": "medium", "settings": { "reasoningEffort": "medium" }, "body": { "reasoning_budget_tokens": 4096 } },
-            { "id": "high",   "settings": { "reasoningEffort": "high" },   "body": { "reasoning_budget_tokens": 8192 } },
-            { "id": "xhigh",  "settings": { "reasoningEffort": "xhigh" },  "body": { "reasoning_budget_tokens": 8192 } },
-            { "id": "temp03", "body": { "temperature": 0.3 } },
             { "id": "router", "settings": { "reasoningEffort": "medium", "temperature": 0.3 }, "body": { "reasoning_budget_tokens": 4096 } }
           ]
         },
@@ -30,7 +24,8 @@
             { "id": "coder", "settings": { "reasoningEffort": "medium", "temperature": 0.2 } },
             { "id": "runner", "settings": { "reasoningEffort": "medium", "temperature": 0.2 } },
             { "id": "architect", "settings": { "reasoningEffort": "medium", "temperature": 0.4 } },
-            { "id": "qa", "settings": { "reasoningEffort": "medium", "temperature": 0.1 } }
+            { "id": "qa", "settings": { "reasoningEffort": "medium", "temperature": 0.1 } },
+            { "id": "quickresearch", "settings": { "reasoningEffort": "medium", "temperature": 0.7 } },
           ],
           "limit": { "context": 131072, "output": 16384 }
         },
